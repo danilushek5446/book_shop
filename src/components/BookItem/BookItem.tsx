@@ -1,4 +1,4 @@
-import Ad from '../ad/Ad';
+import StyleButton from '../Button/StyledButton';
 
 function BookItem() {
   return (
@@ -14,7 +14,7 @@ function BookItem() {
         <div>*</div>
         <div>*</div>
       </div>
-      <button>$14.99 USD</button>
+      <StyleButton content="$14.99 USD" />
     </div>
   );
 }

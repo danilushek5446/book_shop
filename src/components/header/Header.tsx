@@ -1,17 +1,26 @@
 import Ad from '../ad/Ad';
-import foto from '../../../public/images/logo.png';
+import logo from '../../images/logo.png';
+import searchPciture from '../../images/Search.png';
+import StyleButton from '../Button/StyledButton';
+import { StyledContainer, StyledHeaderContainer, StyledInput, StyledInputContainer, StyledInputLabelsContainer } from './header.styles';
 
 function Header() {
   return (
-    <div className="header">
-      <div className="container">
-      <img src={foto} alt="sdtfsdt" />
-      <span>title</span>
-      <input type="text" />
-      <button>Log In/ Sing Up</button>
-      </div>
+    <StyledHeaderContainer className="header">
+      <StyledContainer className="container">
+        <img className="header-logo" src={logo} alt="sdtfsdt" />
+        <StyledInputContainer className="input-container">
+          <span className="header__title">Catalog</span>
+          <StyledInputLabelsContainer>
+            <StyledInput className="header-input" id="header-input" type="text" />
+            <img src={searchPciture} alt="cannot upload picture" />
+            <label className="text-label" htmlFor="header-input">Search</label>
+          </StyledInputLabelsContainer>
+        </StyledInputContainer>
+        <StyleButton content="Log In/ Sing Up" />
+      </StyledContainer>
       <Ad />
-    </div>
+    </StyledHeaderContainer>
   );
 }
 

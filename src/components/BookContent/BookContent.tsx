@@ -1,4 +1,3 @@
-import Ad from '../ad/Ad';
 import BookItem from '../BookItem/BookItem';
 
 function BookContent() {
