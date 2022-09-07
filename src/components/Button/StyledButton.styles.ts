@@ -6,7 +6,8 @@ export const ButtonStyles = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 231px;
+  max-width: 231px;
+  width: 100%;
   padding: 10px 50px;
   gap: 10px;
   border-radius: 16px;

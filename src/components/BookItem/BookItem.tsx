@@ -1,6 +1,7 @@
+import type { FC } from 'react';
 import StyleButton from '../Button/StyledButton';
 
-function BookItem() {
+const BookItem: FC = () => {
   return (
     <div className="book-content">
       <button />
@@ -14,9 +15,8 @@ function BookItem() {
         <div>*</div>
         <div>*</div>
       </div>
-      <StyleButton content="$14.99 USD" />
     </div>
   );
-}
+};
 
 export default BookItem;

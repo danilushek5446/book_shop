@@ -1,31 +1,26 @@
+import type { FC } from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
 
 import { StyledContainer } from './App.styles';
-import Authad from './components/Authad/Authad';
-import BookContent from './components/BookContent/BookContent';
-import Filters from './components/filters/Filters';
+import SignIn from './components/auth/sigIn/SignIn';
+import SignUp from './components/auth/signUp/SignUp';
 import Footer from './components/Footer/Footer';
 import Header from './components/header/Header';
 
-function App() {
+const App: FC = () => {
   return (
     <StyledContainer className="App">
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" />
-      </Routes>
-      </BrowserRouter>
-     <Header />
-     <Filters />
-     <BookContent />
-     <Authad />
-     <Footer />
+      <Header />
+        <Routes>
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/signUp" element={<SignUp />} />
+        </Routes>
+      <Footer />
     </StyledContainer>
   );
-}
+};
 
 export default App;

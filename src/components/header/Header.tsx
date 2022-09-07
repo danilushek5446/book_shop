@@ -1,27 +1,38 @@
-import Ad from '../ad/Ad';
+import type { FC } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import logo from '../../images/logo.png';
 import searchPciture from '../../images/Search.png';
 import StyleButton from '../Button/StyledButton';
-import { StyledContainer, StyledHeaderContainer, StyledInput, StyledInputContainer, StyledInputLabelsContainer } from './header.styles';
+import AuthInput from '../Input/AuthInput';
+import {
+  StyledHeaderContainer,
+} from './header.styles';
 
-function Header() {
+const Header: FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const onClick = () => {
+    if (location.pathname === '/login') {
+      navigate('/signUp');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <StyledHeaderContainer className="header">
-      <StyledContainer className="container">
+      <div className="container">
         <img className="header-logo" src={logo} alt="sdtfsdt" />
-        <StyledInputContainer className="input-container">
+        <div className="input-container">
           <span className="header__title">Catalog</span>
-          <StyledInputLabelsContainer>
-            <StyledInput className="header-input" id="header-input" type="text" />
-            <img src={searchPciture} alt="cannot upload picture" />
-            <label className="text-label" htmlFor="header-input">Search</label>
-          </StyledInputLabelsContainer>
-        </StyledInputContainer>
-        <StyleButton content="Log In/ Sing Up" />
-      </StyledContainer>
-      <Ad />
+          {/* <AuthInput icon={searchPciture} name="header-input"
+          type="text" labelText="Search" /> */}
+        </div>
+        <StyleButton onClick={onClick} text="Log In/ Sing Up" />
+      </div>
     </StyledHeaderContainer>
   );
-}
+};
 
 export default Header;

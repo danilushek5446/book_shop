@@ -1,28 +1,34 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 128px;
-  .header-logo{
-    height: 46px;
-  }
-  button{
-    height: 50px;
-  }
-  .header__title{
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-  }
-  align-items: center;
-`;
-
 export const StyledHeaderContainer = styled.div`
-  width: 1280px;
-  height: 638px;
+  max-width: 1280px;
+  width: 100%;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 128px;
+    .header-logo{
+      height: 46px;
+    }
+    button{
+      height: 50px;
+    }
+    .header__title{
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #000000;
+    }
+    align-items: center;
+    }
+  .input-container{
+    display: flex;
+    max-width: 739px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -40,16 +46,10 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const StyledInputContainer = styled.div`
-  display: flex;
-  width: 739px;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 export const StyledInputLabelsContainer = styled.div`
   position: relative;
-  width: 630px;
+  max-width: 630px;
+  width: 100%;
   img{
     position: absolute;
     top: 20px;

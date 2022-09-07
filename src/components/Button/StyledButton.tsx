@@ -2,12 +2,13 @@ import type { FC } from 'react';
 import { ButtonStyles } from './StyledButton.styles';
 
 type PropType = {
-  content: string;
+  text: string;
+  onClick: () => void;
 };
 
-const StyleButton: FC<PropType> = ({ content }) => {
+const StyleButton: FC<PropType> = ({ text, onClick }) => {
   return (
-    <ButtonStyles>{content}</ButtonStyles>
+    <ButtonStyles onClick={onClick}>{text}</ButtonStyles>
   );
 };
 

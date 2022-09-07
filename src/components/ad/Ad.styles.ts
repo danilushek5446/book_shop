@@ -15,34 +15,35 @@ export const StyledDiv = styled.div`
     font-size: 40px;
     line-height: 60px;
   }
-`;
 
-export const StyledBookBackground = styled.div`
-  background-image: url(${backgroundBooks});
-  width: 542px;
-  height: 326.92px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .sub-title{
-    margin-right: 20%;
-    margin-top: 10px;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 30px;
-    width: 184px;
-    color: #344966;
+  .container{
+    max-width: 640px;
+    width: 100%;
   }
-  button{
-    margin-right: 12%;
-    margin-top: 50px;
+
+  .book-background{
+    background-image: url(${backgroundBooks});
+    width: 542px;
+    height: 326.92px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .sub-title{
+      margin-right: 20%;
+      margin-top: 10px;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 30px;
+      width: 184px;
+      color: #344966;
+    }
+    button{
+      margin-right: 12%;
+      margin-top: 50px;
+    }
   }
-`;
 
-export const StyledImage = styled.img`
-  margin-left: 10%;
-`;
-
-export const StyledContainer = styled.div`
-  width: 640px;
+  .ad-image{
+    margin-left: 10%;
+  }
 `;
