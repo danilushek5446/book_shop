@@ -10,6 +10,7 @@ export const StyledHeaderContainer = styled.div`
     height: 128px;
     .header-logo{
       height: 46px;
+      cursor: pointer;
     }
     button{
       height: 50px;
@@ -28,6 +29,12 @@ export const StyledHeaderContainer = styled.div`
     width: 100%;
     justify-content: space-between;
     align-items: center;
+  }
+  .auth-container{
+    display: flex;
+    max-width: 200px;
+    width: 100%;
+    justify-content: space-between;
   }
 `;
 
@@ -73,4 +80,5 @@ export const StyledInputLabelsContainer = styled.div`
     font-size: 14px;
     line-height: 24px;
   }
+
 `;

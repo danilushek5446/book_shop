@@ -18,4 +18,5 @@ export const ButtonStyles = styled.button`
   letter-spacing: 0.75px;
   font-family: 'Poppins';
   cursor: pointer;
+  border: none;
 `;

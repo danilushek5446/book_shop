@@ -12,7 +12,7 @@ type PropType = {
 const AuthInput: FC<PropType> = ({ icon, labelText, name, type, onChange }) => {
   return (
     <AuthStyledInputLabelsContainer name={name}>
-      <AuthStyledInput className={name} type={type} onChange={onChange} required />
+      <AuthStyledInput id={name} type={type} onChange={onChange} required />
       <img src={icon} alt="cannot load icon" />
       <label htmlFor={name}>{labelText}</label>
     </AuthStyledInputLabelsContainer>

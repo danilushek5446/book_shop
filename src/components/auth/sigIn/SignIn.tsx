@@ -1,6 +1,7 @@
-import type { ChangeEvent, FC } from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import AuthInput from '../../Input/AuthInput';
 import { StyledAuthContainer } from '../Auth.styles';
@@ -9,17 +10,22 @@ import StyledButton from '../../Button/StyledButton';
 import mailIcon from '../../../images/Mail.png';
 import PasswordIcon from '../../../images/Hide.png';
 import { useAppDispatch } from '../../../store/hooks';
-import { fetchUser } from '../../../store/slices/UserSlice';
+import { singIn } from '../../../store/thunks/userThunk';
 
 const SignIn: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const onClick = async () => {
-    await dispatch(fetchUser({ email, password }));
-    setEmail('');
-    setPassword('');
+    await dispatch(singIn({ email, password }));
+    if (location.state) {
+      navigate(location.state);
+    } else {
+      navigate('/');
+    }
   };
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {

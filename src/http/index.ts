@@ -5,4 +5,18 @@ const $host = axios.create({
   responseType: 'json',
 });
 
+$host.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // eslint-disable-next-line no-param-reassign
+      config.headers = {
+        ...config.headers,
+        authorization: `Bearer ${token}`,
+      };
+    }
+    return config;
+  },
+);
+
 export default $host;
