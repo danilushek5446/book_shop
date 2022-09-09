@@ -8,7 +8,6 @@ import profile from '../../images/User profile.png';
 import heart from '../../images/Heart.png';
 import searchPciture from '../../images/Search.png';
 import { useAppSelector } from '../../store/hooks';
-import type { RootStateType } from '../../store/store';
 import StyleButton from '../Button/StyledButton';
 import AuthInput from '../Input/AuthInput';
 import PageIcons from '../pageIcons/PageIcons';
@@ -17,9 +16,8 @@ import { StyledHeaderContainer } from './header.styles';
 const Header: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const user = useAppSelector((state: RootStateType) => state.user);
-  // eslint-disable-next-line no-console
-  console.log(user.email);
+  const user = useAppSelector((state) => state.user.user);
+
   const [search, setSearch] = useState('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,13 +53,13 @@ const Header: FC = () => {
         <img onClick={homePage} className="header-logo" src={logo} alt="sdtfsdt" />
         <div className="input-container">
           <span className="header__title">Catalog</span>
-          <AuthInput
+          {/* <AuthInput
             icon={searchPciture}
             name="header-input"
             type="text"
             labelText="Search"
             onChange={onChange}
-          />
+          /> */}
         </div>
         {user.email
           ? (<div className="auth-container">
@@ -76,7 +74,7 @@ const Header: FC = () => {
             <PageIcons picture={profile} onClick={profilePage} />
              </div>)
 
-          : <StyleButton onClick={onClick} text="Log In/ Sing Up" />}
+          : <StyleButton className="header-auth" type="button" onClick={onClick} text="Log In/ Sing Up" />}
 
       </div>
     </StyledHeaderContainer>

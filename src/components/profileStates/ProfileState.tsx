@@ -10,7 +10,7 @@ type PropType = {
 
 const ProfileState: FC<PropType> = ({ icon, labelText, name, text }) => {
   return (
-    <AuthStyledInputLabelsContainer name={name}>
+    <AuthStyledInputLabelsContainer className={name}>
       <div id={name}>{text}</div>
       <img src={icon} alt="cannot load icon" />
       <label htmlFor={name}>{labelText}</label>

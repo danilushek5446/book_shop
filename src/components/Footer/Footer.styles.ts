@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledFooter = styled.div`
-  height: 341px;
   background-color: #0D1821;
   max-width: 2560px;
   width: 100%;
@@ -12,6 +11,8 @@ export const StyledFooter = styled.div`
   font-size: 20px;
   line-height: 30px;
   color: #F0F4EF;
+  padding-top: 73px;
+  padding-bottom: 73px;
 
   .container{
     max-width: 1280px;

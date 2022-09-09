@@ -14,7 +14,7 @@ import Header from './components/header/Header';
 import UserProfile from './components/userProfile/UserProfile';
 import PrivateRoute from './routes/PrivateRoute';
 import { useAppDispatch } from './store/hooks';
-import { auth } from './store/thunks/userThunk';
+import { auth } from './store/user/userThunk';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);

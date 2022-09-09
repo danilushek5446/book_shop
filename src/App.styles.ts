@@ -7,4 +7,5 @@ export const StyledContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  justify-content: space-between;
 `;

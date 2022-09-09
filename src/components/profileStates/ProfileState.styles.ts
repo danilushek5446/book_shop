@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const AuthStyledInputLabelsContainer = styled.div<{ name: string }>`
+export const AuthStyledInputLabelsContainer = styled.div`
   position: relative;
   max-width: 630px;
   width: 100%;
-
+  
   img{
     position: absolute;
     top: 20px;
@@ -23,10 +23,12 @@ export const AuthStyledInputLabelsContainer = styled.div<{ name: string }>`
 
   div{
     background: #F0F4EF;
-  border-radius: 16px;
-  width: 100%;
-  height: 64px;
-  border: none;
-  padding-left: 60px;
+    border-radius: 16px;
+    width: 100%;
+    height: 64px;
+    border: none;
+    padding-top: 35px;
+    padding-left: 65px;
+    box-sizing: border-box;
   }
 `;

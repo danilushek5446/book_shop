@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import type { FC } from 'react';
-import { useState } from 'react';
-
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import AuthInput from '../../Input/AuthInput';
 import mailIcon from '../../../images/Mail.png';
@@ -10,62 +12,104 @@ import authPicture from '../../../images/чел 1.png';
 import StyledButton from '../../Button/StyledButton';
 import { StyledAuthContainer } from '../Auth.styles';
 import { useAppDispatch } from '../../../store/hooks';
-import { signUp } from '../../../store/thunks/userThunk';
+import { signUp } from '../../../store/user/userThunk';
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(4).max(32).required(),
+  confirmPass: yup.string().min(4).max(32).required(),
+});
+
+type UserType = {
+  email: string;
+  password: string;
+  confirmPass: string;
+};
 
 const SignIn: FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { register, handleSubmit, setError, formState: { errors } } = useForm<UserType>({
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+  });
 
-  const onClick = async () => {
-    await dispatch(signUp({ email, password }));
-    if (location.state) {
-      navigate(location.state);
-    } else {
-      navigate('/');
+  const onSubmitHandler = async (data: UserType) => {
+    try {
+      const email = data.email;
+      const password = data.password;
+      const confirmPass = data.confirmPass;
+      if (password !== confirmPass) {
+        setError('confirmPass', {
+          type: 'value',
+          message: 'passwords must be matched',
+        });
+        return;
+      }
+      await dispatch(signUp({ email, password }));
+
+      if (location.state) {
+        navigate(location.state);
+      } else {
+        navigate('/');
+      }
+    } catch (error) {
+      const err = error as Error;
+
+      if (err.message.includes('password')) {
+        setError('password', {
+          type: 'server',
+          message: err.message,
+        });
+      } else {
+        setError('email', {
+          type: 'server',
+          message: err.message,
+        });
+      }
     }
-  };
-
-  const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
   };
 
   return (
     <StyledAuthContainer>
-      <div className="container">
+      <form className="container" onSubmit={handleSubmit(onSubmitHandler)}>
         <h1>Sign Up</h1>
         <AuthInput
           icon={mailIcon}
-          labelText="Email"
-          name="mail-input"
+          labelText="email"
           type="text"
-          onChange={onEmailChange}
+          reff={register('email').ref}
+          name={register('email').name}
+          onChange={register('email').onChange}
+          onBlur={register('email').onBlur}
+          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
         />
-        <span>Enter your email</span>
+        <span>{`${errors.email ? errors.email?.message : 'Enter your email'}`}</span>
         <AuthInput
           icon={PasswordIcon}
           labelText="Password"
-          name="password-input"
           type="password"
-          onChange={onPasswordChange}
+          reff={register('password').ref}
+          name={register('password').name}
+          onChange={register('password').onChange}
+          onBlur={register('password').onBlur}
+          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
         />
-        <span>Enter your password</span>
+        <span>{`${errors.password ? errors.password?.message : 'Enter your password'}`}</span>
         <AuthInput
           icon={PasswordIcon}
-          labelText="Password replay"
-          name="password-reply-input"
+          labelText="Password reply"
           type="password"
-          onChange={onPasswordChange}
+          reff={register('confirmPass').ref}
+          name={register('confirmPass').name}
+          onChange={register('confirmPass').onChange}
+          onBlur={register('confirmPass').onBlur}
+          className={`form-control ${errors.confirmPass ? 'is-invalid' : ''}`}
         />
-        <span>Repeat your password without errors</span>
-        <StyledButton onClick={onClick} text="Sing Up" />
-      </div>
+        <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your password without errors'}`}</span>
+        <StyledButton className="auth" type="submit" onClick={() => { }} text="Sign up" />
+      </form>
       <img src={authPicture} alt="cannot load picture" />
     </StyledAuthContainer>
   );

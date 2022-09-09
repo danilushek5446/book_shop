@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
-export const StyledAuthContainer = styled.div`
+export const StyledContainer = styled.div`
   display: flex;
-  padding-top: 90px;
-  padding-bottom: 154px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
