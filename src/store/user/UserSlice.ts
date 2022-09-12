@@ -1,16 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { singIn, signUp, auth, changeUserInfo } from './userThunk';
-
-export type UserType = {
-  id: number;
-  email: string;
-  fullName?: string;
-  dob?: Date;
-};
-
-interface IUserType {
-  user: UserType;
-}
+import type { IUserType } from '../../types/types';
+import { singIn, signUp, auth, changeUserInfo, changeUserPassword } from './userThunk';
 
 export const initialState: IUserType = {
   user: {
@@ -51,6 +41,14 @@ export const UserSlice = createSlice({
     });
 
     builder.addCase(changeUserInfo.rejected, (state, action) => {
+      throw action.error;
+    });
+
+    builder.addCase(changeUserPassword.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+
+    builder.addCase(changeUserPassword.rejected, (state, action) => {
       throw action.error;
     });
   },

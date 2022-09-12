@@ -13,6 +13,13 @@ export const StyledProfile = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    .avatar{
+      max-width: 305px;
+      width: 100%;
+      max-height: 305px;
+      height: 100%;
+    }
   }
 
   .info-container{
@@ -33,5 +40,22 @@ export const StyledProfile = styled.div`
     text-decoration: underline;
     color: #8D9F4F;
     cursor: pointer;
+  }
+
+  .image-container{
+    position: relative;
+  }
+
+  .upload-container{
+    position: absolute;
+    width: 100%;
+    left: 230px;
+    top: 230px;
+    input{
+      display: none;
+    }
+    ~div{
+      position: absolute;
+    }
   }
 `;

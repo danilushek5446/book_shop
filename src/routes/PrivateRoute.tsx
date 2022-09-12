@@ -9,10 +9,10 @@ type PropType = {
 const PrivateRoute: FC<PropType> = ({ children }) => {
   const location = useLocation();
   const user = useAppSelector((state) => state.user.user);
-  const path = location.pathname;
+  const from = location.pathname;
 
   if (!user.email) {
-    return <Navigate to="/login" state={{ path }} />;
+    return <Navigate to="/login" state={ from } />;
   }
 
   return children;

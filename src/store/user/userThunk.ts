@@ -1,16 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { changeInfo, checkAuth, login, registration } from '../../http/userAPI';
-
-export type AuthType = {
-  email: string;
-  password: string;
-};
-
-export type ChangeInfoType = {
-  email: string;
-  fullName?: string;
-};
+import { changeInfo, changePassword, checkAuth, login, registration } from '../../http/userAPI';
+import type { AuthType, ChangeInfoType, ChangePasswordType } from '../../types/types';
 
 export const singIn = createAsyncThunk(
   'user/fetchUser',
@@ -58,9 +49,23 @@ export const auth = createAsyncThunk(
 export const changeUserInfo = createAsyncThunk(
   'user/changeUserInfo',
   async (data: ChangeInfoType) => {
-    // eslint-disable-next-line no-useless-catch
     try {
       const response = await changeInfo(data);
+      return response;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        throw Error(error.response?.data.message);
+      }
+      throw Error();
+    }
+  },
+);
+
+export const changeUserPassword = createAsyncThunk(
+  'user/changeUserPassword',
+  async (data: ChangePasswordType) => {
+    try {
+      const response = await changePassword(data);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {

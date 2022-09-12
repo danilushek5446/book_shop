@@ -13,6 +13,7 @@ import StyledButton from '../../Button/StyledButton';
 import { StyledAuthContainer } from '../Auth.styles';
 import { useAppDispatch } from '../../../store/hooks';
 import { signUp } from '../../../store/user/userThunk';
+import type { UserRegistrationType } from '../../../types/types';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -20,22 +21,21 @@ const schema = yup.object().shape({
   confirmPass: yup.string().min(4).max(32).required(),
 });
 
-type UserType = {
-  email: string;
-  password: string;
-  confirmPass: string;
-};
-
 const SignIn: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { register, handleSubmit, setError, formState: { errors } } = useForm<UserType>({
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<UserRegistrationType>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
 
-  const onSubmitHandler = async (data: UserType) => {
+  const onSubmitHandler = async (data: UserRegistrationType) => {
     try {
       const email = data.email;
       const password = data.password;

@@ -13,32 +13,34 @@ import mailIcon from '../../../images/Mail.png';
 import PasswordIcon from '../../../images/Hide.png';
 import { useAppDispatch } from '../../../store/hooks';
 import { singIn } from '../../../store/user/userThunk';
+import type { AuthType } from '../../../types/types';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(4).max(32).required(),
 });
 
-type UserType = {
-  email: string;
-  password: string;
-};
-
 const SignIn: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { register, handleSubmit, setError, formState: { errors } } = useForm<UserType>({
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<AuthType>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
 
-  const onSubmitHandler = async (data: UserType) => {
+  const onSubmitHandler = async (data: AuthType) => {
     try {
       const email = data.email;
       const password = data.password;
       await dispatch(singIn({ email, password }));
-
+      // eslint-disable-next-line no-console
+      console.log(location);
       if (location.state) {
         navigate(location.state);
       } else {

@@ -1,48 +1,50 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import type { FC } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLocation, useNavigate } from 'react-router-dom';
 
-import authPicture from '../../../images/чел 1.png';
 import mailIcon from '../../images/Mail.png';
 import passwordIcon from '../../images/Hide.png';
 import { useAppDispatch } from '../../store/hooks';
 import StyledButton from '../Button/StyledButton';
 import { StyledContainer } from './ChangeUserInfo.styles';
 import AuthInput from '../Input/AuthInput';
+import { changeUserInfo } from '../../store/user/userThunk';
+import type { ChangeInfoType } from '../../types/types';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   fullName: yup.string(),
 });
 
-type UserType = {
+type PropType = {
+  isChangeInfo: () => void;
   email: string;
   fullName: string;
 };
 
-const SignIn: FC = () => {
+const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { register, handleSubmit, reset, setError, formState: { errors } } = useForm<UserType>({
-    resolver: yupResolver(schema),
-    mode: 'onBlur',
+  const { setValue, register, handleSubmit,
+    reset, setError, formState: { errors } } = useForm<ChangeInfoType>({
+      resolver: yupResolver(schema),
+      mode: 'onBlur',
+    });
+
+  useEffect(() => {
+    setValue('email', email);
+    setValue('fullName', fullName);
   });
 
-  const onSubmitHandler = async (data: UserType) => {
+  const onSubmitHandler = async (data: ChangeInfoType) => {
     try {
       const email = data.email;
       const fullName = data.fullName;
-      // await dispatch(singIn({ email, password }));
+      await dispatch(changeUserInfo({ email, fullName }));
+      isChangeInfo();
 
-      if (location.state) {
-        navigate(location.state);
-      } else {
-        navigate('/');
-      }
       reset();
     } catch (error) {
       const err = error as Error;
@@ -59,6 +61,17 @@ const SignIn: FC = () => {
   return (
     <StyledContainer className="sign-in">
       <form className="container" onSubmit={handleSubmit(onSubmitHandler)}>
+      <AuthInput
+          icon={passwordIcon}
+          labelText="Your name"
+          type="text"
+          reff={register('fullName').ref}
+          name={register('fullName').name}
+          onChange={register('fullName').onChange}
+          onBlur={register('fullName').onBlur}
+          className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
+        />
+        <span>{`${errors.fullName ? errors.fullName?.message : ''}`}</span>
         <AuthInput
           icon={mailIcon}
           labelText="Your email"
@@ -70,17 +83,6 @@ const SignIn: FC = () => {
           className={`form-control ${errors.email ? 'is-invalid' : ''}`}
         />
         <span>{`${errors.email ? errors.email?.message : ''}`}</span>
-        <AuthInput
-          icon={passwordIcon}
-          labelText="Your name"
-          type="text"
-          reff={register('fullName').ref}
-          name={register('fullName').name}
-          onChange={register('fullName').onChange}
-          onBlur={register('fullName').onBlur}
-          className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.fullName ? errors.fullName?.message : ''}`}</span>
         <StyledButton className="auth" type="submit" onClick={() => { }} text="confirm" />
       </form>
     </StyledContainer>
