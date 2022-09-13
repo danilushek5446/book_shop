@@ -7,42 +7,42 @@ export const AuthStyledInput = styled.input`
   width: 100%;
   height: 64px;
   border: none;
-  padding-left: 60px;
-  :focus{
-   background-color: white;
-   color: transparent;
-    text-shadow: 0 0 0 black;
-  }
+  padding-left: 62px;
+  padding-top: 18px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+
   :valid{
     background: #F3FDFA;
     border: 2px solid #00BA88;
-  }
-  :valid.is-invalid{
-    background: #FFF2F7;
-    border: 2px solid #ED2E7E;
-  }
-
-  :valid~label.form-control{
-    color: #00BA88;
-  }
-
-  :valid~label{
-    color: black;
-    top: 6px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
-  }
-  :valid~label.is-invalid{
-    color: #ED2E7E;
-    top: 6px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
-  }
-  .is-invalid{
-    background: #FFF2F7;
-    border: 2px solid #ED2E7E;
+    &.is-invalid{
+      background: #FFF2F7;
+      border: 2px solid #ED2E7E;
+      ~button{
+        color: #ED2E7E; 
+      }
+    }
+    ~label{
+      .form-control{
+        color: #00BA88;
+      }
+      ~button{
+        color: #00BA88; 
+      }
+      color: #00BA88;
+      top: 6px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      &.is-invalid{
+        color: #ED2E7E;
+        top: 6px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
   }
 `;
 
@@ -50,7 +50,7 @@ export const AuthStyledInputLabelsContainer = styled.div`
   position: relative;
   max-width: 630px;
   width: 100%;
-  margin-top: 30px;
+
   img{
     position: absolute;
     top: 20px;
@@ -66,6 +66,34 @@ export const AuthStyledInputLabelsContainer = styled.div`
     color: #B9BAC4;
     :hover{
       cursor: text;
+    }
+  }
+  button {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    border: none;
+    font-weight: 500;
+    font-size: 22px;
+    background: none;
+    display: none;
+    cursor: pointer;
+  }
+  :hover button{
+    display: block;
+  }
+
+  .search{
+    ~button {
+      top: 5px;
+    }
+    :valid{
+      background: white;
+      color: black;
+      border: 2px solid black;
+      ~label{
+        color: #B9BAC3;
+      }
     }
   }
 `;

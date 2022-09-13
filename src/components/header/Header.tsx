@@ -53,13 +53,13 @@ const Header: FC = () => {
         <img onClick={homePage} className="header-logo" src={logo} alt="sdtfsdt" />
         <div className="input-container">
           <span className="header__title">Catalog</span>
-          {/* <AuthInput
+          <AuthInput
             icon={searchPciture}
             name="header-input"
             type="text"
             labelText="Search"
-            onChange={onChange}
-          /> */}
+            className="search"
+            />
         </div>
         {user.email
           ? (<div className="auth-container">

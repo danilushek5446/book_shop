@@ -26,11 +26,23 @@ type PropType = {
 
 const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit,
+  const { register, handleSubmit, setValue,
     reset, setError, formState: { errors } } = useForm<UserChangePasswordType>({
       resolver: yupResolver(schema),
       mode: 'onBlur',
     });
+
+  const clearOldPassword = () => {
+    setValue('oldPassword', '');
+  };
+
+  const clearNewPassword = () => {
+    setValue('newPassword', '');
+  };
+
+  const clearConfirmPassword = () => {
+    setValue('confirmPass', '');
+  };
 
   const onSubmitHandler = async (data: UserChangePasswordType) => {
     // eslint-disable-next-line no-console
@@ -65,40 +77,51 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
   return (
     <StyledContainer className="sign-in">
       <form className="container" onSubmit={handleSubmit(onSubmitHandler)}>
-      <AuthInput
-          icon={passwordIcon}
-          labelText="Old password"
-          type="password"
-          reff={register('oldPassword').ref}
-          name={register('oldPassword').name}
-          onChange={register('oldPassword').onChange}
-          onBlur={register('oldPassword').onBlur}
-          className={`form-control ${errors.oldPassword ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.oldPassword ? errors.oldPassword?.message : ''}`}</span>
-        <AuthInput
-          icon={passwordIcon}
-          labelText="New password"
-          type="password"
-          reff={register('newPassword').ref}
-          name={register('newPassword').name}
-          onChange={register('newPassword').onChange}
-          onBlur={register('newPassword').onBlur}
-          className={`form-control ${errors.newPassword ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.newPassword ? errors.newPassword?.message : ''}`}</span>
-        <AuthInput
-          icon={passwordIcon}
-          labelText="Password reply"
-          type="password"
-          reff={register('confirmPass').ref}
-          name={register('confirmPass').name}
-          onChange={register('confirmPass').onChange}
-          onBlur={register('confirmPass').onBlur}
-          className={`form-control ${errors.confirmPass ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your password without errors'}`}</span>
-        <StyledButton className="auth" type="submit" onClick={() => { }} text="confirm" />
+        <div className="input-container">
+          <AuthInput
+            icon={passwordIcon}
+            labelText="Old password"
+            type="password"
+            reff={register('oldPassword').ref}
+            name={register('oldPassword').name}
+            onChange={register('oldPassword').onChange}
+            onBlur={register('oldPassword').onBlur}
+            onClick={clearOldPassword}
+            className={`form-control ${errors.oldPassword ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.oldPassword ? errors.oldPassword?.message : 'enter your old password'}`}</span>
+        </div>
+        <div className="input-container">
+          <AuthInput
+            icon={passwordIcon}
+            labelText="New password"
+            type="password"
+            reff={register('newPassword').ref}
+            name={register('newPassword').name}
+            onChange={register('newPassword').onChange}
+            onBlur={register('newPassword').onBlur}
+            onClick={clearNewPassword}
+            className={`form-control ${errors.newPassword ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.newPassword ? errors.newPassword?.message : 'enter your new password'}`}</span>
+        </div>
+        <div className="input-container">
+          <AuthInput
+            icon={passwordIcon}
+            labelText="Password reply"
+            type="password"
+            reff={register('confirmPass').ref}
+            name={register('confirmPass').name}
+            onChange={register('confirmPass').onChange}
+            onBlur={register('confirmPass').onBlur}
+            onClick={clearConfirmPassword}
+            className={`form-control ${errors.confirmPass ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your new password without errors'}`}</span>
+        </div>
+        <div className="button-container">
+          <StyledButton className="auth" type="submit" onClick={() => { }} text="confirm" />
+        </div>
       </form>
     </StyledContainer>
   );

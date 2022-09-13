@@ -6,7 +6,13 @@ export const StyledProfile = styled.div`
   max-width: 1280px;
   width: 100%;
   padding-top: 50px;
-  margin-bottom: 124px;
+  margin-bottom: 182px;
+
+  .title{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+  }
 
   .container{
     max-width: 956px;
@@ -19,6 +25,7 @@ export const StyledProfile = styled.div`
       width: 100%;
       max-height: 305px;
       height: 100%;
+      object-fit: contain; 
     }
   }
 
@@ -34,6 +41,10 @@ export const StyledProfile = styled.div`
   .change-info-container{
     display: flex;
     justify-content: space-between;
+  }
+  
+  .change-password{
+    padding-top: 40px;
   }
 
   .change-info{

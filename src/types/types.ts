@@ -8,6 +8,7 @@ export type UserType = {
   email: string;
   fullName?: string;
   dob?: Date;
+  photo?: string;
 };
 
 export interface IUserType {
@@ -34,4 +35,8 @@ export type UserChangePasswordType = {
   oldPassword: string;
   newPassword: string;
   confirmPass: string;
+};
+
+export type UserPhotoType = {
+  photo: string | ArrayBuffer;
 };

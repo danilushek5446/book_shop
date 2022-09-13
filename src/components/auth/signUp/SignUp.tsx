@@ -29,11 +29,24 @@ const SignIn: FC = () => {
     register,
     handleSubmit,
     setError,
+    setValue,
     formState: { errors },
   } = useForm<UserRegistrationType>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
+
+  const clearEmail = () => {
+    setValue('email', '');
+  };
+
+  const clearPassword = () => {
+    setValue('password', '');
+  };
+
+  const clearConfirmPassword = () => {
+    setValue('confirmPass', '');
+  };
 
   const onSubmitHandler = async (data: UserRegistrationType) => {
     try {
@@ -75,40 +88,51 @@ const SignIn: FC = () => {
     <StyledAuthContainer>
       <form className="container" onSubmit={handleSubmit(onSubmitHandler)}>
         <h1>Sign Up</h1>
-        <AuthInput
-          icon={mailIcon}
-          labelText="email"
-          type="text"
-          reff={register('email').ref}
-          name={register('email').name}
-          onChange={register('email').onChange}
-          onBlur={register('email').onBlur}
-          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.email ? errors.email?.message : 'Enter your email'}`}</span>
-        <AuthInput
-          icon={PasswordIcon}
-          labelText="Password"
-          type="password"
-          reff={register('password').ref}
-          name={register('password').name}
-          onChange={register('password').onChange}
-          onBlur={register('password').onBlur}
-          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.password ? errors.password?.message : 'Enter your password'}`}</span>
-        <AuthInput
-          icon={PasswordIcon}
-          labelText="Password reply"
-          type="password"
-          reff={register('confirmPass').ref}
-          name={register('confirmPass').name}
-          onChange={register('confirmPass').onChange}
-          onBlur={register('confirmPass').onBlur}
-          className={`form-control ${errors.confirmPass ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your password without errors'}`}</span>
-        <StyledButton className="auth" type="submit" onClick={() => { }} text="Sign up" />
+        <div className="input-container">
+          <AuthInput
+            icon={mailIcon}
+            labelText="email"
+            type="text"
+            reff={register('email').ref}
+            name={register('email').name}
+            onChange={register('email').onChange}
+            onBlur={register('email').onBlur}
+            onClick={clearEmail}
+            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.email ? errors.email?.message : 'Enter your email'}`}</span>
+        </div>
+        <div className="input-container">
+          <AuthInput
+            icon={PasswordIcon}
+            labelText="Password"
+            type="password"
+            reff={register('password').ref}
+            name={register('password').name}
+            onChange={register('password').onChange}
+            onBlur={register('password').onBlur}
+            onClick={clearPassword}
+            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.password ? errors.password?.message : 'Enter your password'}`}</span>
+        </div>
+        <div className="input-container">
+          <AuthInput
+            icon={PasswordIcon}
+            labelText="Password reply"
+            type="password"
+            reff={register('confirmPass').ref}
+            name={register('confirmPass').name}
+            onChange={register('confirmPass').onChange}
+            onBlur={register('confirmPass').onBlur}
+            onClick={clearConfirmPassword}
+            className={`form-control ${errors.confirmPass ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your password without errors'}`}</span>
+        </div>
+        <div className="button-container">
+          <StyledButton className="auth" type="submit" onClick={() => { }} text="Sign up" />
+        </div>
       </form>
       <img src={authPicture} alt="cannot load picture" />
     </StyledAuthContainer>

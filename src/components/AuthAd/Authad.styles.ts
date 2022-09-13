@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import backgroundBooks from '../../images/unsplash_DgQf1dUKUTM.png';
 
 export const StyledDiv = styled.div`
   height: 400px;
@@ -7,12 +6,14 @@ export const StyledDiv = styled.div`
   width: 100%;
   background: #F0F4EF;
   border-radius: 16px;
-  overflow: hidden;
+  position: relative;
   display: flex;
+  margin-top: 100px;
+  justify-content: end;
   .ad__title{
     margin: 0;
     margin-left: 19%;
-    margin-top: 90px;
+    margin-top: 75px;
     font-weight: 700;
     font-size: 40px;
     line-height: 60px;
@@ -23,21 +24,21 @@ export const StyledDiv = styled.div`
     width: 100%;
   }
 
-  .book-background{
-    background-image: url(${backgroundBooks});
-    width: 542px;
-    height: 326.92px;
+  .sub-title-background{
+    max-width: 550px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     .sub-title{
-      margin-right: 20%;
       margin-top: 10px;
       font-weight: 500;
       font-size: 20px;
       line-height: 30px;
-      width: 184px;
+      max-width: 415px;
+      width: 100%;
       color: #344966;
+      margin-left: 107px;
     }
     button{
       margin-right: 12%;
@@ -46,6 +47,12 @@ export const StyledDiv = styled.div`
   }
 
   .ad-image{
-    margin-left: 10%;
+    position: absolute;
+    bottom: 0px;
+    left: 108px;
+  }
+  .ad-image-fairy{
+    position: absolute;
+    bottom: 0px;
   }
 `;

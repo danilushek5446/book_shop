@@ -8,7 +8,7 @@ export const ButtonStyles = styled.button`
   align-items: center;
   max-width: 231px;
   width: 100%;
-  padding: 10px 50px;
+  padding: 10px 42px;
   gap: 10px;
   border-radius: 16px;
   color: #F0F4EF;

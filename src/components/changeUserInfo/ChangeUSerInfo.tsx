@@ -38,6 +38,14 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
     setValue('fullName', fullName);
   });
 
+  const clearEmail = () => {
+    setValue('email', '');
+  };
+
+  const clearFullname = () => {
+    setValue('fullName', '');
+  };
+
   const onSubmitHandler = async (data: ChangeInfoType) => {
     try {
       const email = data.email;
@@ -59,31 +67,39 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   };
 
   return (
-    <StyledContainer className="sign-in">
+    <StyledContainer className="change-info">
       <form className="container" onSubmit={handleSubmit(onSubmitHandler)}>
-      <AuthInput
-          icon={passwordIcon}
-          labelText="Your name"
-          type="text"
-          reff={register('fullName').ref}
-          name={register('fullName').name}
-          onChange={register('fullName').onChange}
-          onBlur={register('fullName').onBlur}
-          className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.fullName ? errors.fullName?.message : ''}`}</span>
-        <AuthInput
-          icon={mailIcon}
-          labelText="Your email"
-          type="text"
-          reff={register('email').ref}
-          name={register('email').name}
-          onChange={register('email').onChange}
-          onBlur={register('email').onBlur}
-          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-        />
-        <span>{`${errors.email ? errors.email?.message : ''}`}</span>
-        <StyledButton className="auth" type="submit" onClick={() => { }} text="confirm" />
+        <div className="input-container">
+          <AuthInput
+            icon={passwordIcon}
+            labelText="Your name"
+            type="text"
+            reff={register('fullName').ref}
+            name={register('fullName').name}
+            onChange={register('fullName').onChange}
+            onBlur={register('fullName').onBlur}
+            onClick={clearEmail}
+            className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.fullName ? errors.fullName?.message : 'Enter your name'}`}</span>
+        </div>
+        <div className="input-container">
+          <AuthInput
+            icon={mailIcon}
+            labelText="Your email"
+            type="text"
+            reff={register('email').ref}
+            name={register('email').name}
+            onChange={register('email').onChange}
+            onBlur={register('email').onBlur}
+            onClick={clearFullname}
+            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+          />
+          <span>{`${errors.email ? errors.email?.message : 'Enter your email'}`}</span>
+        </div>
+        <div className="button-container">
+          <StyledButton className="auth" type="submit" onClick={() => { }} text="confirm" />
+        </div>
       </form>
     </StyledContainer>
   );

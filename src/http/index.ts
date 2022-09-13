@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const $host = axios.create({
+const host = axios.create({
   baseURL: 'http://localhost:4000/',
-  responseType: 'json',
 });
 
-$host.interceptors.request.use(
+host.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -18,4 +17,4 @@ $host.interceptors.request.use(
   },
 );
 
-export default $host;
+export default host;

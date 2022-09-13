@@ -15,6 +15,9 @@ import UserProfile from './components/userProfile/UserProfile';
 import PrivateRoute from './routes/PrivateRoute';
 import { useAppDispatch } from './store/hooks';
 import { auth } from './store/user/userThunk';
+import Ad from './components/ad/Ad';
+import Authad from './components/AuthAd/Authad';
+import Filters from './components/filters/Filters';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -43,6 +46,13 @@ const App: FC = () => {
     <StyledContainer className="App">
       <Header />
       <Routes>
+        <Route path="/" element={
+          (<>
+            <Ad />
+            <Filters />
+            <Authad />
+           </>)}
+          />
         <Route path="/login" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/profile"

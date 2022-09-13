@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { IUserType } from '../../types/types';
-import { singIn, signUp, auth, changeUserInfo, changeUserPassword } from './userThunk';
+import { singIn, signUp, auth, changeUserInfo, changeUserPassword, uploadUserPhoto } from './userThunk';
 
 export const initialState: IUserType = {
   user: {
@@ -8,6 +8,7 @@ export const initialState: IUserType = {
     email: '',
     fullName: '',
     dob: undefined,
+    photo: '',
   },
 };
 
@@ -49,6 +50,14 @@ export const UserSlice = createSlice({
     });
 
     builder.addCase(changeUserPassword.rejected, (state, action) => {
+      throw action.error;
+    });
+
+    builder.addCase(uploadUserPhoto.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+
+    builder.addCase(uploadUserPhoto.rejected, (state, action) => {
       throw action.error;
     });
   },
