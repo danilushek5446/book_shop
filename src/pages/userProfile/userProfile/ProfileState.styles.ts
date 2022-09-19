@@ -47,7 +47,7 @@ export const StyledProfile = styled.div`
     padding-top: 40px;
   }
 
-  .change-info{
+  .change-info-title{
     text-decoration: underline;
     color: #8D9F4F;
     cursor: pointer;

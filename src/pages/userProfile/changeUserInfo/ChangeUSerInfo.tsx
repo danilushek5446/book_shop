@@ -5,14 +5,14 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import mailIcon from '../../images/Mail.png';
-import passwordIcon from '../../images/Hide.png';
-import { useAppDispatch } from '../../store/hooks';
-import StyledButton from '../Button/StyledButton';
+import mailIcon from '../../../assets/icons/Mail.png';
+import passwordIcon from '../../../assets/icons/Hide.png';
+import { useAppDispatch } from '../../../store/hooks';
+import type { ChangeInfoType } from '../../../types/types';
+import { changeUserInfo } from '../../../store/user/userThunk';
 import { StyledContainer } from './ChangeUserInfo.styles';
-import AuthInput from '../Input/AuthInput';
-import { changeUserInfo } from '../../store/user/userThunk';
-import type { ChangeInfoType } from '../../types/types';
+import AuthInput from '../../../components/Input/AuthInput';
+import StyledButton from '../../../components/Button/StyledButton';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -27,7 +27,10 @@ type PropType = {
 
 const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   const dispatch = useAppDispatch();
-  const { setValue, register, handleSubmit,
+  const {
+    setValue,
+    register,
+    handleSubmit,
     reset, setError, formState: { errors } } = useForm<ChangeInfoType>({
       resolver: yupResolver(schema),
       mode: 'onBlur',
@@ -36,7 +39,8 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   useEffect(() => {
     setValue('email', email);
     setValue('fullName', fullName);
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const clearEmail = () => {
     setValue('email', '');

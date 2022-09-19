@@ -21,16 +21,8 @@ export const UserSlice = createSlice({
       state.user = action.payload;
     });
 
-    builder.addCase(singIn.rejected, (state, action) => {
-      throw action.error;
-    });
-
     builder.addCase(signUp.fulfilled, (state, action) => {
       state.user = action.payload;
-    });
-
-    builder.addCase(signUp.rejected, (state, action) => {
-      throw action.error;
     });
 
     builder.addCase(auth.fulfilled, (state, action) => {
@@ -41,24 +33,12 @@ export const UserSlice = createSlice({
       state.user = action.payload;
     });
 
-    builder.addCase(changeUserInfo.rejected, (state, action) => {
-      throw action.error;
-    });
-
     builder.addCase(changeUserPassword.fulfilled, (state, action) => {
       state.user = action.payload;
     });
 
-    builder.addCase(changeUserPassword.rejected, (state, action) => {
-      throw action.error;
-    });
-
     builder.addCase(uploadUserPhoto.fulfilled, (state, action) => {
       state.user = action.payload;
-    });
-
-    builder.addCase(uploadUserPhoto.rejected, (state, action) => {
-      throw action.error;
     });
   },
 });

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import backgroundBooks from '../../images/unsplash_DgQf1dUKUTM.png';
+import backgroundBooks from '../../assets/images/unsplash_DgQf1dUKUTM.png';
 
 export const StyledDiv = styled.div`
   height: 400px;

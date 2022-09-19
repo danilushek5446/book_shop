@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import passwordIcon from '../../images/Hide.png';
-import { useAppDispatch } from '../../store/hooks';
-import StyledButton from '../Button/StyledButton';
+import passwordIcon from '../../../assets/icons/Hide.png';
+import { useAppDispatch } from '../../../store/hooks';
+import type { UserChangePasswordType } from '../../../types/types';
 import { StyledContainer } from './ChangePassword.styles';
-import AuthInput from '../Input/AuthInput';
-import { changeUserPassword } from '../../store/user/userThunk';
-import type { UserChangePasswordType } from '../../types/types';
+import AuthInput from '../../../components/Input/AuthInput';
+import StyledButton from '../../../components/Button/StyledButton';
+import { changeUserPassword } from '../../../store/user/userThunk';
 
 const schema = yup.object().shape({
   oldPassword: yup.string().min(4).max(32).required(),

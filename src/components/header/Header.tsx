@@ -2,11 +2,11 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import logo from '../../images/logo.png';
-import cart from '../../images/Cart.png';
-import profile from '../../images/User profile.png';
-import heart from '../../images/Heart.png';
-import searchPciture from '../../images/Search.png';
+import logo from '../../assets/images/logo.png';
+import cart from '../../assets/icons/Cart.png';
+import profile from '../../assets/icons/User profile.png';
+import heart from '../../assets/icons/Heart.png';
+import searchPciture from '../../assets/icons/Search.png';
 import { useAppSelector } from '../../store/hooks';
 import StyleButton from '../Button/StyledButton';
 import AuthInput from '../Input/AuthInput';

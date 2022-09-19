@@ -5,15 +5,15 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import AuthInput from '../../Input/AuthInput';
 import { StyledAuthContainer } from '../Auth.styles';
-import authPicture from '../../../images/чел 1.png';
-import StyledButton from '../../Button/StyledButton';
-import mailIcon from '../../../images/Mail.png';
-import PasswordIcon from '../../../images/Hide.png';
-import { useAppDispatch } from '../../../store/hooks';
-import { singIn } from '../../../store/user/userThunk';
-import type { AuthType } from '../../../types/types';
+import authPicture from '../../../../assets/images/чел 1.png';
+import mailIcon from '../../../../assets/icons/Mail.png';
+import PasswordIcon from '../../../../assets/icons/Hide.png';
+import { useAppDispatch } from '../../../../store/hooks';
+import type { AuthType } from '../../../../types/types';
+import { singIn } from '../../../../store/user/userThunk';
+import AuthInput from '../../../../components/Input/AuthInput';
+import StyledButton from '../../../../components/Button/StyledButton';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -47,7 +47,7 @@ const SignIn: FC = () => {
     try {
       const email = data.email;
       const password = data.password;
-      await dispatch(singIn({ email, password }));
+      await dispatch(singIn({ email, password })).unwrap();
       // eslint-disable-next-line no-console
       console.log(location);
       if (location.state) {
@@ -55,9 +55,9 @@ const SignIn: FC = () => {
       } else {
         navigate('/');
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error) {
       const err = error as Error;
-
       if (err.message.includes('password')) {
         setError('password', {
           type: 'server',

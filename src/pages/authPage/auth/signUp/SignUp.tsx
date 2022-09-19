@@ -5,15 +5,15 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import AuthInput from '../../Input/AuthInput';
-import mailIcon from '../../../images/Mail.png';
-import PasswordIcon from '../../../images/Hide.png';
-import authPicture from '../../../images/чел 1.png';
-import StyledButton from '../../Button/StyledButton';
+import mailIcon from '../../../../assets/icons/Mail.png';
+import PasswordIcon from '../../../../assets/icons/Hide.png';
+import authPicture from '../../../../assets/images/чел 1.png';
 import { StyledAuthContainer } from '../Auth.styles';
-import { useAppDispatch } from '../../../store/hooks';
-import { signUp } from '../../../store/user/userThunk';
-import type { UserRegistrationType } from '../../../types/types';
+import { useAppDispatch } from '../../../../store/hooks';
+import type { UserRegistrationType } from '../../../../types/types';
+import { signUp } from '../../../../store/user/userThunk';
+import AuthInput from '../../../../components/Input/AuthInput';
+import StyledButton from '../../../../components/Button/StyledButton';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),

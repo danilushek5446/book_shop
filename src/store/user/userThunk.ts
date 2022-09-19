@@ -6,13 +6,13 @@ import type { AuthType, ChangeInfoType, ChangePasswordType, UserPhotoType } from
 
 export const singIn = createAsyncThunk(
   'user/fetchUser',
-  async (data: AuthType) => {
+  async (data: AuthType, { rejectWithValue }) => {
     try {
       const response = await userAuthApi.login(data);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
-        throw Error(error.response?.data.message);
+        return rejectWithValue(error.response?.data);
       }
       throw Error();
     }
@@ -21,15 +21,15 @@ export const singIn = createAsyncThunk(
 
 export const signUp = createAsyncThunk(
   'user/postUser',
-  async (data: AuthType) => {
+  async (data: AuthType, { rejectWithValue }) => {
     try {
       const response = await userAuthApi.registration(data);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
-        throw Error(error.response?.data.message);
+        return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue('unexpected error');
     }
   },
 );
@@ -37,57 +37,56 @@ export const signUp = createAsyncThunk(
 export const auth = createAsyncThunk(
   'user/auth',
   async () => {
-    // eslint-disable-next-line no-useless-catch
     try {
       const response = await userAuthApi.checkAuth();
       return response;
     } catch (error) {
-      throw error;
+      throw Error('authorization error');
     }
   },
 );
 
 export const changeUserInfo = createAsyncThunk(
   'user/changeUserInfo',
-  async (data: ChangeInfoType) => {
+  async (data: ChangeInfoType, { rejectWithValue }) => {
     try {
       const response = await userApi.changeInfo(data);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
-        throw Error(error.response?.data.message);
+        return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue('unexpected error');
     }
   },
 );
 
 export const changeUserPassword = createAsyncThunk(
   'user/changeUserPassword',
-  async (data: ChangePasswordType) => {
+  async (data: ChangePasswordType, { rejectWithValue }) => {
     try {
       const response = await userApi.changePassword(data);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
-        throw Error(error.response?.data.message);
+        return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue('unexpected error');
     }
   },
 );
 
 export const uploadUserPhoto = createAsyncThunk(
   'user/uploadUserPhoto',
-  async (data: UserPhotoType) => {
+  async (data: UserPhotoType, { rejectWithValue }) => {
     try {
       const response = await userApi.uploadPhoto(data);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
-        throw Error(error.response?.data.message);
+        return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue('unexpected error');
     }
   },
 );

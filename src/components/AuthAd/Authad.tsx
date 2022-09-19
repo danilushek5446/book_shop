@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import StyleButton from '../Button/StyledButton';
 import { StyledDiv } from './Authad.styles';
-import authAdPicture from '../../images/2011.i305.006. 1.png';
-import background from '../../images/atz1.png';
+import authAdPicture from '../../assets/images/2011.i305.006. 1.png';
+import background from '../../assets/images/atz1.png';
 
 const Ad: FC = () => {
   return (

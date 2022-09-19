@@ -7,17 +7,17 @@ import {
 import { Audio } from 'react-loader-spinner';
 
 import { StyledContainer } from './App.styles';
-import SignIn from './components/auth/sigIn/SignIn';
-import SignUp from './components/auth/signUp/SignUp';
 import Footer from './components/Footer/Footer';
 import Header from './components/header/Header';
-import UserProfile from './components/userProfile/UserProfile';
+import UserProfile from './pages/userProfile/userProfile/UserProfile';
 import PrivateRoute from './routes/PrivateRoute';
 import { useAppDispatch } from './store/hooks';
 import { auth } from './store/user/userThunk';
 import Ad from './components/ad/Ad';
 import Authad from './components/AuthAd/Authad';
 import Filters from './components/filters/Filters';
+import SignIn from './pages/authPage/auth/sigIn/SignIn';
+import SignUp from './pages/authPage/auth/signUp/SignUp';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);

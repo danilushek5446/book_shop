@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import logo from '../../images/darklogo.png';
-import Map from '../../images/map.png';
+import logo from '../../assets/images/darklogo.png';
+import Map from '../../assets/images/map.png';
 import { StyledFooter } from './Footer.styles';
 
 const Footer: FC = () => {

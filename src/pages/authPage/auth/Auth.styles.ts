@@ -42,4 +42,8 @@ export const StyledAuthContainer = styled.div`
     justify-content: space-between;
     height: 100px;
   }
+
+  img{
+    align-self: start;
+  }
 `;

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import StyleButton from '../Button/StyledButton';
 import { StyledDiv } from './Ad.styles';
-import adPicture from '../../images/2009.i305 1.png';
+import adPicture from '../../assets/images/2009.i305 1.png';
 
 const Ad: FC = () => {
   return (

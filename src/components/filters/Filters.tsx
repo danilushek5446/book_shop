@@ -1,26 +1,40 @@
 import type { FC } from 'react';
+import { useState } from 'react';
+import DropDownButton from '../dropDown/DropDownButton';
 import { StyledContainer } from './Filters.styles';
 
 const Filters: FC = () => {
+  const [isOpen, setIsOpen] = useState('');
+
+  const onClick = (className: string) => {
+    if (isOpen !== className) {
+      setIsOpen(className);
+    } else {
+      setIsOpen('');
+    }
+  };
   return (
     <StyledContainer className="filters">
       <h2>Catalog</h2>
       <div className="container">
-        <div className="dropdown-container">
-          <div className="genere">genere</div>
-          <span>❯</span>
-        </div>
-        <div className="genere-dropdown" />
-        <div className="dropdown-container">
-          <div className="Price">Price</div>
-          <span>❯</span>
-        </div>
-        <div className="price-dropdown" />
-        <div className="dropdown-container">
-          <div className="sort-direction">sort by price</div>
-          <span>❯</span>
-        </div>
-        <div className="sort-direction-dropdown" />
+        <DropDownButton
+          className="genere"
+          text="genere"
+          onClick={onClick}
+          open={isOpen}
+        />
+        <DropDownButton
+          className="price"
+          text="price"
+          onClick={onClick}
+          open={isOpen}
+        />
+        <DropDownButton
+          className="sort-direction"
+          text="sort by price"
+          onClick={onClick}
+          open={isOpen}
+        />
       </div>
     </StyledContainer>
   );
