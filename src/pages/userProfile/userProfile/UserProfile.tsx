@@ -7,7 +7,7 @@ import mail from '../../../assets/icons/Mail.png';
 import camera from '../../../assets/icons/Camera.svg';
 import passwordIcon from '../../../assets/icons/Hide.png';
 import userPhoto from '../../../assets/images/User photo.png';
-import ProfileState from '../../../components/profileStates/ProfileState';
+import ProfileState from '../profileStates/ProfileState';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { StyledProfile } from './ProfileState.styles';
 import ChangeUSerInfo from '../changeUserInfo/ChangeUSerInfo';
@@ -42,8 +42,6 @@ const UserProfile: FC = () => {
       reader.readAsDataURL(file);
     }
   };
-  // eslint-disable-next-line no-console
-  console.log(user.photo);
 
   return (
     <StyledProfile>

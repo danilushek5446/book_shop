@@ -3,10 +3,9 @@ import styled from 'styled-components';
 export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 405px;
+  max-width: 195px;
   width: 100%;
   position: relative;
-  cursor: pointer;
 
   .dropdown-container{
     box-sizing: border-box;
@@ -19,43 +18,9 @@ export const StyledContainer = styled.div`
     height: 48px;
     background: #F0F4EF;
     border-radius: 16px;
+    cursor: pointer;
   }
-
-  .drop-down-list{
-    display: none;
-    background-color: #F0F4EF;
-    border-radius: 16px;
-    position: absolute;
-    top: 50px;
-  }
-
   .open{
-    display: block;
-  }
-
-  .drop-down-item{
-    .drop-down-items-container{
-      padding-left: 15px;
-      padding: 15px 15px 15px 0;
-    }
-
-    span{
-      padding-left: 10px;
-    }
-    input{
-     margin-left: 15px;
-    }
-  }
-
-  .drop-down-list.genere{
-    width: 305px;
-  }
-
-  .drop-down-list.price{
-    width: 413px;
-  }
-
-  .drop-down-list.sort-direction{
-    width: 197px;
+    transform: rotate(90deg);
   }
 `;

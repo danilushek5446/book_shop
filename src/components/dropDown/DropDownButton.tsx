@@ -7,25 +7,20 @@ type PropType = {
   text: string;
   onClick: (className: string) => void;
   open: string;
+  children: JSX.Element;
 };
 
-const DropDownButton: FC<PropType> = ({ className, text, onClick, open }) => {
+const DropDownButton: FC<PropType> = ({ className, text, onClick, open, children }) => {
   return (
     <StyledContainer className="dropdown">
       <div className="dropdown-container" onClick={() => onClick(className)}>
         <div className={className}>{text}</div>
-        <span>❯</span>
+        <span className={open === className ? 'open' : ''}>❯</span>
       </div>
       {(open === className)
-        ? (<div className={`drop-down-list ${(open === className) ? 'open' : ''} ${className}`}>
-          <div className="drop-down-items-container">
-            <div className="drop-down-item">
-              <input type="checkbox" />
-              <span>Fiction</span>
-            </div>
-          </div>
-           </div>
-        // eslint-disable-next-line react/jsx-no-useless-fragment
+        ? (
+          children
+      // eslint-disable-next-line react/jsx-no-useless-fragment
         ) : <></>}
     </StyledContainer>
   );

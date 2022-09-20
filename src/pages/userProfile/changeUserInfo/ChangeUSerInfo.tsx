@@ -78,7 +78,7 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
             icon={passwordIcon}
             labelText="Your name"
             type="text"
-            reff={register('fullName').ref}
+            inputRef={register('fullName').ref}
             name={register('fullName').name}
             onChange={register('fullName').onChange}
             onBlur={register('fullName').onBlur}
@@ -92,7 +92,7 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
             icon={mailIcon}
             labelText="Your email"
             type="text"
-            reff={register('email').ref}
+            inputRef={register('email').ref}
             name={register('email').name}
             onChange={register('email').onChange}
             onBlur={register('email').onBlur}

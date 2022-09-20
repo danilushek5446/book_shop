@@ -11,9 +11,9 @@ export type UserType = {
   photo?: string;
 };
 
-export interface IUserType {
+export type UserInitialType = {
   user: UserType;
-}
+};
 
 export type ChangeInfoType = {
   email: string;
@@ -39,4 +39,25 @@ export type UserChangePasswordType = {
 
 export type UserPhotoType = {
   photo: string | ArrayBuffer;
+};
+
+export type PriceType = {
+  minPrice: number;
+  maxPrice: number;
+};
+
+export type SortDirectionType = {
+  sortBy: string;
+};
+
+export type GenereType = {
+  id: number;
+  name: string;
+  checked?: boolean;
+};
+
+export type FilterInitialType = {
+  genere: GenereType[];
+  price: PriceType;
+  sortDirection: SortDirectionType;
 };

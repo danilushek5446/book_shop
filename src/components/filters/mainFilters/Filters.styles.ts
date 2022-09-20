@@ -26,4 +26,15 @@ export const StyledContainer = styled.div`
     background: #F0F4EF;
     border-radius: 16px;
   }
+
+  .drop-down-list{
+    top: 60px
+  }
+
+  .dropdown-img-container{
+    img{
+      position: absolute;
+      left: 10px;
+    }
+  }
 `;

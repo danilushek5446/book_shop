@@ -10,17 +10,17 @@ type PropType = {
   type: string;
   onChange?: ChangeHandler;
   onBlur?:ChangeHandler;
-  reff?: RefCallBack;
+  inputRef?: RefCallBack;
   onClick?: () => void;
  // onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const AuthInput: FC<PropType> = ({ icon, labelText, name, type,
-  className, reff, onBlur, onChange, onClick }) => {
+  className, inputRef, onBlur, onChange, onClick }) => {
   return (
     <AuthStyledInputLabelsContainer className={className}>
       <AuthStyledInput
-        ref={reff}
+        ref={inputRef}
         id={name}
         name={name}
         type={type}

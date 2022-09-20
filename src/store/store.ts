@@ -1,10 +1,12 @@
 import type { ThunkAction, Action } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
-import UserSlice from './user/UserSlice';
+import filterSlice from './filter/filterSlice';
+import UserSlice from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
     user: UserSlice,
+    filter: filterSlice,
   },
 });
 

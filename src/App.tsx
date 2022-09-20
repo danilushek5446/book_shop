@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import {
@@ -15,22 +16,24 @@ import { useAppDispatch } from './store/hooks';
 import { auth } from './store/user/userThunk';
 import Ad from './components/ad/Ad';
 import Authad from './components/AuthAd/Authad';
-import Filters from './components/filters/Filters';
+import Filters from './components/filters/mainFilters/Filters';
 import SignIn from './pages/authPage/auth/sigIn/SignIn';
 import SignUp from './pages/authPage/auth/signUp/SignUp';
+import { getAllGeneres } from './store/filter/filterThunk';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
   const dispatch = useAppDispatch();
   useEffect(() => {
     (async () => {
+      await dispatch(getAllGeneres());
       const token = localStorage.getItem('token');
       if (token) {
         await dispatch(auth());
       }
       setIsLoad(true);
     })();
-  }, [dispatch]);
+  }, []);
 
   if (!isLoad) {
     return (

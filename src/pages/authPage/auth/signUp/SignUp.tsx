@@ -93,7 +93,7 @@ const SignIn: FC = () => {
             icon={mailIcon}
             labelText="email"
             type="text"
-            reff={register('email').ref}
+            inputRef={register('email').ref}
             name={register('email').name}
             onChange={register('email').onChange}
             onBlur={register('email').onBlur}
@@ -107,7 +107,7 @@ const SignIn: FC = () => {
             icon={PasswordIcon}
             labelText="Password"
             type="password"
-            reff={register('password').ref}
+            inputRef={register('password').ref}
             name={register('password').name}
             onChange={register('password').onChange}
             onBlur={register('password').onBlur}
@@ -121,7 +121,7 @@ const SignIn: FC = () => {
             icon={PasswordIcon}
             labelText="Password reply"
             type="password"
-            reff={register('confirmPass').ref}
+            inputRef={register('confirmPass').ref}
             name={register('confirmPass').name}
             onChange={register('confirmPass').onChange}
             onBlur={register('confirmPass').onBlur}

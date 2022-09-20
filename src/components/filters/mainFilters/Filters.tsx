@@ -1,6 +1,10 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import DropDownButton from '../dropDown/DropDownButton';
+
+import polygon from '../../../assets/icons/Polygon 4.png';
+import DropDownButton from '../../dropDown/DropDownButton';
+import GenereFilters from '../genereFilters/GenereFilters';
+import PriceFilter from '../priceFilter/PriceFilter';
 import { StyledContainer } from './Filters.styles';
 
 const Filters: FC = () => {
@@ -22,19 +26,33 @@ const Filters: FC = () => {
           text="genere"
           onClick={onClick}
           open={isOpen}
-        />
+        >
+          <div className="dropdown-img-container">
+            <img src={polygon} alt="cannot load" />
+            <GenereFilters />
+          </div>
+        </DropDownButton>
+
         <DropDownButton
           className="price"
           text="price"
           onClick={onClick}
           open={isOpen}
-        />
+        >
+          <div className="dropdown-img-container">
+            <img src={polygon} alt="cannot load" />
+            <PriceFilter />
+          </div>
+        </DropDownButton>
+
         <DropDownButton
           className="sort-direction"
           text="sort by price"
           onClick={onClick}
           open={isOpen}
-        />
+        >
+          <GenereFilters />
+        </DropDownButton>
       </div>
     </StyledContainer>
   );

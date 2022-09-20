@@ -45,8 +45,6 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
   };
 
   const onSubmitHandler = async (data: UserChangePasswordType) => {
-    // eslint-disable-next-line no-console
-    console.log('privet', data);
     try {
       const oldPassword = data.oldPassword;
       const newPassword = data.newPassword;
@@ -82,7 +80,7 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
             icon={passwordIcon}
             labelText="Old password"
             type="password"
-            reff={register('oldPassword').ref}
+            inputRef={register('oldPassword').ref}
             name={register('oldPassword').name}
             onChange={register('oldPassword').onChange}
             onBlur={register('oldPassword').onBlur}
@@ -96,7 +94,7 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
             icon={passwordIcon}
             labelText="New password"
             type="password"
-            reff={register('newPassword').ref}
+            inputRef={register('newPassword').ref}
             name={register('newPassword').name}
             onChange={register('newPassword').onChange}
             onBlur={register('newPassword').onBlur}
@@ -110,7 +108,7 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
             icon={passwordIcon}
             labelText="Password reply"
             type="password"
-            reff={register('confirmPass').ref}
+            inputRef={register('confirmPass').ref}
             name={register('confirmPass').name}
             onChange={register('confirmPass').onChange}
             onBlur={register('confirmPass').onBlur}

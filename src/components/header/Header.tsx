@@ -50,7 +50,12 @@ const Header: FC = () => {
   return (
     <StyledHeaderContainer className="header">
       <div className="container">
-        <img onClick={homePage} className="header-logo" src={logo} alt="sdtfsdt" />
+        <img
+          onClick={homePage}
+          className="header-logo"
+          src={logo}
+          alt="sdtfsdt"
+        />
         <div className="input-container">
           <span className="header__title">Catalog</span>
           <AuthInput
@@ -59,7 +64,7 @@ const Header: FC = () => {
             type="text"
             labelText="Search"
             className="search"
-            />
+          />
         </div>
         {user.email
           ? (<div className="auth-container">
