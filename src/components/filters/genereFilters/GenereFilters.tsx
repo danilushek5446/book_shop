@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { toggleChecked } from '../../../store/filter/filterSlice';
+import { toggleCheckedGenere } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 import { StyledContainer } from './GenereFilters.styles';
@@ -9,13 +9,7 @@ const GenereFilters: FC = () => {
   const generes = useAppSelector((state) => state.filter.genere);
   const dispatch = useAppDispatch();
   const onClick = (id: number) => {
-    const index = generes.findIndex((item) => {
-      if (item.id === id) {
-        return true;
-      }
-      return false;
-    });
-    dispatch(toggleChecked(id));
+    dispatch(toggleCheckedGenere(id));
   };
 
   return (

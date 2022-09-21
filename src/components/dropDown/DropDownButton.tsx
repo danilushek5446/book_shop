@@ -13,7 +13,7 @@ type PropType = {
 const DropDownButton: FC<PropType> = ({ className, text, onClick, open, children }) => {
   return (
     <StyledContainer className="dropdown">
-      <div className="dropdown-container" onClick={() => onClick(className)}>
+      <div className={`${className} dropdown-container`} onClick={() => onClick(className)}>
         <div className={className}>{text}</div>
         <span className={open === className ? 'open' : ''}>❯</span>
       </div>

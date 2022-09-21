@@ -7,7 +7,7 @@ import ReactSlider from 'react-slider';
 import { StyledContainer } from './PriceFilter.styles';
 
 const PriceFilter: FC = () => {
-  const [value, setValue] = useState([25, 50]);
+  const [value, setValue] = useState([0, 100]);
 
   const onChange = (value: number[]) => {
     setValue(value);

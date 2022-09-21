@@ -14,19 +14,6 @@ export const StyledContainer = styled.div`
     justify-content: space-between;
   }
 
-  .dropdown-container{
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 8px 10px 15px;
-    max-width: 196px;
-    width: 100%;
-    height: 48px;
-    background: #F0F4EF;
-    border-radius: 16px;
-  }
-
   .drop-down-list{
     top: 60px
   }

@@ -5,6 +5,7 @@ import polygon from '../../../assets/icons/Polygon 4.png';
 import DropDownButton from '../../dropDown/DropDownButton';
 import GenereFilters from '../genereFilters/GenereFilters';
 import PriceFilter from '../priceFilter/PriceFilter';
+import SordDirection from '../sortDirection/SordDirection';
 import { StyledContainer } from './Filters.styles';
 
 const Filters: FC = () => {
@@ -51,7 +52,7 @@ const Filters: FC = () => {
           onClick={onClick}
           open={isOpen}
         >
-          <GenereFilters />
+          <SordDirection />
         </DropDownButton>
       </div>
     </StyledContainer>

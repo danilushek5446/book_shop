@@ -20,7 +20,6 @@ const UserProfile: FC = () => {
   const [isChangePass, setIsChangePass] = useState(false);
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
-
   const changeInfo = () => {
     setIsChangeInfo(!isChangeInfo);
   };
@@ -47,7 +46,7 @@ const UserProfile: FC = () => {
     <StyledProfile>
       <div className="container">
         <div className="image-container">
-          <img src={user.photo ? user.photo : userPhoto} className="avatar" alt="cannot load picture" />
+          <img src={user.photo ? `${process.env.REACT_APP_API_URL}${user.photo}` : userPhoto} className="avatar" alt="cannot load picture" />
           <label className="upload-container" htmlFor="file-input">
             <PageIcons picture={camera} onClick={() => { }}
             />

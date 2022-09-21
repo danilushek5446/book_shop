@@ -20,7 +20,12 @@ export const StyledContainer = styled.div`
     border-radius: 16px;
     cursor: pointer;
   }
+
   .open{
     transform: rotate(90deg);
+  }
+
+  .sort-direction{
+      background: white;
   }
 `;

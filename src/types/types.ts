@@ -47,7 +47,9 @@ export type PriceType = {
 };
 
 export type SortDirectionType = {
+  id: number;
   sortBy: string;
+  checked: boolean;
 };
 
 export type GenereType = {
@@ -59,5 +61,5 @@ export type GenereType = {
 export type FilterInitialType = {
   genere: GenereType[];
   price: PriceType;
-  sortDirection: SortDirectionType;
+  sortDirection: SortDirectionType[];
 };
