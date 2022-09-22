@@ -63,3 +63,32 @@ export type FilterInitialType = {
   price: PriceType;
   sortDirection: SortDirectionType[];
 };
+
+export type BookType = {
+  id: number;
+  name: string;
+  author: string;
+  description: string;
+  image: string;
+  price: number;
+  rating?: number;
+  cover: string;
+  dateOfIssue: string;
+  generes: GenereType[];
+};
+
+export type BookInitialType = {
+  booksArray: BookType[];
+  count: number;
+};
+
+export type QueryType = {
+  page?: string;
+  perPage?: string;
+  sortBy?: string;
+  sortDirection?: 'ASC' | 'DESC';
+  search?: string;
+  priceMin?: number;
+  priceMax?: number;
+  genere?: number[];
+};

@@ -83,7 +83,7 @@ const SignIn: FC = () => {
             name={register('email').name}
             onChange={register('email').onChange}
             onBlur={register('email').onBlur}
-            onClick={clearEmail}
+            onDeleteClick={clearEmail}
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
           />
           <span className={`form-control ${errors.email ? 'is-invalid' : ''}`}>
@@ -99,7 +99,7 @@ const SignIn: FC = () => {
             name={register('password').name}
             onChange={register('password').onChange}
             onBlur={register('password').onBlur}
-            onClick={clearPassword}
+            onDeleteClick={clearPassword}
             className={`form-control ${errors.password ? 'is-invalid' : ''}`}
           />
           <span className={`form-control ${errors.password ? 'is-invalid' : ''}`}>

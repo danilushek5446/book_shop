@@ -1,12 +1,14 @@
 import type { ThunkAction, Action } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
+import bookSlice from './book/bookSlice';
 import filterSlice from './filter/filterSlice';
-import UserSlice from './user/userSlice';
+import userSlice from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
-    user: UserSlice,
+    user: userSlice,
     filter: filterSlice,
+    book: bookSlice,
   },
 });
 

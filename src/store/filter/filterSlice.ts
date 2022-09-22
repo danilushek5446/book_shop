@@ -29,7 +29,7 @@ export const initialState: FilterInitialType = {
     {
       id: 4,
       sortBy: 'Rating',
-      checked: false,
+      checked: true,
     },
     {
       id: 5,
@@ -39,8 +39,9 @@ export const initialState: FilterInitialType = {
   ],
 };
 
-type AddGenereActionType = {
-  payload: GenereType[];
+type PricePayloadType = {
+  minPrice: number;
+   maxPrice: number;
 };
 
 export const filterSlice = createSlice({
@@ -65,6 +66,10 @@ export const filterSlice = createSlice({
         }
       });
     },
+    setPrice: (state, action: PayloadAction<PricePayloadType>) => {
+      state.price.maxPrice = action.payload.maxPrice;
+      state.price.minPrice = action.payload.minPrice;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getAllGeneres.fulfilled, (state, action) => {
@@ -79,6 +84,7 @@ export const filterSlice = createSlice({
 export const {
   toggleCheckedGenere,
   toggleCheckedSortDirection,
+  setPrice,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

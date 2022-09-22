@@ -84,7 +84,7 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
             name={register('oldPassword').name}
             onChange={register('oldPassword').onChange}
             onBlur={register('oldPassword').onBlur}
-            onClick={clearOldPassword}
+            onDeleteClick={clearOldPassword}
             className={`form-control ${errors.oldPassword ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.oldPassword ? errors.oldPassword?.message : 'enter your old password'}`}</span>
@@ -98,7 +98,7 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
             name={register('newPassword').name}
             onChange={register('newPassword').onChange}
             onBlur={register('newPassword').onBlur}
-            onClick={clearNewPassword}
+            onDeleteClick={clearNewPassword}
             className={`form-control ${errors.newPassword ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.newPassword ? errors.newPassword?.message : 'enter your new password'}`}</span>
@@ -112,7 +112,7 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
             name={register('confirmPass').name}
             onChange={register('confirmPass').onChange}
             onBlur={register('confirmPass').onBlur}
-            onClick={clearConfirmPassword}
+            onDeleteClick={clearConfirmPassword}
             className={`form-control ${errors.confirmPass ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your new password without errors'}`}</span>

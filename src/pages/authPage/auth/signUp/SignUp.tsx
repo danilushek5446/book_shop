@@ -97,7 +97,7 @@ const SignIn: FC = () => {
             name={register('email').name}
             onChange={register('email').onChange}
             onBlur={register('email').onBlur}
-            onClick={clearEmail}
+            onDeleteClick={clearEmail}
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.email ? errors.email?.message : 'Enter your email'}`}</span>
@@ -111,7 +111,7 @@ const SignIn: FC = () => {
             name={register('password').name}
             onChange={register('password').onChange}
             onBlur={register('password').onBlur}
-            onClick={clearPassword}
+            onDeleteClick={clearPassword}
             className={`form-control ${errors.password ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.password ? errors.password?.message : 'Enter your password'}`}</span>
@@ -125,7 +125,7 @@ const SignIn: FC = () => {
             name={register('confirmPass').name}
             onChange={register('confirmPass').onChange}
             onBlur={register('confirmPass').onBlur}
-            onClick={clearConfirmPassword}
+            onDeleteClick={clearConfirmPassword}
             className={`form-control ${errors.confirmPass ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your password without errors'}`}</span>

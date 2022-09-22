@@ -31,7 +31,7 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
     setValue,
     register,
     handleSubmit,
-    reset, setError, formState: { errors } } = useForm<ChangeInfoType>({
+    setError, formState: { errors } } = useForm<ChangeInfoType>({
       resolver: yupResolver(schema),
       mode: 'onBlur',
     });
@@ -51,13 +51,15 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   };
 
   const onSubmitHandler = async (data: ChangeInfoType) => {
+    // eslint-disable-next-line no-console
+    console.log(data);
     try {
+      // eslint-disable-next-line no-console
+      console.log(data);
       const email = data.email;
       const fullName = data.fullName;
       await dispatch(changeUserInfo({ email, fullName }));
       isChangeInfo();
-
-      reset();
     } catch (error) {
       const err = error as Error;
 
@@ -82,7 +84,7 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
             name={register('fullName').name}
             onChange={register('fullName').onChange}
             onBlur={register('fullName').onBlur}
-            onClick={clearEmail}
+            onDeleteClick={clearFullname}
             className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.fullName ? errors.fullName?.message : 'Enter your name'}`}</span>
@@ -96,7 +98,7 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
             name={register('email').name}
             onChange={register('email').onChange}
             onBlur={register('email').onBlur}
-            onClick={clearFullname}
+            onDeleteClick={clearEmail}
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
           />
           <span>{`${errors.email ? errors.email?.message : 'Enter your email'}`}</span>

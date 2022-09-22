@@ -20,6 +20,8 @@ import Filters from './components/filters/mainFilters/Filters';
 import SignIn from './pages/authPage/auth/sigIn/SignIn';
 import SignUp from './pages/authPage/auth/signUp/SignUp';
 import { getAllGeneres } from './store/filter/filterThunk';
+import { getBooks } from './store/book/bookThunk';
+import BookCatalog from './components/bookCatalog/BookCatalog';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -31,7 +33,13 @@ const App: FC = () => {
       if (token) {
         await dispatch(auth());
       }
-      setIsLoad(true);
+      try {
+        await dispatch(getBooks());
+      } catch (error) {
+        alert(error);
+      } finally {
+        setIsLoad(true);
+      }
     })();
   }, []);
 
@@ -53,6 +61,7 @@ const App: FC = () => {
           (<>
             <Ad />
             <Filters />
+            <BookCatalog />
             <Authad />
            </>)}
           />

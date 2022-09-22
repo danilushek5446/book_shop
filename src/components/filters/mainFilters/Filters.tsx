@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react';
 import type { FC } from 'react';
-import { useState } from 'react';
 
 import polygon from '../../../assets/icons/Polygon 4.png';
 import DropDownButton from '../../dropDown/DropDownButton';
