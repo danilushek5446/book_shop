@@ -4,12 +4,17 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import ReactSlider from 'react-slider';
 import { setPrice } from '../../../store/filter/filterSlice';
-import { useAppDispatch } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 import { StyledContainer } from './PriceFilter.styles';
 
-const PriceFilter: FC = () => {
-  const [value, setValue] = useState([0, 100]);
+type PropType = {
+  onBlur: () => void;
+};
+
+const PriceFilter: FC<PropType> = ({ onBlur }) => {
+  const filter = useAppSelector((state) => state.filter.price);
+  const [value, setValue] = useState([filter.minPrice, filter.maxPrice]);
   const dispatch = useAppDispatch();
 
   const onChange = (value: number[]) => {

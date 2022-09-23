@@ -20,21 +20,20 @@ import Filters from './components/filters/mainFilters/Filters';
 import SignIn from './pages/authPage/auth/sigIn/SignIn';
 import SignUp from './pages/authPage/auth/signUp/SignUp';
 import { getAllGeneres } from './store/filter/filterThunk';
-import { getBooks } from './store/book/bookThunk';
-import BookCatalog from './components/bookCatalog/BookCatalog';
+import BookCatalog from './components/Book/bookCatalog/BookCatalog';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     (async () => {
-      await dispatch(getAllGeneres());
-      const token = localStorage.getItem('token');
-      if (token) {
-        await dispatch(auth());
-      }
       try {
-        await dispatch(getBooks());
+        await dispatch(getAllGeneres());
+        const token = localStorage.getItem('token');
+        if (token) {
+          await dispatch(auth());
+        }
       } catch (error) {
         alert(error);
       } finally {
@@ -53,6 +52,7 @@ const App: FC = () => {
       />
     );
   }
+
   return (
     <StyledContainer className="App">
       <Header />
@@ -64,7 +64,7 @@ const App: FC = () => {
             <BookCatalog />
             <Authad />
            </>)}
-          />
+        />
         <Route path="/login" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/profile"

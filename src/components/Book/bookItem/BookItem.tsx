@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import StyleButton from '../Button/StyledButton';
+import StyleButton from '../../Button/StyledButton';
 import { StyledBookContainer } from './BookItem.styles';
 
 type PropType = {

@@ -6,7 +6,7 @@ export const StyledBookContainer = styled.div`
   padding-top: 50px;
   .container{
     display: grid;
-    grid-template: 1fr 1fr 1fr/1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 60px 20px;
     img{
       width: 305px;

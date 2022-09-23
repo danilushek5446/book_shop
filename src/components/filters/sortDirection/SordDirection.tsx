@@ -5,11 +5,15 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 import { StyledContainer, StyledItemContainer } from './SordDirection.styles';
 
-const SordDirection: FC = () => {
+type PropType = {
+  onBlur: () => void;
+};
+
+const SordDirection: FC<PropType> = ({ onBlur }) => {
   const sortDirections = useAppSelector((state) => state.filter.sortDirection);
   const dispatch = useAppDispatch();
-  const onClick = (id: number) => {
-    dispatch(toggleCheckedSortDirection(id));
+  const onClick = (name: string) => {
+    dispatch(toggleCheckedSortDirection(name));
   };
 
   return (
@@ -18,7 +22,7 @@ const SordDirection: FC = () => {
         {sortDirections.map((item) => {
           return (
             <StyledItemContainer isChecked={item.checked} key={item.id} className="drop-down-item">
-              <span onClick={() => onClick(item.id)}>{item.sortBy}</span>
+              <span onClick={() => onClick(item.sortBy)}>{item.sortBy}</span>
             </StyledItemContainer>
           );
         })}

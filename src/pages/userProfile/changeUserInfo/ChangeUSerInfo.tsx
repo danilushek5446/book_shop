@@ -51,11 +51,7 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   };
 
   const onSubmitHandler = async (data: ChangeInfoType) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
     try {
-      // eslint-disable-next-line no-console
-      console.log(data);
       const email = data.email;
       const fullName = data.fullName;
       await dispatch(changeUserInfo({ email, fullName }));

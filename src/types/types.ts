@@ -59,6 +59,8 @@ export type GenereType = {
 };
 
 export type FilterInitialType = {
+  page: number;
+  search: string;
   genere: GenereType[];
   price: PriceType;
   sortDirection: SortDirectionType[];
@@ -88,7 +90,7 @@ export type QueryType = {
   sortBy?: string;
   sortDirection?: 'ASC' | 'DESC';
   search?: string;
-  priceMin?: number;
-  priceMax?: number;
-  genere?: number[];
+  priceMin?: string;
+  priceMax?: string;
+  genere?: string;
 };

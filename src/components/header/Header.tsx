@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
@@ -7,21 +7,27 @@ import cart from '../../assets/icons/Cart.png';
 import profile from '../../assets/icons/User profile.png';
 import heart from '../../assets/icons/Heart.png';
 import searchPciture from '../../assets/icons/Search.png';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import StyleButton from '../Button/StyledButton';
-import AuthInput from '../Input/AuthInput';
 import PageIcons from '../pageIcons/PageIcons';
 import { StyledHeaderContainer } from './header.styles';
+import { setSearch } from '../../store/filter/filterSlice';
 
 const Header: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = useAppSelector((state) => state.user.user);
-
-  const [search, setSearch] = useState('');
+  const dispatch = useAppDispatch();
+  const [searchValue, setSearchValue] = useState('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+    setSearchValue(event.target.value);
+    dispatch(setSearch(event.target.value));
+  };
+
+  const onDelete = () => {
+    setSearchValue('');
+    dispatch(setSearch(searchValue));
   };
 
   const homePage = () => {
@@ -58,13 +64,18 @@ const Header: FC = () => {
         />
         <div className="input-container">
           <span className="header__title">Catalog</span>
-          <AuthInput
-            icon={searchPciture}
-            name="header-input"
-            type="text"
-            labelText="Search"
-            className="search"
-          />
+          <div className="input-label-container">
+            <input
+              id="search-input"
+              value={searchValue}
+              className="search-input"
+              onChange={(e) => onChange(e)}
+              required
+            />
+            <img src={searchPciture} alt="cannot load icon" />
+            <label htmlFor="search-input">search</label>
+            <button className="clear" onMouseUp={onDelete}>x</button>
+          </div>
         </div>
         {user.email
           ? (<div className="auth-container">
@@ -79,7 +90,12 @@ const Header: FC = () => {
             <PageIcons picture={profile} onClick={profilePage} />
              </div>)
 
-          : <StyleButton className="header-auth" type="button" onClick={onClick} text="Log In/ Sing Up" />}
+          : (<StyleButton
+            className="header-auth"
+            type="button"
+            onClick={onClick}
+            text="Log In/ Sing Up"
+          />)}
 
       </div>
     </StyledHeaderContainer>

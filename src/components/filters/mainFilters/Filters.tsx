@@ -7,9 +7,11 @@ import GenereFilters from '../genereFilters/GenereFilters';
 import PriceFilter from '../priceFilter/PriceFilter';
 import SordDirection from '../sortDirection/SordDirection';
 import { StyledContainer } from './Filters.styles';
+import { useAppSelector } from '../../../store/hooks';
 
 const Filters: FC = () => {
   const [isOpen, setIsOpen] = useState('');
+  const filter = useAppSelector((state) => state.filter);
 
   const onClick = (className: string) => {
     if (isOpen !== className) {
@@ -18,23 +20,30 @@ const Filters: FC = () => {
       setIsOpen('');
     }
   };
+
+  const onBlur = () => {
+    setIsOpen('');
+  };
+
   return (
     <StyledContainer className="filters">
       <h2>Catalog</h2>
       <div className="container">
         <DropDownButton
-          className="genere"
+          onBlur={onBlur}
+          className="genere genere-dropdown"
           text="genere"
           onClick={onClick}
           open={isOpen}
         >
           <div className="dropdown-img-container">
             <img src={polygon} alt="cannot load" />
-            <GenereFilters />
+            <GenereFilters onBlur={onBlur} />
           </div>
         </DropDownButton>
 
         <DropDownButton
+          onBlur={onBlur}
           className="price"
           text="price"
           onClick={onClick}
@@ -42,17 +51,18 @@ const Filters: FC = () => {
         >
           <div className="dropdown-img-container">
             <img src={polygon} alt="cannot load" />
-            <PriceFilter />
+            <PriceFilter onBlur={onBlur} />
           </div>
         </DropDownButton>
 
         <DropDownButton
+          onBlur={onBlur}
           className="sort-direction"
           text="sort by price"
           onClick={onClick}
           open={isOpen}
         >
-          <SordDirection />
+          <SordDirection onBlur={onBlur} />
         </DropDownButton>
       </div>
     </StyledContainer>

@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { FilterInitialType, GenereType } from '../../types/types';
+import type { FilterInitialType } from '../../types/types';
 import { getAllGeneres } from './filterThunk';
 
 export const initialState: FilterInitialType = {
+  page: 0,
+  search: '',
   genere: [],
   price: {
     minPrice: 0,
@@ -41,7 +43,7 @@ export const initialState: FilterInitialType = {
 
 type PricePayloadType = {
   minPrice: number;
-   maxPrice: number;
+  maxPrice: number;
 };
 
 export const filterSlice = createSlice({
@@ -57,10 +59,10 @@ export const filterSlice = createSlice({
       });
       state.genere[index].checked = !state.genere[index].checked;
     },
-    toggleCheckedSortDirection: (state, action: PayloadAction<number>) => {
+    toggleCheckedSortDirection: (state, action: PayloadAction<string>) => {
       state.sortDirection.forEach((item) => {
-        if (item.id === action.payload) {
-          item.checked = !item.checked;
+        if (item.sortBy === action.payload) {
+          item.checked = true;
         } else {
           item.checked = false;
         }
@@ -69,6 +71,12 @@ export const filterSlice = createSlice({
     setPrice: (state, action: PayloadAction<PricePayloadType>) => {
       state.price.maxPrice = action.payload.maxPrice;
       state.price.minPrice = action.payload.minPrice;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -85,6 +93,8 @@ export const {
   toggleCheckedGenere,
   toggleCheckedSortDirection,
   setPrice,
+  setPage,
+  setSearch,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
