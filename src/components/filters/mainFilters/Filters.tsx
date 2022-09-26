@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import type { FC } from 'react';
 
 import polygon from '../../../assets/icons/Polygon 4.png';
@@ -7,11 +7,12 @@ import GenereFilters from '../genereFilters/GenereFilters';
 import PriceFilter from '../priceFilter/PriceFilter';
 import SordDirection from '../sortDirection/SordDirection';
 import { StyledContainer } from './Filters.styles';
-import { useAppSelector } from '../../../store/hooks';
 
 const Filters: FC = () => {
   const [isOpen, setIsOpen] = useState('');
-  const filter = useAppSelector((state) => state.filter);
+  const genereRef = useRef<HTMLDivElement>(null);
+  const priceRef = useRef<HTMLDivElement>(null);
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const onClick = (className: string) => {
     if (isOpen !== className) {
@@ -30,39 +31,42 @@ const Filters: FC = () => {
       <h2>Catalog</h2>
       <div className="container">
         <DropDownButton
-          onBlur={onBlur}
+          dropDownRef={genereRef}
           className="genere genere-dropdown"
           text="genere"
           onClick={onClick}
           open={isOpen}
+          onBlur={onBlur}
         >
           <div className="dropdown-img-container">
             <img src={polygon} alt="cannot load" />
-            <GenereFilters onBlur={onBlur} />
+            <GenereFilters onBlur={onBlur} dropDownRef={genereRef} />
           </div>
         </DropDownButton>
 
         <DropDownButton
-          onBlur={onBlur}
           className="price"
+          dropDownRef={priceRef}
           text="price"
           onClick={onClick}
           open={isOpen}
+          onBlur={onBlur}
         >
           <div className="dropdown-img-container">
             <img src={polygon} alt="cannot load" />
-            <PriceFilter onBlur={onBlur} />
+            <PriceFilter onBlur={onBlur} dropDownRef={priceRef} />
           </div>
         </DropDownButton>
 
         <DropDownButton
-          onBlur={onBlur}
+          dropDownRef={sortRef}
           className="sort-direction"
           text="sort by price"
           onClick={onClick}
           open={isOpen}
+          onBlur={onBlur}
         >
-          <SordDirection onBlur={onBlur} />
+          <SordDirection onBlur={onBlur} dropDownRef={sortRef} />
         </DropDownButton>
       </div>
     </StyledContainer>

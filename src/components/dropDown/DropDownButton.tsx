@@ -1,5 +1,5 @@
-import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
+import type { FC, RefObject } from 'react';
+import { useRef, useEffect } from 'react';
 
 import { StyledContainer } from './DropDownButton.styles';
 
@@ -10,14 +10,22 @@ type PropType = {
   open: string;
   children: JSX.Element;
   onBlur: () => void;
+  dropDownRef: RefObject<HTMLDivElement>;
 };
 
-const DropDownButton: FC<PropType> = ({ className, text, onClick, open, children, onBlur }) => {
-  const ref = useRef(null);
+const DropDownButton: FC<PropType> = (
+  { className,
+    text,
+    onClick,
+    open,
+    children,
+    onBlur,
+    dropDownRef,
+  },
+) => {
   return (
-    <StyledContainer className="dropdown">
+    <StyledContainer ref={dropDownRef} className="dropdown">
       <div
-        ref={ref}
         className={`${className} dropdown-container`} onClick={() => onClick(className)}
       >
         <div className={className}>{text}</div>

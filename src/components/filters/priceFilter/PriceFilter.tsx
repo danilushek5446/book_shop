@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FC } from 'react';
-import { useState } from 'react';
+import type { FC, RefObject } from 'react';
+import { useEffect, useState } from 'react';
 import ReactSlider from 'react-slider';
 import { setPrice } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -10,9 +10,10 @@ import { StyledContainer } from './PriceFilter.styles';
 
 type PropType = {
   onBlur: () => void;
+  dropDownRef: RefObject<HTMLDivElement>;
 };
 
-const PriceFilter: FC<PropType> = ({ onBlur }) => {
+const PriceFilter: FC<PropType> = ({ onBlur, dropDownRef }) => {
   const filter = useAppSelector((state) => state.filter.price);
   const [value, setValue] = useState([filter.minPrice, filter.maxPrice]);
   const dispatch = useAppDispatch();
@@ -21,6 +22,21 @@ const PriceFilter: FC<PropType> = ({ onBlur }) => {
     setValue(value);
     dispatch(setPrice({ minPrice: value[0], maxPrice: value[1] }));
   };
+
+  useEffect(() => {
+    const closeDropdown = (e: MouseEvent) => {
+      if (!dropDownRef.current) {
+        return;
+      }
+      if (!dropDownRef.current.contains(e.target as Node)) {
+        onBlur();
+      }
+    };
+
+    document.body.addEventListener('click', closeDropdown);
+
+    return () => document.body.removeEventListener('click', closeDropdown);
+  });
 
   return (
     <StyledContainer className="drop-down-list">

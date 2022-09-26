@@ -11,7 +11,7 @@ import { StyledContainer } from './App.styles';
 import Footer from './components/Footer/Footer';
 import Header from './components/header/Header';
 import UserProfile from './pages/userProfile/userProfile/UserProfile';
-import PrivateRoute from './routes/PrivateRoute';
+import PrivateProfileRoute from './routes/PrivateProfileRoute';
 import { useAppDispatch } from './store/hooks';
 import { auth } from './store/user/userThunk';
 import Ad from './components/ad/Ad';
@@ -21,6 +21,8 @@ import SignIn from './pages/authPage/auth/sigIn/SignIn';
 import SignUp from './pages/authPage/auth/signUp/SignUp';
 import { getAllGeneres } from './store/filter/filterThunk';
 import BookCatalog from './components/Book/bookCatalog/BookCatalog';
+import PrivateAuthRoute from './routes/PrivateAuthRoute';
+import BookPage from './components/Book/bookPage/BookPage';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -65,13 +67,24 @@ const App: FC = () => {
             <Authad />
            </>)}
         />
-        <Route path="/login" element={<SignIn />} />
-        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/login" element={
+          (<PrivateAuthRoute>
+            <SignIn />
+           </PrivateAuthRoute>)
+          }
+        />
+        <Route path="/signUp" element={
+          (<PrivateAuthRoute>
+            <SignUp />
+           </PrivateAuthRoute>)
+          }
+        />
+        <Route path="/bookPage/:id" element={<BookPage />} />
         <Route path="/profile"
           element={
-            (<PrivateRoute>
+            (<PrivateProfileRoute>
               <UserProfile />
-             </PrivateRoute>)
+             </PrivateProfileRoute>)
           }
         />
       </Routes>

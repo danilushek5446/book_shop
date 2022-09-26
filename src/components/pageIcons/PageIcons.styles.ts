@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
+  cursor: pointer;
   background-color: #344966;
   width: 48px;
   height: 48px;

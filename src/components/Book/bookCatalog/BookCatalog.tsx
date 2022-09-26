@@ -102,6 +102,7 @@ const BookCatalog: FC = () => {
           return (
             <BookItem
               key={item.id}
+              id={item.id}
               image={item.image}
               name={item.name}
               author={item.author}

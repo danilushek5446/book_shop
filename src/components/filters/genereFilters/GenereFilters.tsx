@@ -1,5 +1,5 @@
-import type { FC } from 'react';
-import { useRef, useEffect } from 'react';
+import type { FC, RefObject } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { toggleCheckedGenere } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -8,23 +8,24 @@ import { StyledContainer } from './GenereFilters.styles';
 
 type PropType = {
   onBlur: () => void;
+  dropDownRef: RefObject<HTMLDivElement>;
 };
 
-const GenereFilters: FC<PropType> = ({ onBlur }) => {
+const GenereFilters: FC<PropType> = ({ onBlur, dropDownRef }) => {
   const generes = useAppSelector((state) => state.filter.genere);
 
   const dispatch = useAppDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const onClick = (id: number) => {
     dispatch(toggleCheckedGenere(id));
   };
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const closeDropdown = (e: any) => {
-      // eslint-disable-next-line no-console
-      console.log(e.target.className.includes('genere-dropdown'));
-      if (!e.target.className.includes('genere-dropdown')) {
+    const closeDropdown = (e: MouseEvent) => {
+      if (!dropDownRef.current) {
+        return;
+      }
+      if (!dropDownRef.current.contains(e.target as Node)) {
         onBlur();
       }
     };
@@ -36,7 +37,7 @@ const GenereFilters: FC<PropType> = ({ onBlur }) => {
 
   return (
     <StyledContainer ref={ref} className="drop-down-list genere-dropdown">
-      <div ref={ref} className="drop-down-items-container genere-dropdown">
+      <div className="drop-down-items-container genere-dropdown">
         {generes.map((item) => {
           return (
             <div key={item.id} className="drop-down-item genere-dropdown">

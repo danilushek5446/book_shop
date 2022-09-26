@@ -79,8 +79,13 @@ export type BookType = {
   generes: GenereType[];
 };
 
+export type CurrentBookType = {
+  book?: BookType;
+};
+
 export type BookInitialType = {
   booksArray: BookType[];
+  currentBook?: BookType;
   count: number;
 };
 

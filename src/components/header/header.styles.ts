@@ -3,11 +3,12 @@ import styled from 'styled-components';
 export const StyledHeaderContainer = styled.div`
   max-width: 1280px;
   width: 100%;
+  padding-top: 24px;
+  padding-bottom: 40px;
   .container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 128px;
     .header-logo{
       height: 46px;
       cursor: pointer;
