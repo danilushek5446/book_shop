@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import type { BookInitialType } from '../../types/types';
-import { getBookById, getBooks } from './bookThunk';
+import { getBookById, getBooks, getBooksForCart } from './bookThunk';
 
 export const initialState: BookInitialType = {
   booksArray: [],
@@ -12,10 +12,14 @@ export const initialState: BookInitialType = {
 export const bookSlice = createSlice({
   name: 'book',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getBooks.fulfilled, (state, action) => {
+      state.booksArray = action.payload.booksArray;
+      state.count = action.payload.count;
+    });
+
+    builder.addCase(getBooksForCart.fulfilled, (state, action) => {
       state.booksArray = action.payload.booksArray;
       state.count = action.payload.count;
     });

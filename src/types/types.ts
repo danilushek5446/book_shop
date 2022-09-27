@@ -89,7 +89,7 @@ export type BookInitialType = {
   count: number;
 };
 
-export type QueryType = {
+export type QueryBookType = {
   page?: string;
   perPage?: string;
   sortBy?: string;
@@ -98,4 +98,26 @@ export type QueryType = {
   priceMin?: string;
   priceMax?: string;
   genere?: string;
+};
+
+export type CartType = {
+  id: number;
+  userId: number;
+  bookId: number;
+  count: number;
+};
+
+export type CartInitialType = {
+  cart?: CartType[];
+};
+
+export type QueryCartType = {
+  userId: number;
+  bookId: number;
+  count: number;
+};
+
+export type QueryCartCountUpdateType = {
+  id: number;
+  count: number;
 };

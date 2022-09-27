@@ -42,7 +42,7 @@ const PriceFilter: FC<PropType> = ({ onBlur, dropDownRef }) => {
     <StyledContainer className="drop-down-list">
       <ReactSlider
         value={value}
-        onChange={(value) => onChange(value)}
+        onAfterChange={(value) => onChange(value)}
         className="horizontal-slider"
         thumbClassName="example-thumb"
         trackClassName="example-track"

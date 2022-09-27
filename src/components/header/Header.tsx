@@ -38,6 +38,10 @@ const Header: FC = () => {
     navigate('/profile');
   };
 
+  const cartPage = () => {
+    navigate('/cart');
+  };
+
   const onClick = () => {
     let state;
     const path = location.pathname;
@@ -79,9 +83,7 @@ const Header: FC = () => {
         </div>
         {user.email
           ? (<div className="auth-container">
-            <PageIcons picture={cart} onClick={function (): void {
-              throw new Error('Function not implemented.');
-            }}
+            <PageIcons picture={cart} onClick={cartPage}
             />
             <PageIcons picture={heart} onClick={function (): void {
               throw new Error('Function not implemented.');

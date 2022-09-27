@@ -23,6 +23,7 @@ import { getAllGeneres } from './store/filter/filterThunk';
 import BookCatalog from './components/Book/bookCatalog/BookCatalog';
 import PrivateAuthRoute from './routes/PrivateAuthRoute';
 import BookPage from './components/Book/bookPage/BookPage';
+import Cart from './pages/cartPage.ts/Cart';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -84,6 +85,13 @@ const App: FC = () => {
           element={
             (<PrivateProfileRoute>
               <UserProfile />
+             </PrivateProfileRoute>)
+          }
+        />
+        <Route path="/cart"
+          element={
+            (<PrivateProfileRoute>
+              <Cart />
              </PrivateProfileRoute>)
           }
         />

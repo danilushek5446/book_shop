@@ -5,7 +5,7 @@ import { getBooks } from '../../../store/book/bookThunk';
 import { setPage, setPrice, setSearch, toggleCheckedGenere, toggleCheckedSortDirection } from '../../../store/filter/filterSlice';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import type { QueryType } from '../../../types/types';
+import type { QueryBookType } from '../../../types/types';
 import Pagination from '../../pagination/Pagination';
 import BookItem from '../bookItem/BookItem';
 
@@ -80,7 +80,7 @@ const BookCatalog: FC = () => {
         priceMax: filter.price.maxPrice.toString(),
         genere: genere.toString(),
       });
-      const query: QueryType = {
+      const query: QueryBookType = {
         sortBy: searchQuery.get('sortBy') || '',
         genere: searchQuery.get('genere') || '',
         perPage: searchQuery.get('perPage') || '',
