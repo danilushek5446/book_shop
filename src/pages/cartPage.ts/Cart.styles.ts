@@ -53,5 +53,41 @@ export const StyledDiv = styled.div`
 
   .not-empty-cart{
     width: 100%;
+    .total-price{
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 54px;
+      color: #0D1821;
+      padding-bottom: 30px;
+    }
+
+    .continue-shopping-container{
+      max-width: 268px;
+      width: 100%;
+      max-height: 48px;
+      height: 100%;
+      padding-bottom: 114px;
+    }
+
+    .continue-shopping{
+      max-width: 268px;
+      border: 1px solid #0D1821;
+      background: white;
+      color: #0D1821;
+    }
+
+    .buttons-container{
+      display: flex;
+      max-width: 460px;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .chekout-container{
+      max-width: 174px;
+      width: 100%;
+      max-height: 44px;
+      height: 100%;
+    }
   }
 `;

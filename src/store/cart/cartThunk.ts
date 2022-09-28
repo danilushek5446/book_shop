@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import cartApi from '../../http/cartApi';
-import type { QueryCartCountUpdateType, QueryCartType } from '../../types/types';
+import type { QueryCartCountUpdateType, QueryCartType, QueryRequsetType } from '../../types/types';
+import { deleteOneBookInCart } from './cartSlice';
 
 export const getUserCart = createAsyncThunk(
   'cart/getUserCart',
@@ -20,9 +21,9 @@ export const getUserCart = createAsyncThunk(
 
 export const addToCart = createAsyncThunk(
   'cart/addToCart',
-  async (query: QueryCartType, { rejectWithValue }) => {
+  async (bookId: number, { rejectWithValue }) => {
     try {
-      const response = await cartApi.addToCart(query);
+      const response = await cartApi.addToCart(bookId);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -35,9 +36,10 @@ export const addToCart = createAsyncThunk(
 
 export const deleteOneBook = createAsyncThunk(
   'cart/deleteOneBook',
-  async (query: QueryCartType, { rejectWithValue }) => {
+  async (query: QueryRequsetType, { rejectWithValue, dispatch }) => {
     try {
       const response = await cartApi.deleteOne(query);
+      dispatch(deleteOneBookInCart(query.bookId));
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -52,7 +54,7 @@ export const checkOut = createAsyncThunk(
   'cart/checkOut',
   async (userId: number, { rejectWithValue }) => {
     try {
-      const response = await cartApi.getCart(userId);
+      const response = await cartApi.deleteMany(userId);
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {

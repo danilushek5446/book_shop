@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const StyledBookContainer = styled.div`
+export const StyledBookContainer = styled.div<{ count: number }>`
   display: flex;
   width: 100%;
   color: #0D1821;
@@ -47,10 +47,6 @@ export const StyledBookContainer = styled.div`
    height: 32px;
  }
 
- .count-container{
-   display: flex;
-   align-items: center;
- }
 
  .titles-container{
    display: flex;
@@ -58,11 +54,14 @@ export const StyledBookContainer = styled.div`
  }
 
  .count-container{
-   padding-top: 40px;
-   padding-bottom: 40px;
-   img{
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    img{
       padding-left: 60px;
-   }
+      cursor: pointer;
+    }
  }
 
  .container{
@@ -73,4 +72,12 @@ export const StyledBookContainer = styled.div`
    padding-left: 15px;
    padding-right: 15px;
  }
+ 
+ ${({ count }) => {
+    if (!count) {
+      return css`
+        display: none;
+      `;
+    }
+  }}
 `;

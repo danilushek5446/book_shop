@@ -6,7 +6,7 @@ import { StyledDiv } from './Cart.styles';
 import booksImage from '../../assets/images/books.png';
 import StyleButton from '../../components/Button/StyledButton';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getUserCart } from '../../store/cart/cartThunk';
+import { checkOut, getUserCart } from '../../store/cart/cartThunk';
 import BookCard from '../../components/Book/bookCard/BookCard';
 import { getBooksForCart } from '../../store/book/bookThunk';
 
@@ -19,6 +19,11 @@ const Cart: FC = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const onCatalogClick = () => {
+    navigate('/');
+  };
+
+  const onCheckout = async () => {
+    await dispatch(checkOut(user.id));
     navigate('/');
   };
 
@@ -37,7 +42,7 @@ const Cart: FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (!cart) {
+      if (!cart?.length) {
         return;
       }
       const booksId = cart.map((item) => {
@@ -50,7 +55,7 @@ const Cart: FC = () => {
   }, [cart]);
   return (
     <StyledDiv className="cart">
-      {!cart ? (
+      {!cart?.length ? (
         <div className="empty-cart">
           <img className="empty-cart-image" src={booksImage} alt="cannot upload picture" />
           <div className="container">
@@ -79,18 +84,31 @@ const Cart: FC = () => {
                     rating={item.rating || 0}
                     price={item.price}
                     countPrice={summ}
+                    userId={user.id}
                   />
                 );
               })
             }
           </div>
-          <span>{`Total: ${totalPrice}`}</span>
-          <StyleButton
-            text="Continue shopping"
-            type="button"
-            onClick={onCatalogClick}
-            className="emty-cart"
-          />
+          <div className="total-price">{`Total: ${totalPrice}`}</div>
+          <div className="buttons-container">
+            <div className="continue-shopping-container">
+              <StyleButton
+                text="Continue shopping"
+                type="button"
+                onClick={onCatalogClick}
+                className="continue-shopping"
+              />
+            </div>
+            <div className="chekout-container">
+              <StyleButton
+                text="Chekout"
+                type="button"
+                onClick={onCheckout}
+                className="chekout-button"
+              />
+            </div>
+          </div>
         </div>
       )}
     </StyledDiv >

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import StyleButton from '../../Button/StyledButton';
 import { StyledBookContainer } from './BookCard.styles';
 import trash from '../../../assets/icons/Delete.png';
+import { deleteOneBook } from '../../../store/cart/cartThunk';
 
 type PropType = {
   id: number;
@@ -16,9 +17,10 @@ type PropType = {
   rating: number;
   price: number;
   countPrice(price: number): void;
+  userId: number;
 };
 
-const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countPrice }) => {
+const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countPrice, userId }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
@@ -28,9 +30,12 @@ const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countP
     navigate(`/bookPage/${id}`);
   };
 
-  const onDecreaseClick = () => {
+  const onDecreaseClick = async () => {
     setCount(count - 1);
     countPrice(-price);
+    if ((count - 1) === 0) {
+      dispatch(deleteOneBook({ userId, bookId: id }));
+    }
   };
 
   const onIncreaseClick = () => {
@@ -38,25 +43,25 @@ const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countP
     countPrice(+price);
   };
 
+  const onDeleteOne = () => {
+    countPrice(-(price * count));
+    dispatch(deleteOneBook({ userId, bookId: id }));
+  };
+
   useEffect(() => {
-    (async () => {
-      const index = cart?.findIndex((item) => {
-        if (item.bookId === id) {
-          return true;
-        }
-        return false;
-      });
-      if (cart) {
-        setCount(cart[index || 0].count);
-        countPrice(cart[index || 0].count * price);
+    if (cart?.length) {
+      const index = cart.findIndex((item) => item.bookId === id);
+
+      if (index !== -1) {
+        setCount(cart[index].count);
+        countPrice(cart[index].count * price);
       }
-      // await dispatch(getBooks(id));
-    })();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <StyledBookContainer className="book-content">
+    <StyledBookContainer count={count} className="book-content">
       <img src={`${process.env.REACT_APP_API_URL}${image}`}
         className="book-picture"
         alt="cannot load picture"
@@ -71,7 +76,7 @@ const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countP
           <button className="decrease-button" onClick={onDecreaseClick}>-</button>
           <span className="book-count">{count}</span>
           <button className="increase-button" onClick={onIncreaseClick}>+</button>
-          <img src={trash} alt="cannot load picture" />
+          <img src={trash} onClick={onDeleteOne} alt="cannot load picture" />
         </div>
         <span className="book-price">{`$${price} USD`}</span>
       </div>

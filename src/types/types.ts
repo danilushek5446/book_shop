@@ -117,7 +117,21 @@ export type QueryCartType = {
   count: number;
 };
 
+export type QueryRequsetType = {
+  userId: number;
+  bookId: number;
+};
+
 export type QueryCartCountUpdateType = {
   id: number;
   count: number;
+};
+
+export type RatingParamsType = {
+  bookId: number;
+  rate: number;
+};
+
+export type RatingResponseType = {
+  rating: number;
 };

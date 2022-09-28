@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+
 import type { BookInitialType } from '../../types/types';
 import { getBookById, getBooks, getBooksForCart } from './bookThunk';
 
@@ -12,7 +14,13 @@ export const initialState: BookInitialType = {
 export const bookSlice = createSlice({
   name: 'book',
   initialState,
-  reducers: {},
+  reducers: {
+    changeCurrentRate: (state, action: PayloadAction<number>) => {
+      if (state.currentBook) {
+        state.currentBook.rating = action.payload;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getBooks.fulfilled, (state, action) => {
       state.booksArray = action.payload.booksArray;
@@ -29,5 +37,9 @@ export const bookSlice = createSlice({
     });
   },
 });
+
+export const {
+  changeCurrentRate,
+} = bookSlice.actions;
 
 export default bookSlice.reducer;

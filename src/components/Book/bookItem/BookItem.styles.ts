@@ -30,6 +30,32 @@ export const StyledBookContainer = styled.div`
  }
 
  .book-rating{
-    padding-bottom: 30px;
+   padding-top: 2px;
+   padding-left: 25px;
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 24px;
+   color: #B9BAC4;
+ }
+
+ .rating-container{
+   display: flex;
+ }
+
+ .empty-icons{
+   >svg:last-child{
+      padding: 0;
+   }
+ }
+
+ svg{
+   padding-right: 32px;
+   >svg:last-child{
+      padding-left: 0;
+   }
+   path{
+      stroke: #BFCC94;
+      stroke-width: 1;
+   }
  }
 `;

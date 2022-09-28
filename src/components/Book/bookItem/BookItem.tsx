@@ -1,5 +1,8 @@
+import { Rating } from 'react-simple-star-rating';
 import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addToCart } from '../../../store/cart/cartThunk';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import StyleButton from '../../Button/StyledButton';
 import { StyledBookContainer } from './BookItem.styles';
 
@@ -13,9 +16,19 @@ type PropType = {
 };
 
 const BookItem: FC<PropType> = ({ image, name, author, rating, price, id }) => {
+  const user = useAppSelector((state) => state.user.user);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const onClick = () => {
     navigate(`/bookPage/${id}`);
+  };
+
+  const onAddToCart = () => {
+    if (!user.email) {
+      navigate('/login');
+    }
+    dispatch(addToCart(id));
   };
 
   return (
@@ -27,11 +40,20 @@ const BookItem: FC<PropType> = ({ image, name, author, rating, price, id }) => {
       />
       <span className="book-name">{name}</span>
       <span className="book-author">{author}</span>
-      <span className="book-rating">{rating}</span>
+      <div className="rating-container">
+        <Rating
+          ratingValue={rating * 20}
+          readonly
+          emptyColor="#fff"
+          fillColor="#BFCC94"
+          size={23}
+        />
+        <span className="book-rating">{rating.toFixed(1)}</span>
+      </div>
       <StyleButton
         text={`$${price} USD`}
         type="button"
-        onClick={() => ''}
+        onClick={onAddToCart}
         className="price"
       />
     </StyledBookContainer>
