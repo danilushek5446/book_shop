@@ -80,4 +80,8 @@ export const StyledBookContainer = styled.div<{ count: number }>`
       `;
     }
   }}
+
+  .in-favorite{
+    display: none;
+  }
 `;

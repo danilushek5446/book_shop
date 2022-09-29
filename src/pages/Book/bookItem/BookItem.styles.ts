@@ -58,4 +58,27 @@ export const StyledBookContainer = styled.div`
       stroke-width: 1;
    }
  }
+
+ .in-cart{
+   background: white;
+   color: #0D1821;
+   border: 1px solid #0D1821;
+   cursor: default;
+ }
+
+ .book-image-container{
+   position: relative;
+   .book-favorite{
+      position: absolute;
+      opacity: 0.6;
+      width: 48px;
+      height: 48px;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+   }
+   .in-favorite{
+      opacity: 1;
+   }
+ }
 `;

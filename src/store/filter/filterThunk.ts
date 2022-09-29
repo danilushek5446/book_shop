@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
+
 import { getGeneres } from '../../http/generesApi';
 
 export const getAllGeneres = createAsyncThunk(

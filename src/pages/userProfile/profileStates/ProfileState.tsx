@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+
 import { AuthStyledInputLabelsContainer } from './ProfileState.styles';
 
 type PropType = {

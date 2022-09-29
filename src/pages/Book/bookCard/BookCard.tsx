@@ -2,9 +2,7 @@ import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getBookById, getBooks } from '../../../store/book/bookThunk';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import StyleButton from '../../Button/StyledButton';
 import { StyledBookContainer } from './BookCard.styles';
 import trash from '../../../assets/icons/Delete.png';
 import { deleteOneBook } from '../../../store/cart/cartThunk';
@@ -16,11 +14,21 @@ type PropType = {
   author: string;
   rating: number;
   price: number;
-  countPrice(price: number): void;
+  countPrice?(price: number): void;
   userId: number;
+  isInCart: boolean;
 };
 
-const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countPrice, userId }) => {
+const BookCard: FC<PropType> = ({
+  image,
+  name,
+  author,
+  rating,
+  price,
+  id,
+  countPrice,
+  userId,
+  isInCart }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
@@ -32,7 +40,9 @@ const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countP
 
   const onDecreaseClick = async () => {
     setCount(count - 1);
-    countPrice(-price);
+    if (countPrice) {
+      countPrice(-price);
+    }
     if ((count - 1) === 0) {
       dispatch(deleteOneBook({ userId, bookId: id }));
     }
@@ -40,11 +50,15 @@ const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countP
 
   const onIncreaseClick = () => {
     setCount(count + 1);
-    countPrice(+price);
+    if (countPrice) {
+      countPrice(+price);
+    }
   };
 
   const onDeleteOne = () => {
-    countPrice(-(price * count));
+    if (countPrice) {
+      countPrice(-(price * count));
+    }
     dispatch(deleteOneBook({ userId, bookId: id }));
   };
 
@@ -54,7 +68,9 @@ const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countP
 
       if (index !== -1) {
         setCount(cart[index].count);
-        countPrice(cart[index].count * price);
+        if (countPrice) {
+          countPrice(cart[index].count * price);
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +88,7 @@ const BookCard: FC<PropType> = ({ image, name, author, rating, price, id, countP
           <span className="book-name">{name}</span>
           <span className="book-author">{author}</span>
         </div>
-        <div className="count-container">
+        <div className={`${isInCart ? 'count-container' : 'in-favorite'}`}>
           <button className="decrease-button" onClick={onDecreaseClick}>-</button>
           <span className="book-count">{count}</span>
           <button className="increase-button" onClick={onIncreaseClick}>+</button>

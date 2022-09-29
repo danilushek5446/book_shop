@@ -6,7 +6,7 @@ const getCart = async (userId: number): Promise<CartInitialType> => {
   return data;
 };
 
-const addToCart = async (bookId: number) => {
+const addToCart = async (bookId: number): Promise<CartType> => {
   const { data } = await host.post(`api/cart/${bookId}`);
   return data;
 };

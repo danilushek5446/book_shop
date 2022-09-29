@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
+
 import userAuthApi from '../../http/userAuthApi';
 import userApi from '../../http/userApi';
 import type { AuthType, ChangeInfoType, ChangePasswordType, UserPhotoType } from '../../types/types';

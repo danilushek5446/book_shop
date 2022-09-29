@@ -25,8 +25,10 @@ export const StyledDiv = styled.div`
 
   .book-background{
     background-image: url(${backgroundBooks});
-    width: 542px;
-    height: 326.92px;
+    max-width: 542px;
+    width: 100%;
+    max-height: 326.92px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +38,8 @@ export const StyledDiv = styled.div`
       font-weight: 500;
       font-size: 20px;
       line-height: 30px;
-      width: 184px;
+      max-width: 191px;
+      width: 100%;
       color: #344966;
     }
     button{

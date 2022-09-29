@@ -51,7 +51,7 @@ const UserProfile: FC = () => {
           alt="cannot load picture"
           />
           <label className="upload-container" htmlFor="file-input">
-            <PageIcons picture={camera} onClick={() => { }}
+            <PageIcons className="add-avater-button" picture={camera} onClick={() => { }}
             />
             <input id="file-input" className="upload" type="file" onChange={uploadAvatar} />
           </label>

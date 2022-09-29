@@ -1,5 +1,5 @@
 import type { FC, RefObject } from 'react';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { toggleCheckedSortDirection } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';

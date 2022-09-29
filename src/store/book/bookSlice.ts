@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { BookInitialType } from '../../types/types';
-import { getBookById, getBooks, getBooksForCart } from './bookThunk';
+import { getAllBooksByIds, getBookById, getBooks } from './bookThunk';
 
 export const initialState: BookInitialType = {
   booksArray: [],
@@ -27,7 +27,7 @@ export const bookSlice = createSlice({
       state.count = action.payload.count;
     });
 
-    builder.addCase(getBooksForCart.fulfilled, (state, action) => {
+    builder.addCase(getAllBooksByIds.fulfilled, (state, action) => {
       state.booksArray = action.payload.booksArray;
       state.count = action.payload.count;
     });

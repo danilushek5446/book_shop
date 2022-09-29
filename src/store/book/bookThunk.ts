@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { getAllBooks, getCartBooks, getOneBook } from '../../http/bookApi';
+
+import { getAllBooks, getBooksByIds, getOneBook } from '../../http/bookApi';
 import type { QueryBookType } from '../../types/types';
 
 export const getBooks = createAsyncThunk(
@@ -34,11 +35,11 @@ export const getBookById = createAsyncThunk(
   },
 );
 
-export const getBooksForCart = createAsyncThunk(
+export const getAllBooksByIds = createAsyncThunk(
   'book/getCartBooks',
   async (booksId: string) => {
     try {
-      const response = await getCartBooks(booksId);
+      const response = await getBooksByIds(booksId);
 
       return response;
     } catch (error) {

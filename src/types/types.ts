@@ -135,3 +135,13 @@ export type RatingParamsType = {
 export type RatingResponseType = {
   rating: number;
 };
+
+export type FavoriteType = {
+  id: number;
+  userId: number;
+  bookId: number;
+};
+
+export type FavoriteInitialType = {
+  favorite?: CartType[];
+};

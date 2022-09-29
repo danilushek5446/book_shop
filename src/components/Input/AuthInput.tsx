@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import type { ChangeHandler, RefCallBack } from 'react-hook-form';
+
 import { AuthStyledInput, AuthStyledInputLabelsContainer } from './AuthInput.styles';
 
 type PropType = {

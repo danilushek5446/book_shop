@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
@@ -17,6 +17,8 @@ const Header: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = useAppSelector((state) => state.user.user);
+  const userCart = useAppSelector((state) => state.cart.cart);
+  const userFavorite = useAppSelector((state) => state.favorite.favorite);
   const dispatch = useAppDispatch();
   const [searchValue, setSearchValue] = useState('');
 
@@ -36,6 +38,10 @@ const Header: FC = () => {
 
   const profilePage = () => {
     navigate('/profile');
+  };
+
+  const favoritePage = () => {
+    navigate('/favorite');
   };
 
   const cartPage = () => {
@@ -83,15 +89,24 @@ const Header: FC = () => {
         </div>
         {user.email
           ? (<div className="auth-container">
-            <PageIcons picture={cart} onClick={cartPage}
+            <PageIcons
+              className="cart-icon"
+              picture={cart}
+              onClick={cartPage}
+              count={userCart?.length}
             />
-            <PageIcons picture={heart} onClick={function (): void {
-              throw new Error('Function not implemented.');
-            }}
+            <PageIcons
+              className="favorite-icon"
+              picture={heart}
+              onClick={favoritePage}
+              count={userFavorite?.length}
             />
-            <PageIcons picture={profile} onClick={profilePage} />
+            <PageIcons
+              className="profile-icon"
+              picture={profile}
+              onClick={profilePage}
+            />
              </div>)
-
           : (<StyleButton
             className="header-auth"
             type="button"

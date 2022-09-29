@@ -7,8 +7,8 @@ import booksImage from '../../assets/images/books.png';
 import StyleButton from '../../components/Button/StyledButton';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { checkOut, getUserCart } from '../../store/cart/cartThunk';
-import BookCard from '../../components/Book/bookCard/BookCard';
-import { getBooksForCart } from '../../store/book/bookThunk';
+import BookCard from '../Book/bookCard/BookCard';
+import { getAllBooksByIds } from '../../store/book/bookThunk';
 
 const Cart: FC = () => {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const Cart: FC = () => {
         return (item.bookId);
       });
 
-      await dispatch(getBooksForCart(booksId.toString()));
+      await dispatch(getAllBooksByIds(booksId.toString()));
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
@@ -85,6 +85,7 @@ const Cart: FC = () => {
                     price={item.price}
                     countPrice={summ}
                     userId={user.id}
+                    isInCart
                   />
                 );
               })

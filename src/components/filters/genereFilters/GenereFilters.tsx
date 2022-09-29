@@ -1,9 +1,8 @@
 import type { FC, RefObject } from 'react';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { toggleCheckedGenere } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-
 import { StyledContainer } from './GenereFilters.styles';
 
 type PropType = {

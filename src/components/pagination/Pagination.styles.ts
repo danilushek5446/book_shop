@@ -4,7 +4,7 @@ export const StyledContainer = styled.div`
   max-width: 1280px;
   width: 100%;
   padding-top: 80px;
-
+  padding-bottom: 30px;
   .circle{
     border: 2px solid #0D1821;
     border-radius: 50%;

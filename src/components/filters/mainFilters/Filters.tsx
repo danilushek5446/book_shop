@@ -36,7 +36,6 @@ const Filters: FC = () => {
           text="genere"
           onClick={onClick}
           open={isOpen}
-          onBlur={onBlur}
         >
           <div className="dropdown-img-container">
             <img src={polygon} alt="cannot load" />
@@ -50,7 +49,6 @@ const Filters: FC = () => {
           text="price"
           onClick={onClick}
           open={isOpen}
-          onBlur={onBlur}
         >
           <div className="dropdown-img-container">
             <img src={polygon} alt="cannot load" />
@@ -64,7 +62,6 @@ const Filters: FC = () => {
           text="sort by price"
           onClick={onClick}
           open={isOpen}
-          onBlur={onBlur}
         >
           <SordDirection onBlur={onBlur} dropDownRef={sortRef} />
         </DropDownButton>

@@ -3,6 +3,7 @@
 import type { FC, RefObject } from 'react';
 import { useEffect, useState } from 'react';
 import ReactSlider from 'react-slider';
+
 import { setPrice } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 

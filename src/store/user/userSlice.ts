@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import type { UserInitialType } from '../../types/types';
 import { singIn, signUp, auth, changeUserInfo, changeUserPassword, uploadUserPhoto } from './userThunk';
 

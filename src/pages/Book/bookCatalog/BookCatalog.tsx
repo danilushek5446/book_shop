@@ -1,12 +1,14 @@
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getBooks } from '../../../store/book/bookThunk';
-import { setPage, setPrice, setSearch, toggleCheckedGenere, toggleCheckedSortDirection } from '../../../store/filter/filterSlice';
 
+import { getBooks } from '../../../store/book/bookThunk';
+import { getUserCart } from '../../../store/cart/cartThunk';
+import { getUserFavorite } from '../../../store/favorite/favoriteThunk';
+import { setPage, setPrice, setSearch, toggleCheckedGenere, toggleCheckedSortDirection } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import type { QueryBookType } from '../../../types/types';
-import Pagination from '../../pagination/Pagination';
+import Pagination from '../../../components/pagination/Pagination';
 import BookItem from '../bookItem/BookItem';
 
 import { StyledBookContainer } from './BookCatalog.styles';
@@ -14,6 +16,7 @@ import { StyledBookContainer } from './BookCatalog.styles';
 const BookCatalog: FC = () => {
   const books = useAppSelector((state) => state.book);
   const filter = useAppSelector((state) => state.filter);
+  const userId = useAppSelector((state) => state.user.user.id);
   const [searchQuery, setSearchQuery] = useSearchParams();
 
   const dispatch = useAppDispatch();
@@ -52,6 +55,20 @@ const BookCatalog: FC = () => {
       ));
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(getUserCart(userId));
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(getUserFavorite(userId));
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

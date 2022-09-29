@@ -12,7 +12,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/header/Header';
 import UserProfile from './pages/userProfile/userProfile/UserProfile';
 import PrivateProfileRoute from './routes/PrivateProfileRoute';
-import { useAppDispatch } from './store/hooks';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 import { auth } from './store/user/userThunk';
 import Ad from './components/ad/Ad';
 import Authad from './components/AuthAd/Authad';
@@ -20,14 +20,16 @@ import Filters from './components/filters/mainFilters/Filters';
 import SignIn from './pages/authPage/auth/sigIn/SignIn';
 import SignUp from './pages/authPage/auth/signUp/SignUp';
 import { getAllGeneres } from './store/filter/filterThunk';
-import BookCatalog from './components/Book/bookCatalog/BookCatalog';
+import BookCatalog from './pages/Book/bookCatalog/BookCatalog';
 import PrivateAuthRoute from './routes/PrivateAuthRoute';
-import BookPage from './components/Book/bookPage/BookPage';
-import Cart from './pages/cartPage.ts/Cart';
+import BookPage from './pages/Book/bookPage/BookPage';
+import Cart from './pages/cartPage/Cart';
+import Favorite from './pages/favoritePage/Favorite';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.user);
 
   useEffect(() => {
     (async () => {
@@ -65,7 +67,7 @@ const App: FC = () => {
             <Ad />
             <Filters />
             <BookCatalog />
-            <Authad />
+            {!user.email && <Authad />}
            </>)}
         />
         <Route path="/login" element={
@@ -92,6 +94,13 @@ const App: FC = () => {
           element={
             (<PrivateProfileRoute>
               <Cart />
+             </PrivateProfileRoute>)
+          }
+        />
+        <Route path="/favorite"
+          element={
+            (<PrivateProfileRoute>
+              <Favorite />
              </PrivateProfileRoute>)
           }
         />

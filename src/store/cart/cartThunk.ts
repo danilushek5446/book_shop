@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
+
 import cartApi from '../../http/cartApi';
-import type { QueryCartCountUpdateType, QueryCartType, QueryRequsetType } from '../../types/types';
+import type { QueryCartCountUpdateType, QueryRequsetType } from '../../types/types';
 import { deleteOneBookInCart } from './cartSlice';
 
 export const getUserCart = createAsyncThunk(

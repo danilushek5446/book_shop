@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+
 import type { FilterInitialType } from '../../types/types';
 import { getAllGeneres } from './filterThunk';
 
@@ -51,21 +52,12 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     toggleCheckedGenere: (state, action: PayloadAction<number>) => {
-      const index = state.genere.findIndex((item) => {
-        if (item.id === action.payload) {
-          return true;
-        }
-        return false;
-      });
+      const index = state.genere.findIndex((item) => item.id === action.payload);
       state.genere[index].checked = !state.genere[index].checked;
     },
     toggleCheckedSortDirection: (state, action: PayloadAction<string>) => {
       state.sortDirection.forEach((item) => {
-        if (item.sortBy === action.payload) {
-          item.checked = true;
-        } else {
-          item.checked = false;
-        }
+        item.checked = item.sortBy === action.payload;
       });
     },
     setPrice: (state, action: PayloadAction<PricePayloadType>) => {

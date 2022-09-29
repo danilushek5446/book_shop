@@ -111,10 +111,35 @@ export const StyledBookContainer = styled.div`
         stroke-width: 1;
     }
   }
+
   .rate-star{
     max-width: 27.5px;
     width: 100%;
     max-height: 27.5px;
     height: 100%;
   }
+
+  .in-cart{
+   background: white;
+   color: #0D1821;
+   border: 1px solid #0D1821;
+   cursor: default;
+ }
+
+ .book-image-container{
+   position: relative;
+   .book-favorite{
+      position: absolute;
+      opacity: 0.6;
+      width: 59px;
+      height: 59px;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+   }
+   .in-favorite{
+      opacity: 1;
+   }
+ }
+
 `;

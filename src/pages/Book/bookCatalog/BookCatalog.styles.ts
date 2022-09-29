@@ -8,7 +8,7 @@ export const StyledBookContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 60px 20px;
-    img{
+    .book-picture{
       width: 305px;
       height: 448px;
       object-fit: contain;
