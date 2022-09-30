@@ -14,4 +14,22 @@ export const StyledBookContainer = styled.div`
       object-fit: contain;
     }
   }
+  @media (max-width: 1280px) {
+    .container{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 20px 20px;
+    }
+
+    .book-content{
+      max-width: 254px;
+    }
+    .container{
+      .book-picture{
+        width: 254px;
+        height: 372px;
+        object-fit: contain;
+      }
+    }
+  }
 `;

@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import type { FC } from 'react';
 
 import polygon from '../../../assets/icons/Polygon 4.png';
-import DropDownButton from '../../dropDown/DropDownButton';
+import DropDownButton from '../dropDown/DropDownButton';
 import GenereFilters from '../genereFilters/GenereFilters';
 import PriceFilter from '../priceFilter/PriceFilter';
 import SordDirection from '../sortDirection/SordDirection';

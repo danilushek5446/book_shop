@@ -27,58 +27,58 @@ export const StyledBookContainer = styled.div`
       color: #0D1821;
     }
 
-  .price{
-      max-width: 305px;
-      width: 100%;
-  }
+    .price{
+        max-width: 305px;
+        width: 100%;
+    }
 
-  .book-rating{
-      padding-bottom: 30px;
-  }
+    .book-rating{
+        padding-bottom: 30px;
+    }
 
-  .book-description{
-    max-width: 630px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: #344966;
-    white-space: pre-wrap;
-  }
+    .book-description{
+      max-width: 630px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #344966;
+      white-space: pre-wrap;
+    }
 
-  .contenet-container{
-    display: flex;
-    flex-direction: column;
-  }
+    .contenet-container{
+      display: flex;
+      flex-direction: column;
+    }
 
-  .book-picture{
-    max-width: 522px;
-    max-height: 779px;
-    height: 100%;
-    width: 100%;
-  }
-
-  .book-description-title{
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 36px;
-    color: #0D1821;
-  }
-
-  .contenet-container{
-    button{
-      max-width: 216px;
+    .book-picture{
+      max-width: 522px;
+      max-height: 779px;
+      height: 100%;
       width: 100%;
     }
-  }
 
-  .hardcover-title{
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: #344966;
-    padding-top: 74px;
-    padding-bottom: 14px;
-  }
+    .book-description-title{
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 36px;
+      color: #0D1821;
+    }
+
+    .contenet-container{
+      button{
+        max-width: 216px;
+        width: 100%;
+      }
+    }
+
+    .hardcover-title{
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #344966;
+      padding-top: 74px;
+      padding-bottom: 14px;
+    }
   }
 
   .book-rating{
@@ -142,4 +142,54 @@ export const StyledBookContainer = styled.div`
    }
  }
 
+  .comments-container{
+    padding-top: 110px;
+
+    .comments-title{
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 60px;
+      color: #0D1821;
+      padding-bottom: 50px;
+    }
+
+    .add-comment-container{
+      max-width: 738px;
+      width: 100%;
+      height: 200px;
+      padding-top: 55px;
+      padding-bottom: 30px;
+    }
+
+    .textarea-container{
+      max-height: 128px;
+      height: 100%;
+    }
+
+    .add-comment{
+      width: 100%;
+      height: 100%;
+      background: #F0F4EF;
+      border-radius: 16px;
+      border: none;
+      resize: none;
+      padding: 20px;
+      box-sizing: border-box;
+      :focus{
+        outline: none;
+      }
+      ::placeholder{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        letter-spacing: 0.75px;
+        color: #B9BAC4;
+        padding-left: 4px;
+      }
+    }
+
+    .add-button-container{
+      padding-top: 40px;
+    }
+  }
 `;

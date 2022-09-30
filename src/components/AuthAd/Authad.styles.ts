@@ -10,6 +10,7 @@ export const StyledDiv = styled.div`
   display: flex;
   margin-top: 100px;
   justify-content: end;
+  position: relative;
   .ad__title{
     margin: 0;
     margin-left: 19%;

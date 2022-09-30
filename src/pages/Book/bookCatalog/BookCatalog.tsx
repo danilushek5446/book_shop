@@ -97,6 +97,7 @@ const BookCatalog: FC = () => {
         priceMax: filter.price.maxPrice.toString(),
         genere: genere.toString(),
       });
+
       const query: QueryBookType = {
         sortBy: searchQuery.get('sortBy') || '',
         genere: searchQuery.get('genere') || '',

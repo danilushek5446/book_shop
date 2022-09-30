@@ -81,4 +81,12 @@ export const StyledBookContainer = styled.div`
       opacity: 1;
    }
  }
+
+   @media (max-width: 1280px) {
+      svg{
+         padding-right: 25px;
+         width: 18px !important;
+         height: 18px !important;
+      }
+   }
 `;

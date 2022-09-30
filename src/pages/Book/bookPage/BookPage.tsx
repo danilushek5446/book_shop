@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -16,6 +17,8 @@ import { changeCurrentRate } from '../../../store/book/bookSlice';
 import { addToCart, getUserCart } from '../../../store/cart/cartThunk';
 import PageIcons from '../../../components/pageIcons/PageIcons';
 import { addToFavorite, deleteFromFavorite, getUserFavorite } from '../../../store/favorite/favoriteThunk';
+import Comment from '../../../components/comment/Comment';
+import { addCommentToBook, getAllComments } from '../../../store/comments/commentThunk';
 // import { StyledBookContainer } from './BookItem.styles';
 
 const BookPage: FC = () => {
@@ -26,6 +29,8 @@ const BookPage: FC = () => {
   const user = useAppSelector((state) => state.user.user);
   const cart = useAppSelector((state) => state.cart.cart);
   const favorite = useAppSelector((state) => state.favorite.favorite);
+  const comments = useAppSelector((state) => state.comments);
+  const [comment, setComment] = useState('');
   const [stateRating, setStateRating] = useState(0);
   const [isInCart, setIsInCart] = useState(false);
   const [isInFavorite, setIsInFavorite] = useState(false);
@@ -33,8 +38,15 @@ const BookPage: FC = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getUserCart(user.id));
+
+      await dispatch(getAllComments({ bookId: +id! }));
+
+      await dispatch(getBookById(+id!));
+
+      setStateRating(() => {
+        return ((book?.rating || 0) * 20);
+      });
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -43,7 +55,6 @@ const BookPage: FC = () => {
         setIsInFavorite(true);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favorite]);
 
   useEffect(() => {
@@ -52,15 +63,17 @@ const BookPage: FC = () => {
         setIsInCart(true);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
-  useEffect(() => {
-    setStateRating(() => {
-      return ((book?.rating || 0) * 20);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const onAddToCart = () => {
+    if (!user.email) {
+      navigate('/login');
+    }
+    if (book) {
+      dispatch(addToCart(book.id));
+      setIsInCart(true);
+    }
+  };
 
   const onAddFavorite = async () => {
     if (!user.email) {
@@ -91,27 +104,19 @@ const BookPage: FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-    (async () => {
-      try {
-        await dispatch(getBookById(+id));
-      } catch (error) {
-        alert(error);
-      }
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const handleChangeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
 
-  const onAddToCart = () => {
+  const onAddComment = async () => {
     if (!user.email) {
       navigate('/login');
     }
-    if (book) {
-      dispatch(addToCart(book.id));
-      setIsInCart(true);
+    try {
+      await dispatch(addCommentToBook({ bookId: +id!, comment }));
+      setComment('');
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -145,7 +150,7 @@ const BookPage: FC = () => {
           </div>
           <span className="book-description-title">Descrition</span>
           <span className="book-description">{book?.description}</span>
-          <div>
+          <div className="button-container">
             <div className="hardcover-title">Hardcover</div>
             <StyleButton
               text={`${isInCart ? 'Added to cart' : `$${book?.price} USD`}`}
@@ -156,6 +161,39 @@ const BookPage: FC = () => {
             />
           </div>
         </div>
+      </div>
+      <div className="comments-container">
+        <div className="comments-title">Comments</div>
+        {comments.commentArray.map((item) => {
+          return (
+            <Comment
+              key={item.id}
+              UserId={item.userId}
+              date={item.dateOfPost}
+              comment={item.comment}
+            />
+          );
+        })}
+        {user.email &&
+          (<div className="add-comment-container">
+            <div className="textarea-container">
+              <textarea
+                className="add-comment"
+                placeholder="Share a comment"
+                value={comment}
+                onChange={(e) => handleChangeComment(e)}
+              />
+            </div>
+            <div className="add-button-container">
+              <StyleButton
+                text="Post a comment"
+                type="button"
+                onClick={onAddComment}
+                className="add-comment-button"
+              />
+            </div>
+           </div>)
+        }
       </div>
       {!user.email && <Authad />}
     </StyledBookContainer>

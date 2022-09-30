@@ -19,8 +19,15 @@ const uploadPhoto = async (request: UserPhotoType): Promise<UserType> => {
   return data.user;
 };
 
+const getUser = async (id: number): Promise<UserType> => {
+  const { data } = await host.get(`api/user/${id}`);
+
+  return data.user;
+};
+
 export default {
   changeInfo,
   changePassword,
   uploadPhoto,
+  getUser,
 };

@@ -7,8 +7,10 @@ export const StyledDiv = styled.div`
   width: 100%;
   background: #F0F4EF;
   border-radius: 16px;
-  overflow: hidden;
   display: flex;
+  position: relative;
+  overflow: hidden;
+
   .ad__title{
     margin: 0;
     margin-left: 19%;
@@ -50,5 +52,41 @@ export const StyledDiv = styled.div`
 
   .ad-image{
     margin-left: 10%;
+  }
+
+  @media (max-width: 1280px) {
+    overflow: unset;
+    height: 289px;
+    .book-background{
+      background-size: 361px 218px;
+      max-width: 361px;
+      width: 100%;
+      max-height: 218px;
+      height: 100%;
+    }
+
+    .ad__title{
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 48px;
+      margin: 0;
+      padding-top: 23px;
+      padding-left: 45px;
+    }
+
+    .sub-title{
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .ad-image{
+      margin: 0;
+      position: absolute;
+      left: 55%;
+      top: -93px;
+      height: 380px;
+      bottom: 29px;
+    }
   }
 `;

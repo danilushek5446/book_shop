@@ -103,4 +103,15 @@ export const StyledHeaderContainer = styled.div`
       display: block;
     }
   }
+
+  @media (max-width: 1280px) {
+    .auth-container{
+      justify-content: unset;
+      max-width: 270px;
+      margin-left: 11%;
+      div{
+        margin-left: 24px;
+      }
+    }
+  }
 `;
