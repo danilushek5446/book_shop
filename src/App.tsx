@@ -6,41 +6,38 @@ import {
   Route,
 } from 'react-router-dom';
 import { Audio } from 'react-loader-spinner';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { StyledContainer } from './App.styles';
 import Footer from './components/Footer/Footer';
 import Header from './components/header/Header';
 import UserProfile from './pages/userProfile/userProfile/UserProfile';
-import PrivateProfileRoute from './routes/PrivateProfileRoute';
-import { useAppDispatch, useAppSelector } from './store/hooks';
+import PrivateProfileRoute from './routes/PrivateAuthRoutes';
+import { useAppDispatch } from './store/hooks';
 import { auth } from './store/user/userThunk';
-import Ad from './components/ad/Ad';
-import Authad from './components/AuthAd/Authad';
-import Filters from './components/filters/mainFilters/Filters';
 import SignIn from './pages/authPage/auth/sigIn/SignIn';
 import SignUp from './pages/authPage/auth/signUp/SignUp';
-import { getAllGeneres } from './store/filter/filterThunk';
-import BookCatalog from './pages/Book/bookCatalog/BookCatalog';
-import PrivateAuthRoute from './routes/PrivateAuthRoute';
+import PrivateAuthRoute from './routes/PrivateUnAuthRoutes';
 import BookPage from './pages/Book/bookPage/BookPage';
 import Cart from './pages/cartPage/Cart';
 import Favorite from './pages/favoritePage/Favorite';
+import MainPage from './pages/mainPage/MainPage';
 
 const App: FC = () => {
   const [isLoad, setIsLoad] = useState(false);
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user.user);
 
   useEffect(() => {
     (async () => {
       try {
-        await dispatch(getAllGeneres());
         const token = localStorage.getItem('token');
         if (token) {
           await dispatch(auth());
         }
       } catch (error) {
-        alert(error);
+        const err = error as Error;
+        toast(err.message);
       } finally {
         setIsLoad(true);
       }
@@ -60,48 +57,52 @@ const App: FC = () => {
 
   return (
     <StyledContainer className="App">
+      <ToastContainer />
       <Header />
       <Routes>
-        <Route path="/" element={
-          (<>
-            <Ad />
-            <Filters />
-            <BookCatalog />
-            {!user.email && <Authad />}
-           </>)}
-        />
+        <Route path="/" element={<MainPage />} />
         <Route path="/login" element={
-          (<PrivateAuthRoute>
-            <SignIn />
-           </PrivateAuthRoute>)
-          }
+          (
+            <PrivateAuthRoute>
+              <SignIn />
+            </PrivateAuthRoute>
+          )
+        }
         />
         <Route path="/signUp" element={
-          (<PrivateAuthRoute>
-            <SignUp />
-           </PrivateAuthRoute>)
-          }
+          (
+            <PrivateAuthRoute>
+              <SignUp />
+            </PrivateAuthRoute>
+          )
+        }
         />
         <Route path="/bookPage/:id" element={<BookPage />} />
         <Route path="/profile"
           element={
-            (<PrivateProfileRoute>
-              <UserProfile />
-             </PrivateProfileRoute>)
+            (
+              <PrivateProfileRoute>
+                <UserProfile />
+              </PrivateProfileRoute>
+            )
           }
         />
         <Route path="/cart"
           element={
-            (<PrivateProfileRoute>
-              <Cart />
-             </PrivateProfileRoute>)
+            (
+              <PrivateProfileRoute>
+                <Cart />
+              </PrivateProfileRoute>
+            )
           }
         />
         <Route path="/favorite"
           element={
-            (<PrivateProfileRoute>
-              <Favorite />
-             </PrivateProfileRoute>)
+            (
+              <PrivateProfileRoute>
+                <Favorite />
+              </PrivateProfileRoute>
+            )
           }
         />
       </Routes>

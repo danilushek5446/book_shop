@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 
 import { StyledCommentContainer } from './Comment.styles';
 import userApi from '../../http/userApi';
@@ -28,7 +29,8 @@ const Comment: FC<PropType> = ({ comment, UserId, date }) => {
           setName(user.fullName);
         }
       } catch (error) {
-        alert(error);
+        const err = error as Error;
+        toast(err.message);
       }
     })();
   });

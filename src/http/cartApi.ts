@@ -1,4 +1,4 @@
-import type { CartInitialType, CartType, QueryRequsetType, QueryCartCountUpdateType } from '../types/types';
+import type { CartInitialType, CartType, QueryRequsetType, QueryCartCountUpdateType, ChangeCountResponseType } from '../types/types';
 import host from './index';
 
 const getCart = async (userId: number): Promise<CartInitialType> => {
@@ -7,7 +7,7 @@ const getCart = async (userId: number): Promise<CartInitialType> => {
 };
 
 const addToCart = async (bookId: number): Promise<CartType> => {
-  const { data } = await host.post(`api/cart/${bookId}`);
+  const { data } = await host.post(`api/cart/addCart/${bookId}`);
   return data;
 };
 
@@ -21,8 +21,8 @@ const deleteMany = async (userId: number) => {
   return data;
 };
 
-const updateCount = async (query: QueryCartCountUpdateType): Promise<CartType> => {
-  const { data } = await host.delete('api/cart/', { params: query });
+const updateCount = async (query: QueryCartCountUpdateType): Promise<ChangeCountResponseType> => {
+  const { data } = await host.post('api/cart/updateCount/', { params: query });
   return data;
 };
 

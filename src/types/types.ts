@@ -1,46 +1,3 @@
-export type AuthType = {
-  email: string;
-  password: string;
-};
-
-export type UserType = {
-  id: number;
-  email: string;
-  fullName?: string;
-  dob?: Date;
-  photo?: string;
-};
-
-export type UserInitialType = {
-  user: UserType;
-};
-
-export type ChangeInfoType = {
-  email: string;
-  fullName?: string;
-};
-
-export type ChangePasswordType = {
-  oldPassword: string;
-  newPassword: string;
-};
-
-export type UserRegistrationType = {
-  email: string;
-  password: string;
-  confirmPass: string;
-};
-
-export type UserChangePasswordType = {
-  oldPassword: string;
-  newPassword: string;
-  confirmPass: string;
-};
-
-export type UserPhotoType = {
-  photo: string | ArrayBuffer;
-};
-
 export type PriceType = {
   minPrice: number;
   maxPrice: number;
@@ -107,6 +64,10 @@ export type CartType = {
   count: number;
 };
 
+export type ChangeCountResponseType = {
+  cart: CartType;
+};
+
 export type CartInitialType = {
   cart?: CartType[];
 };
@@ -123,7 +84,8 @@ export type QueryRequsetType = {
 };
 
 export type QueryCartCountUpdateType = {
-  id: number;
+  bookId: number;
+  userId: number;
   count: number;
 };
 

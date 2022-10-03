@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 
 import userAuthApi from '../../http/userAuthApi';
 import userApi from '../../http/userApi';
-import type { AuthType, ChangeInfoType, ChangePasswordType, UserPhotoType } from '../../types/types';
+import type { AuthType, ChangeInfoType, ChangePasswordType, UserPhotoType } from '../../types/userTypes';
 
 export const singIn = createAsyncThunk(
   'user/fetchUser',

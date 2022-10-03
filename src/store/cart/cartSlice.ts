@@ -3,10 +3,15 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { CartInitialType } from '../../types/types';
-import { addToCart, getUserCart } from './cartThunk';
+import { addToCart, changeCount, getUserCart } from './cartThunk';
 
 export const initialState: CartInitialType = {
   cart: undefined,
+};
+
+type PricePayloadType = {
+  count: number;
+  index: number;
 };
 
 export const cartSlice = createSlice({
@@ -30,6 +35,16 @@ export const cartSlice = createSlice({
 
     builder.addCase(addToCart.fulfilled, (state, action) => {
       state.cart?.push(action.payload);
+    });
+
+    builder.addCase(changeCount.fulfilled, (state, action) => {
+      if (state.cart) {
+        const index = state.cart.findIndex((item) => item.id === action.payload.cart.id);
+
+        if (index !== -1) {
+          state.cart[index] = action.payload.cart;
+        }
+      }
     });
   },
 });

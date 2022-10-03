@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import passwordIcon from '../../../assets/icons/Hide.png';
 import { useAppDispatch } from '../../../store/hooks';
-import type { UserChangePasswordType } from '../../../types/types';
+import type { UserChangePasswordType } from '../../../types/userTypes';
 import { StyledContainer } from './ChangePassword.styles';
 import AuthInput from '../../../components/Input/AuthInput';
 import StyledButton from '../../../components/Button/StyledButton';

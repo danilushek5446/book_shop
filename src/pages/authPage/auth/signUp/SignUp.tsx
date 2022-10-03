@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import mailIcon from '../../../../assets/icons/Mail.png';
@@ -10,7 +11,7 @@ import PasswordIcon from '../../../../assets/icons/Hide.png';
 import authPicture from '../../../../assets/images/чел 1.png';
 import { StyledAuthContainer } from '../Auth.styles';
 import { useAppDispatch } from '../../../../store/hooks';
-import type { UserRegistrationType } from '../../../../types/types';
+import type { UserRegistrationType } from '../../../../types/userTypes';
 import { signUp } from '../../../../store/user/userThunk';
 import AuthInput from '../../../../components/Input/AuthInput';
 import StyledButton from '../../../../components/Button/StyledButton';
@@ -21,7 +22,7 @@ const schema = yup.object().shape({
   confirmPass: yup.string().min(4).max(32).required(),
 });
 
-const SignIn: FC = () => {
+const SignUp: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -60,7 +61,7 @@ const SignIn: FC = () => {
         });
         return;
       }
-      await dispatch(signUp({ email, password }));
+      await dispatch(signUp({ email, password })).unwrap();
 
       if (location.state) {
         navigate(location.state);
@@ -75,12 +76,15 @@ const SignIn: FC = () => {
           type: 'server',
           message: err.message,
         });
-      } else {
+      }
+
+      if (err.message.includes('email')) {
         setError('email', {
           type: 'server',
           message: err.message,
         });
       }
+      toast(err.message);
     }
   };
 
@@ -131,7 +135,7 @@ const SignIn: FC = () => {
           <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your password without errors'}`}</span>
         </div>
         <div className="button-container">
-          <StyledButton className="auth" type="submit" onClick={() => { }} text="Sign up" />
+          <StyledButton className="auth" type="submit" text="Sign up" />
         </div>
       </form>
       <img src={authPicture} alt="cannot load picture" />
@@ -139,4 +143,4 @@ const SignIn: FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

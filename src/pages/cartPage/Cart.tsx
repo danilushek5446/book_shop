@@ -24,7 +24,7 @@ const Cart: FC = () => {
 
   const onCheckout = async () => {
     await dispatch(checkOut(user.id));
-    navigate('/');
+    await dispatch(getUserCart(user.id));
   };
 
   const summ = async (price: number) => {
@@ -53,6 +53,7 @@ const Cart: FC = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
+
   return (
     <StyledDiv className="cart">
       {!cart?.length ? (
@@ -77,7 +78,7 @@ const Cart: FC = () => {
                 return (
                   <BookCard
                     key={item.id}
-                    id={item.id}
+                    bookId={item.id}
                     image={item.image}
                     name={item.name}
                     author={item.author}

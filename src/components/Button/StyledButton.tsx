@@ -5,7 +5,7 @@ import { ButtonStyles } from './StyledButton.styles';
 type PropType = {
   text: string;
   type: 'button' | 'submit' | 'reset' | undefined;
-  onClick: () => void;
+  onClick?: () => void;
   className: string;
   disabled?: boolean;
 };

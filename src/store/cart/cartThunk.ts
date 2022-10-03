@@ -15,7 +15,7 @@ export const getUserCart = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );
@@ -30,7 +30,7 @@ export const addToCart = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );
@@ -46,7 +46,7 @@ export const deleteOneBook = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );

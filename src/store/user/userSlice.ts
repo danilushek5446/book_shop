@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { UserInitialType } from '../../types/types';
+import type { UserInitialType } from '../../types/userTypes';
 import { singIn, signUp, auth, changeUserInfo, changeUserPassword, uploadUserPhoto } from './userThunk';
 
 export const initialState: UserInitialType = {

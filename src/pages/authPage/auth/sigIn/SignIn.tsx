@@ -4,13 +4,14 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { StyledAuthContainer } from '../Auth.styles';
 import authPicture from '../../../../assets/images/чел 1.png';
 import mailIcon from '../../../../assets/icons/Mail.png';
 import PasswordIcon from '../../../../assets/icons/Hide.png';
 import { useAppDispatch } from '../../../../store/hooks';
-import type { AuthType } from '../../../../types/types';
+import type { AuthType } from '../../../../types/userTypes';
 import { singIn } from '../../../../store/user/userThunk';
 import AuthInput from '../../../../components/Input/AuthInput';
 import StyledButton from '../../../../components/Button/StyledButton';
@@ -61,12 +62,16 @@ const SignIn: FC = () => {
           type: 'server',
           message: err.message,
         });
-      } else {
+        return;
+      }
+      if (err.message.includes('email')) {
         setError('email', {
           type: 'server',
           message: err.message,
         });
+        return;
       }
+      toast(err.message);
     }
   };
 
@@ -107,7 +112,7 @@ const SignIn: FC = () => {
           </span>
         </div>
         <div className="button-container">
-          <StyledButton className="auth" type="submit" onClick={() => { }} text="Log In" />
+          <StyledButton className="auth" type="submit" text="Log In" />
         </div>
       </form>
       <img src={authPicture} alt="cannot load picture" />

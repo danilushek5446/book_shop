@@ -1,4 +1,4 @@
-import type { AuthType, UserType } from '../types/types';
+import type { AuthType, UserType } from '../types/userTypes';
 import host from './index';
 
 const login = async (request: AuthType): Promise<UserType> => {

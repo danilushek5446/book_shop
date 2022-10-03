@@ -65,7 +65,7 @@ const Favorite: FC = () => {
                 return (
                   <BookCard
                     key={item.id}
-                    id={item.id}
+                    bookId={item.id}
                     image={item.image}
                     name={item.name}
                     author={item.author}

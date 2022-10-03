@@ -38,9 +38,11 @@ export const StyledBookContainer = styled.div<{ count: number }>`
    border-radius: 50%;
    width: 32px;
    height: 32px;
+   cursor: pointer;
  }
 
  .increase-button{
+  cursor: pointer;
    border: none;
    border-radius: 50%;
    width: 32px;

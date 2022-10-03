@@ -12,6 +12,7 @@ import Pagination from '../../../components/pagination/Pagination';
 import BookItem from '../bookItem/BookItem';
 
 import { StyledBookContainer } from './BookCatalog.styles';
+import { getAllGeneres } from '../../../store/filter/filterThunk';
 
 const BookCatalog: FC = () => {
   const books = useAppSelector((state) => state.book);
@@ -22,7 +23,11 @@ const BookCatalog: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    (() => {
+    (async () => {
+      await dispatch(getAllGeneres());
+      await dispatch(getUserCart(userId));
+      await dispatch(getUserFavorite(userId));
+
       const searchParam = searchQuery.get('search');
       if (searchParam) {
         dispatch(setSearch(searchParam));
@@ -55,20 +60,6 @@ const BookCatalog: FC = () => {
       ));
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      await dispatch(getUserCart(userId));
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      await dispatch(getUserFavorite(userId));
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

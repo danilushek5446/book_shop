@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import mailIcon from '../../../assets/icons/Mail.png';
 import passwordIcon from '../../../assets/icons/Hide.png';
 import { useAppDispatch } from '../../../store/hooks';
-import type { ChangeInfoType } from '../../../types/types';
+import type { ChangeInfoType } from '../../../types/userTypes';
 import { changeUserInfo } from '../../../store/user/userThunk';
 import { StyledContainer } from './ChangeUserInfo.styles';
 import AuthInput from '../../../components/Input/AuthInput';

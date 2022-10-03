@@ -1,4 +1,4 @@
-import type { UserType, ChangeInfoType, ChangePasswordType, UserPhotoType } from '../types/types';
+import type { ChangeInfoType, ChangePasswordType, UserPhotoType, UserType } from '../types/userTypes';
 import host from './index';
 
 const changeInfo = async (request: ChangeInfoType): Promise<UserType> => {
