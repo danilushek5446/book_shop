@@ -1,10 +1,12 @@
+/* eslint-disable no-param-reassign */
 import type { FC, RefObject } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import { toggleCheckedSortDirection } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 import { StyledContainer, StyledItemContainer } from './SordDirection.styles';
+import { sortDirection } from './sortDirectionArray';
 
 type PropType = {
   onBlur: () => void;
@@ -12,10 +14,23 @@ type PropType = {
 };
 
 const SordDirection: FC<PropType> = ({ onBlur, dropDownRef }) => {
-  const sortDirections = useAppSelector((state) => state.filter.sortDirection);
+  const [sortDirections, setSortDirections] = useState(sortDirection);
   const dispatch = useAppDispatch();
+  const [searchQuery, setSearchQuery] = useSearchParams();
+
   const onClick = (name: string) => {
-    dispatch(toggleCheckedSortDirection(name));
+    setSortDirections((state) => {
+      state.forEach((item) => {
+        if (item.sortBy === name) {
+          item.checked = true;
+        } else {
+          item.checked = false;
+        }
+      });
+      return state;
+    });
+    searchQuery.set('sortBy', name);
+    setSearchQuery({ sortBy: name });
   };
 
   useEffect(() => {
@@ -32,6 +47,21 @@ const SordDirection: FC<PropType> = ({ onBlur, dropDownRef }) => {
 
     return () => document.body.removeEventListener('click', closeDropdown);
   });
+
+  useEffect(() => {
+    const sortBy = searchQuery.get('sortBy');
+    setSortDirections((state) => {
+      state.forEach((item) => {
+        if (item.sortBy === sortBy) {
+          item.checked = true;
+        } else {
+          item.checked = false;
+        }
+      });
+      return state;
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <StyledContainer className="drop-down-list">

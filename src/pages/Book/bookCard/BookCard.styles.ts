@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledBookContainer = styled.div<{ count: number }>`
+export const StyledBookContainer = styled.div`
   display: flex;
   width: 100%;
   color: #0D1821;
@@ -74,14 +74,6 @@ export const StyledBookContainer = styled.div<{ count: number }>`
    padding-left: 15px;
    padding-right: 15px;
  }
- 
- ${({ count }) => {
-    if (!count) {
-      return css`
-        display: none;
-      `;
-    }
-  }}
 
   .in-favorite{
     display: none;

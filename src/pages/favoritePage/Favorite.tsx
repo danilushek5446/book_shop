@@ -22,23 +22,19 @@ const Favorite: FC = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      await dispatch(getUserFavorite(user.id));
-    })();
+    dispatch(getUserFavorite(user.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    (async () => {
-      if (!favorite?.length) {
-        return;
-      }
-      const booksId = favorite.map((item) => {
-        return (item.bookId);
-      });
+    if (!favorite?.length) {
+      return;
+    }
+    const booksId = favorite.map((item) => {
+      return (item.bookId);
+    });
 
-      await dispatch(getAllBooksByIds(booksId.toString()));
-    })();
+    dispatch(getAllBooksByIds(booksId.toString()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favorite]);
   return (
@@ -62,6 +58,8 @@ const Favorite: FC = () => {
           <div className="cart-items-container">
             {
               books.map((item) => {
+                // eslint-disable-next-line no-console
+                console.log(item);
                 return (
                   <BookCard
                     key={item.id}

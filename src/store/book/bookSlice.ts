@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { BookInitialType } from '../../types/types';
+import type { BookInitialType } from '../../types/bookType';
 import { getAllBooksByIds, getBooks } from './bookThunk';
 
 export const initialState: BookInitialType = {

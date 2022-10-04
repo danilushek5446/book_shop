@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import favoriteApi from '../../http/favoriteApi';
-import type { QueryRequsetType } from '../../types/types';
+import type { QueryRequsetType } from '../../types/cartTypes';
 import { deleteOneBookInFavorite } from './favoriteSlice';
 
 export const getUserFavorite = createAsyncThunk(
@@ -15,7 +15,7 @@ export const getUserFavorite = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );
@@ -30,7 +30,7 @@ export const addToFavorite = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );
@@ -46,7 +46,7 @@ export const deleteFromFavorite = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );

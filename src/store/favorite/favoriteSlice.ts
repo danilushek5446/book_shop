@@ -2,8 +2,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { FavoriteInitialType } from '../../types/types';
-import { getUserFavorite } from './favoriteThunk';
+import type { FavoriteInitialType } from '../../types/favoriteTypes';
+import { addToFavorite, getUserFavorite } from './favoriteThunk';
 
 export const initialState: FavoriteInitialType = {
   favorite: undefined,
@@ -23,6 +23,10 @@ export const favoriteSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserFavorite.fulfilled, (state, action) => {
       state.favorite = action.payload.favorite;
+    });
+
+    builder.addCase(addToFavorite.fulfilled, (state, action) => {
+      state.favorite?.push(action.payload.favorite);
     });
   },
 });

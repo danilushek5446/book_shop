@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
-import { setPage } from '../../store/filter/filterSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useSearchParams } from 'react-router-dom';
 
 import { StyledContainer } from './Pagination.styles';
 
@@ -10,31 +9,45 @@ type PropType = {
 };
 
 const Pagination: FC<PropType> = ({ countPages }) => {
-  const dispacth = useAppDispatch();
   const [paginationArray, setPagginationArray] = useState<number[]>([]);
-  const filter = useAppSelector((state) => state.filter);
+  const [page, setPage] = useState(0);
+  const [searchQuery, setSearchQuery] = useSearchParams();
 
   let countPaginationPages = Math.ceil(countPages / +process.env.REACT_APP_PER_PAGE!);
   if (!countPaginationPages) {
     countPaginationPages = 1;
   }
 
-  const onPageClick = (page: number) => {
-    dispacth(setPage(page));
+  const onPageClick = (pageNumber: number) => {
+    setPage(pageNumber);
+    searchQuery.set('page', pageNumber.toString());
+    setSearchQuery({ page: pageNumber.toString() });
   };
 
   const onForwardClick = () => {
-    if (filter.page === countPaginationPages - 1) {
+    if (page === countPaginationPages - 1) {
       return;
     }
-    dispacth(setPage(filter.page + 1));
+
+    searchQuery.set('page', (page + 1).toString());
+    setSearchQuery({ page: (page + 1).toString() });
+
+    setPage((state) => {
+      return state + 1;
+    });
   };
 
   const onBackClick = () => {
-    if (filter.page === 0) {
+    if (page === 0) {
       return;
     }
-    dispacth(setPage(filter.page - 1));
+
+    searchQuery.set('page', (page - 1).toString());
+    setSearchQuery({ page: (page - 1).toString() });
+
+    setPage((state) => {
+      return state - 1;
+    });
   };
 
   useEffect(() => {
@@ -44,12 +57,18 @@ const Pagination: FC<PropType> = ({ countPages }) => {
       for (let i = 0; i < countPaginationPages; i++) {
         tempPagination.push(i);
       }
-      if (filter.page > tempPagination.length - 1) {
-        dispacth(setPage(0));
+      if (page > tempPagination.length - 1) {
+        setPage(0);
       }
       setPagginationArray([...tempPagination]);
     })();
-  }, [countPaginationPages, dispacth, filter.page]);
+  }, [countPaginationPages, page]);
+
+  useEffect(() => {
+    const currentPage = searchQuery.get('page') || 0;
+    setPage(+currentPage);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <StyledContainer className="pagination">
@@ -60,7 +79,7 @@ const Pagination: FC<PropType> = ({ countPages }) => {
             <div
               key={item}
               onClick={() => onPageClick(item)}
-              className={`circle ${filter.page === item && 'active'}`}
+              className={`circle ${page === item && 'active'}`}
             />
           );
         })}

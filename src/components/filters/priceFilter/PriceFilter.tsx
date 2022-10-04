@@ -2,10 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FC, RefObject } from 'react';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ReactSlider from 'react-slider';
-
-import { setPrice } from '../../../store/filter/filterSlice';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 import { StyledContainer } from './PriceFilter.styles';
 
@@ -15,13 +13,15 @@ type PropType = {
 };
 
 const PriceFilter: FC<PropType> = ({ onBlur, dropDownRef }) => {
-  const filter = useAppSelector((state) => state.filter.price);
-  const [value, setValue] = useState([filter.minPrice, filter.maxPrice]);
-  const dispatch = useAppDispatch();
+  const [value, setValue] = useState([0, 100]);
+  const [searchQuery, setSearchQuery] = useSearchParams();
 
   const onChange = (value: number[]) => {
     setValue(value);
-    dispatch(setPrice({ minPrice: value[0], maxPrice: value[1] }));
+
+    searchQuery.set('priceMin', value[0].toString());
+    searchQuery.set('priceMax', value[1].toString());
+    setSearchQuery({ priceMin: value[0].toString(), priceMax: value[1].toString() });
   };
 
   useEffect(() => {
@@ -38,6 +38,13 @@ const PriceFilter: FC<PropType> = ({ onBlur, dropDownRef }) => {
 
     return () => document.body.removeEventListener('click', closeDropdown);
   });
+
+  useEffect(() => {
+    const priceMin = Number(searchQuery.get('priceMin'));
+    const priceMax = Number(searchQuery.get('priceMax'));
+    setValue([priceMin, priceMax]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <StyledContainer className="drop-down-list">

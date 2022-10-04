@@ -27,30 +27,26 @@ const Cart: FC = () => {
     await dispatch(getUserCart(user.id));
   };
 
-  const summ = async (price: number) => {
+  const summ = (price: number) => {
     setTotalPrice((state) => {
       return (+(state + price).toFixed(2));
     });
   };
 
   useEffect(() => {
-    (async () => {
-      await dispatch(getUserCart(user.id));
-    })();
+    dispatch(getUserCart(user.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    (async () => {
-      if (!cart?.length) {
-        return;
-      }
-      const booksId = cart.map((item) => {
-        return (item.bookId);
-      });
+    if (!cart?.length) {
+      return;
+    }
+    const booksId = cart.map((item) => {
+      return (item.bookId);
+    });
 
-      await dispatch(getAllBooksByIds(booksId.toString()));
-    })();
+    dispatch(getAllBooksByIds(booksId.toString()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 

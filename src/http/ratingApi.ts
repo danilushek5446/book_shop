@@ -1,4 +1,4 @@
-import type { RatingParamsType, RatingResponseType } from '../types/types';
+import type { RatingParamsType, RatingResponseType } from '../types/ratingTypes';
 import host from './index';
 
 export const setRating = async (params: RatingParamsType): Promise<RatingResponseType> => {

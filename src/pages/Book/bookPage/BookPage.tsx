@@ -16,12 +16,12 @@ import filledHeart from '../../../assets/icons/filledHeart.png';
 import { setRating } from '../../../http/ratingApi';
 import { addToCart, getUserCart } from '../../../store/cart/cartThunk';
 import PageIcons from '../../../components/pageIcons/PageIcons';
-import { addToFavorite, deleteFromFavorite, getUserFavorite } from '../../../store/favorite/favoriteThunk';
+import { addToFavorite, deleteFromFavorite } from '../../../store/favorite/favoriteThunk';
 import Comment from '../../../components/comment/Comment';
-import { addCommentToBook, getAllComments } from '../../../store/comments/commentThunk';
-import type { BookType, CurrentBookType } from '../../../types/types';
+import type { CurrentBookType } from '../../../types/bookType';
 import { getOneBook } from '../../../http/bookApi';
-// import { StyledBookContainer } from './BookItem.styles';
+import type { CommentsInitialType } from '../../../types/commentTypes';
+import { addComment, getComments } from '../../../http/comments';
 
 const BookPage: FC = () => {
   const { id } = useParams();
@@ -30,8 +30,8 @@ const BookPage: FC = () => {
   const user = useAppSelector((state) => state.user.user);
   const cart = useAppSelector((state) => state.cart.cart);
   const favorite = useAppSelector((state) => state.favorite.favorite);
-  const comments = useAppSelector((state) => state.comments);
-  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState<CommentsInitialType>({ commentArray: [], count: 0 });
+  const [commentInput, setCommentInput] = useState('');
   const [stateRating, setStateRating] = useState(0);
   const [isInCart, setIsInCart] = useState(false);
   const [isInFavorite, setIsInFavorite] = useState(false);
@@ -39,9 +39,13 @@ const BookPage: FC = () => {
 
   useEffect(() => {
     (async () => {
-      await dispatch(getUserCart(user.id));
+      dispatch(getUserCart(user.id));
 
-      await dispatch(getAllComments({ bookId: +id! }));
+      const commentResponse = await getComments({ bookId: +id! });
+
+      setComments(() => {
+        return commentResponse;
+      });
 
       await dispatch(getBookById(+id!));
 
@@ -92,13 +96,11 @@ const BookPage: FC = () => {
 
     if (isInFavorite) {
       await dispatch(deleteFromFavorite({ userId: user.id, bookId: +id! }));
-      await dispatch(getUserFavorite(user.id));
       setIsInFavorite(false);
       return;
     }
 
     await dispatch(addToFavorite(+id!));
-    await dispatch(getUserFavorite(user.id));
   };
 
   const handleRating = async (rate: number) => {
@@ -107,18 +109,21 @@ const BookPage: FC = () => {
         setStateRating(rate);
 
         if (currentBook.book) {
-          await setRating(
+          const newRating = await setRating(
             {
               bookId: currentBook.book.id || -1,
               rate: (rate / 20),
             },
           );
-          const book = await getOneBook(+id!);
-
-          if (book) {
-            setCurrentBook(() => {
-              return book;
+          if (currentBook.book) {
+            setCurrentBook((state) => {
+              if (state?.book) {
+                state.book.rating = newRating.rating;
+              }
+              return state;
             });
+            // eslint-disable-next-line no-console
+            console.log(currentBook?.book?.rating, ' ', newRating);
           }
         }
       }
@@ -129,7 +134,7 @@ const BookPage: FC = () => {
   };
 
   const handleChangeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
+    setCommentInput(e.target.value);
   };
 
   const onAddComment = async () => {
@@ -137,8 +142,14 @@ const BookPage: FC = () => {
       navigate('/login');
     }
     try {
-      await dispatch(addCommentToBook({ bookId: +id!, comment }));
-      setComment('');
+      const newComment = await addComment({ bookId: +id!, comment: commentInput });
+      if (newComment) {
+        setComments((state) => {
+          state.commentArray.push(newComment.newComment);
+          return state;
+        });
+      }
+      setCommentInput('');
     } catch (error) {
       const err = error as Error;
       toast(err.message);
@@ -189,7 +200,7 @@ const BookPage: FC = () => {
       </div>
       <div className="comments-container">
         <div className="comments-title">Comments</div>
-        {comments.commentArray.map((item) => {
+        {comments?.commentArray.map((item) => {
           return (
             <Comment
               key={item.id}
@@ -206,8 +217,8 @@ const BookPage: FC = () => {
                 <textarea
                   className="add-comment"
                   placeholder="Share a comment"
-                  value={comment}
-                  onChange={(e) => handleChangeComment(e)}
+                  value={commentInput}
+                  onChange={handleChangeComment}
                 />
               </div>
               <div className="add-button-container">

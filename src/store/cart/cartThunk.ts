@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import cartApi from '../../http/cartApi';
-import type { QueryCartCountUpdateType, QueryRequsetType } from '../../types/types';
-import { deleteOneBookInCart } from './cartSlice';
+import type { QueryCartCountUpdateType, QueryRequsetType } from '../../types/cartTypes';
+import { changeBookCount, deleteOneBookInCart } from './cartSlice';
 
 export const getUserCart = createAsyncThunk(
   'cart/getUserCart',
@@ -61,22 +61,23 @@ export const checkOut = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );
 
 export const changeCount = createAsyncThunk(
   'cart/changeCount',
-  async (query: QueryCartCountUpdateType, { rejectWithValue }) => {
+  async (query: QueryCartCountUpdateType, { rejectWithValue, dispatch }) => {
     try {
       const response = await cartApi.updateCount(query);
+      dispatch(changeBookCount({ bookId: query.bookId, count: query.count }));
       return response;
     } catch (error) {
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );

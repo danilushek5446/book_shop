@@ -1,4 +1,4 @@
-import type { BookInitialType, CurrentBookType, QueryBookType } from '../types/types';
+import type { BookInitialType, CurrentBookType, QueryBookType } from '../types/bookType';
 import host from './index';
 
 export const getAllBooks = async (query?: QueryBookType): Promise<BookInitialType> => {

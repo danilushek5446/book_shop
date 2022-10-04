@@ -3,14 +3,14 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { addToCart, getUserCart } from '../../../store/cart/cartThunk';
+import { addToCart } from '../../../store/cart/cartThunk';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import StyleButton from '../../../components/Button/StyledButton';
 import { StyledBookContainer } from './BookItem.styles';
 import heart from '../../../assets/icons/Heart.png';
 import filledHeart from '../../../assets/icons/filledHeart.png';
 import PageIcons from '../../../components/pageIcons/PageIcons';
-import { addToFavorite, deleteFromFavorite, getUserFavorite } from '../../../store/favorite/favoriteThunk';
+import { addToFavorite, deleteFromFavorite } from '../../../store/favorite/favoriteThunk';
 
 type PropType = {
   id: number;
@@ -24,7 +24,7 @@ type PropType = {
 const BookItem: FC<PropType> = ({ image, name, author, rating, price, id }) => {
   const user = useAppSelector((state) => state.user.user);
   const cart = useAppSelector((state) => state.cart.cart);
-  const favorite = useAppSelector((state) => state.favorite.favorite);
+  const favorite = useAppSelector((state) => state.favorite);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isInCart, setIsInCart] = useState(false);
@@ -41,7 +41,7 @@ const BookItem: FC<PropType> = ({ image, name, author, rating, price, id }) => {
 
   useEffect(() => {
     if (favorite) {
-      if (favorite.some((item) => item.bookId === id)) {
+      if (favorite.favorite?.some((item) => item.bookId === id)) {
         setIsInFavorite(true);
       }
     }
@@ -57,23 +57,16 @@ const BookItem: FC<PropType> = ({ image, name, author, rating, price, id }) => {
       navigate('/login');
     }
     await dispatch(addToCart(id));
-    await dispatch(getUserCart(user.id));
   };
 
   const onAddFavorite = async () => {
-    if (!user.email) {
-      navigate('/login');
-    }
-
     if (isInFavorite) {
       await dispatch(deleteFromFavorite({ userId: user.id, bookId: id }));
-      await dispatch(getUserFavorite(user.id));
       setIsInFavorite(false);
       return;
     }
 
     await dispatch(addToFavorite(id));
-    await dispatch(getUserFavorite(user.id));
   };
 
   return (

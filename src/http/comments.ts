@@ -1,4 +1,4 @@
-import type { AddCommentResponseType, CommentsBodyType, CommentsInitialType, CommentsQueryType } from '../types/types';
+import type { AddCommentResponseType, CommentsBodyType, CommentsInitialType, CommentsQueryType } from '../types/commentTypes';
 import host from './index';
 
 export const getComments = async (query: CommentsQueryType): Promise<CommentsInitialType> => {

@@ -2,16 +2,16 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { CartInitialType } from '../../types/types';
-import { addToCart, changeCount, getUserCart } from './cartThunk';
+import type { CartInitialType } from '../../types/cartTypes';
+import { addToCart, getUserCart } from './cartThunk';
 
 export const initialState: CartInitialType = {
   cart: undefined,
 };
 
-type PricePayloadType = {
+type PayloadActionType = {
+  bookId: number;
   count: number;
-  index: number;
 };
 
 export const cartSlice = createSlice({
@@ -27,6 +27,15 @@ export const cartSlice = createSlice({
     deleteAllBooksInCart: (state) => {
       state.cart = [];
     },
+    changeBookCount: (state, action: PayloadAction<PayloadActionType>) => {
+      if (state.cart) {
+        const index = state.cart.findIndex((item) => item.bookId === action.payload.bookId);
+
+        if (index !== -1) {
+          state.cart[index].count += action.payload.count;
+        }
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getUserCart.fulfilled, (state, action) => {
@@ -34,23 +43,14 @@ export const cartSlice = createSlice({
     });
 
     builder.addCase(addToCart.fulfilled, (state, action) => {
-      state.cart?.push(action.payload);
-    });
-
-    builder.addCase(changeCount.fulfilled, (state, action) => {
-      if (state.cart) {
-        const index = state.cart.findIndex((item) => item.id === action.payload.cart.id);
-
-        if (index !== -1) {
-          state.cart[index] = action.payload.cart;
-        }
-      }
+      state.cart?.push(action.payload.cart);
     });
   },
 });
 
 export const {
   deleteOneBookInCart,
+  changeBookCount,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

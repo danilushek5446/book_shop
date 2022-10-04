@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../store/hooks';
 
@@ -8,10 +8,12 @@ type PropType = {
 };
 
 const PrivateRoute: FC<PropType> = ({ children }) => {
+  const location = useLocation();
   const user = useAppSelector((state) => state.user.user);
+  const from = location.pathname;
 
   if (user.email) {
-    return <Navigate to="/profile" />;
+    return <Navigate to="/profile" state={from} />;
   }
 
   return children;

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
@@ -15,7 +16,7 @@ export const singIn = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      throw Error();
+      return rejectWithValue(error);
     }
   },
 );
@@ -30,7 +31,7 @@ export const signUp = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      return rejectWithValue('unexpected error');
+      return rejectWithValue(error);
     }
   },
 );
@@ -42,7 +43,7 @@ export const auth = createAsyncThunk(
       const response = await userAuthApi.checkAuth();
       return response;
     } catch (error) {
-      throw Error('authorization error');
+      throw error;
     }
   },
 );
@@ -57,7 +58,7 @@ export const changeUserInfo = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      return rejectWithValue('unexpected error');
+      return rejectWithValue(error);
     }
   },
 );
@@ -72,7 +73,7 @@ export const changeUserPassword = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      return rejectWithValue('unexpected error');
+      return rejectWithValue(error);
     }
   },
 );
@@ -87,7 +88,7 @@ export const uploadUserPhoto = createAsyncThunk(
       if (error instanceof AxiosError) {
         return rejectWithValue(error.response?.data);
       }
-      return rejectWithValue('unexpected error');
+      return rejectWithValue(error);
     }
   },
 );

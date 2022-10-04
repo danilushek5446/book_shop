@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -32,7 +31,14 @@ const BookCard: FC<PropType> = ({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
-  const [index, setIndex] = useState(0);
+
+  const index = useMemo(() => {
+    if (cart?.length) {
+      return cart.findIndex((item) => item.bookId === bookId);
+    }
+    return -1;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]);
 
   const onClick = () => {
     navigate(`/bookPage/${bookId}`);
@@ -41,11 +47,13 @@ const BookCard: FC<PropType> = ({
   const onDecreaseClick = async () => {
     if (cart && (cart[index].count - 1) <= 0) {
       await dispatch(deleteOneBook({ userId, bookId }));
+      if (countPrice) {
+        countPrice(-price);
+      }
       return;
     }
 
     await dispatch(changeCount({ bookId, userId, count: -1 }));
-
     if (countPrice) {
       countPrice(-price);
     }
@@ -69,13 +77,9 @@ const BookCard: FC<PropType> = ({
     if (cart?.length) {
       const cartIndex = cart.findIndex((item) => item.bookId === bookId);
 
-      if (cartIndex !== -1) {
-        setIndex(() => {
-          return cartIndex;
-        });
-
-        if (countPrice) {
-          countPrice(cart[index].count * price);
+      if (countPrice) {
+        if (cartIndex !== -1) {
+          countPrice(cart[cartIndex].count * price);
         }
       }
     }
@@ -83,7 +87,7 @@ const BookCard: FC<PropType> = ({
   }, []);
 
   return (
-    <StyledBookContainer count={(cart && cart[index] && cart[index].count) || 0} className="book-content">
+    <StyledBookContainer className="book-content">
       <img src={`${process.env.REACT_APP_API_URL}${image}`}
         className="book-picture"
         alt="cannot load picture"

@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import StyleButton from '../Button/StyledButton';
 import PageIcons from '../pageIcons/PageIcons';
 import { StyledHeaderContainer } from './header.styles';
-import { setSearch } from '../../store/filter/filterSlice';
 
 const Header: FC = () => {
   const navigate = useNavigate();
@@ -24,12 +23,12 @@ const Header: FC = () => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
-    dispatch(setSearch(event.target.value));
+    // dispatch(setSearch(event.target.value));
   };
 
   const onDelete = () => {
     setSearchValue('');
-    dispatch(setSearch(searchValue));
+    // dispatch(setSearch(searchValue));
   };
 
   const homePage = () => {
@@ -79,7 +78,7 @@ const Header: FC = () => {
               id="search-input"
               value={searchValue}
               className="search-input"
-              onChange={(e) => onChange(e)}
+              onChange={onChange}
               required
             />
             <img src={searchPciture} alt="cannot load icon" />

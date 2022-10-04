@@ -5,18 +5,15 @@ import { useSearchParams } from 'react-router-dom';
 import { getBooks } from '../../../store/book/bookThunk';
 import { getUserCart } from '../../../store/cart/cartThunk';
 import { getUserFavorite } from '../../../store/favorite/favoriteThunk';
-import { setPage, setPrice, setSearch, toggleCheckedGenere, toggleCheckedSortDirection } from '../../../store/filter/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import type { QueryBookType } from '../../../types/types';
+import type { QueryBookType } from '../../../types/bookType';
 import Pagination from '../../../components/pagination/Pagination';
 import BookItem from '../bookItem/BookItem';
 
 import { StyledBookContainer } from './BookCatalog.styles';
-import { getAllGeneres } from '../../../store/filter/filterThunk';
 
 const BookCatalog: FC = () => {
   const books = useAppSelector((state) => state.book);
-  const filter = useAppSelector((state) => state.filter);
   const userId = useAppSelector((state) => state.user.user.id);
   const [searchQuery, setSearchQuery] = useSearchParams();
 
@@ -24,76 +21,46 @@ const BookCatalog: FC = () => {
 
   useEffect(() => {
     (async () => {
-      await dispatch(getAllGeneres());
-      await dispatch(getUserCart(userId));
-      await dispatch(getUserFavorite(userId));
+      dispatch(getUserCart(userId));
+      dispatch(getUserFavorite(userId));
 
       const searchParam = searchQuery.get('search');
-      if (searchParam) {
-        dispatch(setSearch(searchParam));
-      }
 
       const sortBy = searchQuery.get('sortBy');
-      if (sortBy) {
-        dispatch(toggleCheckedSortDirection(sortBy));
-      }
 
       const genere = searchQuery.get('genere');
-      if (genere) {
-        genere.split(',').forEach((item) => {
-          dispatch(toggleCheckedGenere(+item));
-        });
-      }
 
       const page = searchQuery.get('page');
-      if (page) {
-        dispatch(setPage(+page));
-      }
 
       const priceMin = Number(searchQuery.get('priceMin'));
       const priceMax = Number(searchQuery.get('priceMax'));
-      dispatch(setPrice(
-        {
-          minPrice: priceMin || 0,
-          maxPrice: priceMax || 100,
-        },
-      ));
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     (async () => {
-      const index = filter.sortDirection.findIndex((item) => {
-        if (item.checked) {
-          return true;
-        }
-        return false;
-      });
-
-      const genere: number[] = [];
-      (filter.genere.forEach((item) => {
-        if (item.checked) {
-          genere.push(item.id);
-        }
-      }));
+      const genere = searchQuery.get('genere');
+      const priceMin = searchQuery.get('priceMin') || '';
+      const priceMax = searchQuery.get('priceMax') || '';
+      const sortBy = searchQuery.get('sortBy') || '';
+      const page = searchQuery.get('page') || '';
 
       setSearchQuery({
-        sortBy: filter.sortDirection[index].sortBy,
-        page: filter.page.toString(),
-        perPage: process.env.REACT_APP_PER_PAGE!,
-        search: filter.search,
+        sortBy,
+        page,
+        search: '',
         sortDirection: 'ASC',
-        priceMin: filter.price.minPrice.toString(),
-        priceMax: filter.price.maxPrice.toString(),
-        genere: genere.toString(),
+        priceMin,
+        priceMax,
+        genere: genere || '',
       });
 
       const query: QueryBookType = {
-        sortBy: searchQuery.get('sortBy') || '',
+        sortBy,
         genere: searchQuery.get('genere') || '',
-        perPage: searchQuery.get('perPage') || '',
-        page: searchQuery.get('page') || '',
+        perPage: process.env.REACT_APP_PER_PAGE!,
+        page,
         search: searchQuery.get('search') || '',
         sortDirection: 'ASC',
         priceMin: searchQuery.get('priceMin') || '',
@@ -102,7 +69,7 @@ const BookCatalog: FC = () => {
       await dispatch(getBooks(query));
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, filter, searchQuery]);
+  }, [searchQuery]);
 
   return (
     <StyledBookContainer className="book-content">
