@@ -37,6 +37,7 @@ const Favorite: FC = () => {
     dispatch(getAllBooksByIds(booksId.toString()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favorite]);
+
   return (
     <StyledDiv className="cart">
       {!favorite?.length ? (
@@ -58,8 +59,6 @@ const Favorite: FC = () => {
           <div className="cart-items-container">
             {
               books.map((item) => {
-                // eslint-disable-next-line no-console
-                console.log(item);
                 return (
                   <BookCard
                     key={item.id}

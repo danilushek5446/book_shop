@@ -69,4 +69,25 @@ export const StyledProfile = styled.div`
       position: absolute;
     }
   }
+
+  @media(max-width: 1280px){
+    .container{
+      max-width: 834px;
+      padding: 5px;
+    }
+    .image-container{
+      .avatar{
+        max-width: 255px;
+      }
+    }
+
+    .upload-container{
+      .add-avater-button{
+        width: 40px;
+        height: 40px;
+        bottom: 10px;
+        right: 35px;
+      }
+    }
+  }
 `;

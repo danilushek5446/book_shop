@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import fairy from '../../assets/images/atz3.png';
 
 export const StyledDiv = styled.div`
   height: 400px;
@@ -55,5 +56,36 @@ export const StyledDiv = styled.div`
   .ad-image-fairy{
     position: absolute;
     bottom: 0px;
+  }
+
+  @media(max-width: 1280px){
+    .ad-image{
+      width: 389px;
+      left: 0;
+    }
+
+    .ad-image-fairy{
+      content: url(${fairy});
+    }
+
+    .ad__title{
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 48px;
+    }
+    
+    .container{
+      max-width: 500px;
+    }
+    
+    .sub-title-background{
+      padding-left: 40px;
+      .sub-title{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      max-width: 392px;
+    }
   }
 `;

@@ -28,11 +28,7 @@ const DropDownButton: FC<PropType> = (
         <div className={className}>{text}</div>
         <span className={open === className ? 'open' : ''}>❯</span>
       </div>
-      {(open === className)
-        ? (
-          children
-          // eslint-disable-next-line react/jsx-no-useless-fragment
-        ) : <></>}
+      {(open === className) && children}
     </StyledContainer>
   );
 };

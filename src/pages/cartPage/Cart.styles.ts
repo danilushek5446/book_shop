@@ -90,4 +90,10 @@ export const StyledDiv = styled.div`
       height: 100%;
     }
   }
+
+  @media(max-width: 1280px){
+    .not-empty-cart{
+      padding: 15px;
+    } 
+  }
 `;

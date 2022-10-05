@@ -83,7 +83,7 @@ export const StyledDiv = styled.div`
     .ad-image{
       margin: 0;
       position: absolute;
-      left: 55%;
+      left: 51%;
       top: -93px;
       height: 380px;
       bottom: 29px;

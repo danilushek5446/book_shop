@@ -27,6 +27,7 @@ type PropType = {
 
 const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   const dispatch = useAppDispatch();
+
   const {
     setValue,
     register,
@@ -39,7 +40,7 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
   useEffect(() => {
     setValue('email', email);
     setValue('fullName', fullName);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const clearEmail = () => {
@@ -54,7 +55,9 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
     try {
       const email = data.email;
       const fullName = data.fullName;
+
       await dispatch(changeUserInfo({ email, fullName }));
+
       isChangeInfo();
     } catch (error) {
       const err = error as Error;
@@ -100,7 +103,11 @@ const SignIn: FC<PropType> = ({ isChangeInfo, email, fullName }) => {
           <span>{`${errors.email ? errors.email?.message : 'Enter your email'}`}</span>
         </div>
         <div className="button-container">
-          <StyledButton className="auth" type="submit" onClick={() => { }} text="confirm" />
+          <StyledButton
+            className="auth"
+            type="submit"
+            text="confirm"
+          />
         </div>
       </form>
     </StyledContainer>

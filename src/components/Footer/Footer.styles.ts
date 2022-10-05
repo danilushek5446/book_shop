@@ -46,4 +46,13 @@ export const StyledFooter = styled.div`
     display: flex;
     flex-direction: column;
   }
+
+  @media (max-width: 1280px) {
+    .container{
+      max-width: 804px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
 `;

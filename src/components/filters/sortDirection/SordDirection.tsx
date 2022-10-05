@@ -3,8 +3,6 @@ import type { FC, RefObject } from 'react';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-
 import { StyledContainer, StyledItemContainer } from './SordDirection.styles';
 import { sortDirection } from './sortDirectionArray';
 
@@ -15,7 +13,6 @@ type PropType = {
 
 const SordDirection: FC<PropType> = ({ onBlur, dropDownRef }) => {
   const [sortDirections, setSortDirections] = useState(sortDirection);
-  const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = useSearchParams();
 
   const onClick = (name: string) => {
@@ -27,10 +24,13 @@ const SordDirection: FC<PropType> = ({ onBlur, dropDownRef }) => {
           item.checked = false;
         }
       });
+
       return state;
     });
+
     searchQuery.set('sortBy', name);
-    setSearchQuery({ sortBy: name });
+
+    setSearchQuery(searchQuery);
   };
 
   useEffect(() => {
@@ -50,6 +50,7 @@ const SordDirection: FC<PropType> = ({ onBlur, dropDownRef }) => {
 
   useEffect(() => {
     const sortBy = searchQuery.get('sortBy');
+
     setSortDirections((state) => {
       state.forEach((item) => {
         if (item.sortBy === sortBy) {
@@ -58,9 +59,10 @@ const SordDirection: FC<PropType> = ({ onBlur, dropDownRef }) => {
           item.checked = false;
         }
       });
+
       return state;
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -68,7 +70,11 @@ const SordDirection: FC<PropType> = ({ onBlur, dropDownRef }) => {
       <div className="drop-down-items-container">
         {sortDirections.map((item) => {
           return (
-            <StyledItemContainer isChecked={item.checked} key={item.id} className="drop-down-item">
+            <StyledItemContainer
+              isChecked={item.checked}
+              key={item.id}
+              className="drop-down-item"
+            >
               <span onClick={() => onClick(item.sortBy)}>{item.sortBy}</span>
             </StyledItemContainer>
           );

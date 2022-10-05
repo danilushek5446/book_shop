@@ -26,6 +26,7 @@ type PropType = {
 
 const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
   const dispatch = useAppDispatch();
+
   const { register, handleSubmit, setValue,
     reset, setError, formState: { errors } } = useForm<UserChangePasswordType>({
       resolver: yupResolver(schema),
@@ -56,9 +57,11 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
         });
         return;
       }
+
       await dispatch(changeUserPassword({ oldPassword, newPassword }));
 
       isChangePasswrod();
+
       reset();
     } catch (error) {
       const err = error as Error;
@@ -118,7 +121,11 @@ const SignIn: FC<PropType> = ({ isChangePasswrod }) => {
           <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your new password without errors'}`}</span>
         </div>
         <div className="button-container">
-          <StyledButton className="auth" type="submit" onClick={() => { }} text="confirm" />
+          <StyledButton
+            className="auth"
+            type="submit"
+            text="confirm"
+          />
         </div>
       </form>
     </StyledContainer>

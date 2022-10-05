@@ -1,11 +1,12 @@
 import type { FC } from 'react';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { StyledBookContainer } from './BookCard.styles';
 import trash from '../../../assets/icons/Delete.png';
 import { changeCount, deleteOneBook } from '../../../store/cart/cartThunk';
+import { config } from '../../../config';
 
 type PropType = {
   bookId: number;
@@ -30,6 +31,7 @@ const BookCard: FC<PropType> = ({
   isInCart }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const cart = useAppSelector((state) => state.cart.cart);
 
   const index = useMemo(() => {
@@ -44,33 +46,35 @@ const BookCard: FC<PropType> = ({
     navigate(`/bookPage/${bookId}`);
   };
 
-  const onDecreaseClick = async () => {
+  const onDecreaseClick = () => {
     if (cart && (cart[index].count - 1) <= 0) {
-      await dispatch(deleteOneBook({ userId, bookId }));
+      dispatch(deleteOneBook({ userId, bookId }));
       if (countPrice) {
         countPrice(-price);
       }
       return;
     }
 
-    await dispatch(changeCount({ bookId, userId, count: -1 }));
+    dispatch(changeCount({ bookId, userId, count: -1 }));
     if (countPrice) {
       countPrice(-price);
     }
   };
 
-  const onIncreaseClick = async () => {
-    await dispatch(changeCount({ bookId, userId, count: +1 }));
+  const onIncreaseClick = () => {
+    dispatch(changeCount({ bookId, userId, count: +1 }));
+
     if (countPrice) {
       countPrice(+price);
     }
   };
 
-  const onDeleteOne = async () => {
+  const onDeleteOne = () => {
     if (countPrice && cart && cart[index]) {
       countPrice(-(price * cart[index].count));
     }
-    await dispatch(deleteOneBook({ userId, bookId }));
+
+    dispatch(deleteOneBook({ userId, bookId }));
   };
 
   useEffect(() => {
@@ -88,7 +92,7 @@ const BookCard: FC<PropType> = ({
 
   return (
     <StyledBookContainer className="book-content">
-      <img src={`${process.env.REACT_APP_API_URL}${image}`}
+      <img src={`${config.apiURL}${image}`}
         className="book-picture"
         alt="cannot load picture"
         onClick={onClick}

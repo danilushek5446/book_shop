@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-import uncheked from '../../../assets/icons/Uncheked.png';
-import cheked from '../../../assets/icons/Cheked.png';
 
 export const StyledContainer = styled.div`
   z-index: 999;
@@ -13,6 +11,10 @@ export const StyledContainer = styled.div`
   width: 195px;
   padding: 15px;
   box-sizing: border-box;
+
+  @media(max-width: 1280px){
+    width: 255px;
+  }
 `;
 
 export const StyledItemContainer = styled.div<{ isChecked: boolean }>`

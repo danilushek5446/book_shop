@@ -16,6 +16,7 @@ type PropType = {
 const Comment: FC<PropType> = ({ comment, UserId, date }) => {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
+
   useEffect(() => {
     (async () => {
       try {
@@ -34,6 +35,7 @@ const Comment: FC<PropType> = ({ comment, UserId, date }) => {
       }
     })();
   });
+
   return (
     <StyledCommentContainer className="comment-content">
       <div className="avatar-container">

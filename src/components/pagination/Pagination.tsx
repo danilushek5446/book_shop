@@ -1,6 +1,7 @@
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { config } from '../../config';
 
 import { StyledContainer } from './Pagination.styles';
 
@@ -9,19 +10,40 @@ type PropType = {
 };
 
 const Pagination: FC<PropType> = ({ countPages }) => {
-  const [paginationArray, setPagginationArray] = useState<number[]>([]);
-  const [page, setPage] = useState(0);
   const [searchQuery, setSearchQuery] = useSearchParams();
+  const [page, setPage] = useState(+(searchQuery.get('page') || 0));
 
-  let countPaginationPages = Math.ceil(countPages / +process.env.REACT_APP_PER_PAGE!);
-  if (!countPaginationPages) {
-    countPaginationPages = 1;
-  }
+  const countPaginationPages = useMemo(() => {
+    let countPaginationPages = Math.ceil(countPages / +config.perPage!);
+
+    if (!countPaginationPages) {
+      countPaginationPages = 1;
+    }
+
+    return countPaginationPages;
+  }, [countPages]);
+
+  const paginationArray: number[] = useMemo(() => {
+    const tempPagination: number[] = [];
+
+    for (let i = 0; i < countPaginationPages; i++) {
+      tempPagination.push(i);
+    }
+
+    if (page > tempPagination.length - 1) {
+      setPage(0);
+
+      searchQuery.set('page', '0');
+    }
+
+    return [...tempPagination];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countPaginationPages]);
 
   const onPageClick = (pageNumber: number) => {
     setPage(pageNumber);
+
     searchQuery.set('page', pageNumber.toString());
-    setSearchQuery({ page: pageNumber.toString() });
   };
 
   const onForwardClick = () => {
@@ -30,7 +52,6 @@ const Pagination: FC<PropType> = ({ countPages }) => {
     }
 
     searchQuery.set('page', (page + 1).toString());
-    setSearchQuery({ page: (page + 1).toString() });
 
     setPage((state) => {
       return state + 1;
@@ -43,7 +64,6 @@ const Pagination: FC<PropType> = ({ countPages }) => {
     }
 
     searchQuery.set('page', (page - 1).toString());
-    setSearchQuery({ page: (page - 1).toString() });
 
     setPage((state) => {
       return state - 1;
@@ -51,24 +71,9 @@ const Pagination: FC<PropType> = ({ countPages }) => {
   };
 
   useEffect(() => {
-    (() => {
-      const tempPagination: number[] = [];
-
-      for (let i = 0; i < countPaginationPages; i++) {
-        tempPagination.push(i);
-      }
-      if (page > tempPagination.length - 1) {
-        setPage(0);
-      }
-      setPagginationArray([...tempPagination]);
-    })();
-  }, [countPaginationPages, page]);
-
-  useEffect(() => {
-    const currentPage = searchQuery.get('page') || 0;
-    setPage(+currentPage);
+    setSearchQuery(searchQuery);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page]);
 
   return (
     <StyledContainer className="pagination">

@@ -25,6 +25,7 @@ const SignIn: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
   const {
     register,
     handleSubmit,
@@ -48,15 +49,17 @@ const SignIn: FC = () => {
     try {
       const email = data.email;
       const password = data.password;
+
       await dispatch(singIn({ email, password })).unwrap();
+
       if (location.state) {
         navigate(location.state);
       } else {
         navigate('/');
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error) {
       const err = error as Error;
+
       if (err.message.includes('password')) {
         setError('password', {
           type: 'server',
@@ -64,6 +67,7 @@ const SignIn: FC = () => {
         });
         return;
       }
+
       if (err.message.includes('email')) {
         setError('email', {
           type: 'server',
@@ -71,6 +75,7 @@ const SignIn: FC = () => {
         });
         return;
       }
+
       toast(err.message);
     }
   };
@@ -115,7 +120,11 @@ const SignIn: FC = () => {
           <StyledButton className="auth" type="submit" text="Log In" />
         </div>
       </form>
-      <img src={authPicture} alt="cannot load picture" />
+      <img
+        className="auth-iamge signin"
+        src={authPicture}
+        alt="cannot load picture"
+      />
     </StyledAuthContainer>
   );
 };

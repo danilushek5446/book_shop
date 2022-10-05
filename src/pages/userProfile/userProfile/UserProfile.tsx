@@ -14,12 +14,16 @@ import ChangeUSerInfo from '../changeUserInfo/ChangeUSerInfo';
 import ChangePassword from '../changePassword/ChangePassword';
 import PageIcons from '../../../components/pageIcons/PageIcons';
 import { uploadUserPhoto } from '../../../store/user/userThunk';
+import { config } from '../../../config';
 
 const UserProfile: FC = () => {
   const [isChangeInfo, setIsChangeInfo] = useState(false);
   const [isChangePass, setIsChangePass] = useState(false);
+
   const user = useAppSelector((state) => state.user.user);
+
   const dispatch = useAppDispatch();
+
   const changeInfo = () => {
     setIsChangeInfo(!isChangeInfo);
   };
@@ -32,12 +36,15 @@ const UserProfile: FC = () => {
     if (event.target.files) {
       const file = event.target.files[0];
       const reader = new FileReader();
+
       reader.onload = async (event) => {
         const photo = event.target?.result;
+
         if (photo) {
           await dispatch(uploadUserPhoto({ photo }));
         }
       };
+
       reader.readAsDataURL(file);
     }
   };
@@ -46,57 +53,75 @@ const UserProfile: FC = () => {
     <StyledProfile>
       <div className="container">
         <div className="image-container">
-          <img src={user.photo ? `${process.env.REACT_APP_API_URL}${user.photo}` : userPhoto}
-          className="avatar"
-          alt="cannot load picture"
+          <img src={user.photo ? `${config.apiURL}${user.photo}` : userPhoto}
+            className="avatar"
+            alt="cannot load picture"
           />
           <label className="upload-container" htmlFor="file-input">
-            <PageIcons className="add-avater-button" picture={camera} onClick={() => { }}
+            <PageIcons
+              className="add-avater-button"
+              picture={camera}
             />
-            <input id="file-input" className="upload" type="file" onChange={uploadAvatar} />
+            <input
+              id="file-input"
+              className="upload"
+              type="file"
+              onChange={uploadAvatar}
+            />
           </label>
         </div>
         <div className="info-container">
           <div className="change-info-container">
             <span className="title">Personal information</span>
-            <span onClick={changeInfo} className="change-info-title">Change information</span>
+            <span onClick={changeInfo} className="change-info-title">
+              Change information
+            </span>
           </div>
           {isChangeInfo
-            ? (<ChangeUSerInfo
-              fullName={user.fullName || ''}
-              email={user.email}
-              isChangeInfo={changeInfo}
-            />)
-            : (<><ProfileState
-              icon={profile}
-              labelText="Your name"
-              name="profile-info"
-              text={user.fullName || ''}
-            />
-              <ProfileState
-                icon={mail}
-                labelText="Your email"
-                name="profile-info"
-                text={user.email || ''}
+            ? (
+              <ChangeUSerInfo
+                fullName={user.fullName || ''}
+                email={user.email}
+                isChangeInfo={changeInfo}
               />
-               </>)
+            )
+            : (
+              <>
+                <ProfileState
+                  icon={profile}
+                  labelText="Your name"
+                  name="profile-info"
+                  text={user.fullName || ''}
+                />
+                <ProfileState
+                  icon={mail}
+                  labelText="Your email"
+                  name="profile-info"
+                  text={user.email || ''}
+                />
+              </>
+            )
           }
           <div className="change-info-container change-password">
             <span className="title">Password</span>
             <span onClick={changePass} className="change-info-title">Change Password</span>
           </div>
           {isChangePass
-            ? (<ChangePassword
-              fullName={user.fullName || ''}
-              email={user.email}
-              isChangePasswrod={changePass}
-            />)
-            : (<ProfileState
-              icon={passwordIcon}
-              labelText="Your password"
-              name="profile-info"
-              text="********"
-            />)
+            ? (
+              <ChangePassword
+                fullName={user.fullName || ''}
+                email={user.email}
+                isChangePasswrod={changePass}
+              />
+            )
+            : (
+              <ProfileState
+                icon={passwordIcon}
+                labelText="Your password"
+                name="profile-info"
+                text="********"
+              />
+            )
           }
         </div>
       </div>

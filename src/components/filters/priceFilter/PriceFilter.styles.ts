@@ -64,4 +64,7 @@ export const StyledContainer = styled.div`
     padding-bottom: 40px;
   }
 
+  @media(max-width: 1280px){
+    width: 290px;
+  }
 `;

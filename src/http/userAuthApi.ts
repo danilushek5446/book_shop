@@ -5,6 +5,7 @@ const login = async (request: AuthType): Promise<UserType> => {
   const data = await host.post('api/auth/login', request);
 
   localStorage.setItem('token', data.data.token);
+
   return data.data.user;
 };
 
@@ -12,6 +13,7 @@ const registration = async (request: AuthType): Promise<UserType> => {
   const data = await host.post('api/auth/registration', request);
 
   localStorage.setItem('token', data.data.token);
+
   return data.data.user;
 };
 

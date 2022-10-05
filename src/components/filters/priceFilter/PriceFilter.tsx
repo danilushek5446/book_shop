@@ -21,7 +21,7 @@ const PriceFilter: FC<PropType> = ({ onBlur, dropDownRef }) => {
 
     searchQuery.set('priceMin', value[0].toString());
     searchQuery.set('priceMax', value[1].toString());
-    setSearchQuery({ priceMin: value[0].toString(), priceMax: value[1].toString() });
+    setSearchQuery(searchQuery);
   };
 
   useEffect(() => {
@@ -40,8 +40,9 @@ const PriceFilter: FC<PropType> = ({ onBlur, dropDownRef }) => {
   });
 
   useEffect(() => {
-    const priceMin = Number(searchQuery.get('priceMin'));
-    const priceMax = Number(searchQuery.get('priceMax'));
+    const priceMin = +(searchQuery.get('priceMin') || 0);
+    const priceMax = +(searchQuery.get('priceMax') || 100);
+
     setValue([priceMin, priceMax]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

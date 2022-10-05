@@ -11,6 +11,7 @@ import Pagination from '../../../components/pagination/Pagination';
 import BookItem from '../bookItem/BookItem';
 
 import { StyledBookContainer } from './BookCatalog.styles';
+import { config } from '../../../config';
 
 const BookCatalog: FC = () => {
   const books = useAppSelector((state) => state.book);
@@ -20,54 +21,32 @@ const BookCatalog: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    (async () => {
+    if (userId) {
       dispatch(getUserCart(userId));
       dispatch(getUserFavorite(userId));
-
-      const searchParam = searchQuery.get('search');
-
-      const sortBy = searchQuery.get('sortBy');
-
-      const genere = searchQuery.get('genere');
-
-      const page = searchQuery.get('page');
-
-      const priceMin = Number(searchQuery.get('priceMin'));
-      const priceMax = Number(searchQuery.get('priceMax'));
-    })();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    (async () => {
-      const genere = searchQuery.get('genere');
-      const priceMin = searchQuery.get('priceMin') || '';
-      const priceMax = searchQuery.get('priceMax') || '';
-      const sortBy = searchQuery.get('sortBy') || '';
-      const page = searchQuery.get('page') || '';
+    const search = searchQuery.get('search') || '';
+    const genere = searchQuery.get('genere') || '';
+    const priceMin = searchQuery.get('priceMin') || '';
+    const priceMax = searchQuery.get('priceMax') || '';
+    const sortBy = searchQuery.get('sortBy') || '';
+    const page = searchQuery.get('page') || '';
 
-      setSearchQuery({
-        sortBy,
-        page,
-        search: '',
-        sortDirection: 'ASC',
-        priceMin,
-        priceMax,
-        genere: genere || '',
-      });
-
-      const query: QueryBookType = {
-        sortBy,
-        genere: searchQuery.get('genere') || '',
-        perPage: process.env.REACT_APP_PER_PAGE!,
-        page,
-        search: searchQuery.get('search') || '',
-        sortDirection: 'ASC',
-        priceMin: searchQuery.get('priceMin') || '',
-        priceMax: searchQuery.get('priceMax') || '',
-      };
-      await dispatch(getBooks(query));
-    })();
+    const query: QueryBookType = {
+      sortBy,
+      genere,
+      perPage: config.perPage,
+      page,
+      search,
+      sortDirection: 'ASC',
+      priceMin,
+      priceMax,
+    };
+    dispatch(getBooks(query));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
 import { toast } from 'react-toastify';
@@ -27,19 +27,39 @@ const BookPage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const user = useAppSelector((state) => state.user.user);
   const cart = useAppSelector((state) => state.cart.cart);
   const favorite = useAppSelector((state) => state.favorite.favorite);
+
   const [comments, setComments] = useState<CommentsInitialType>({ commentArray: [], count: 0 });
   const [commentInput, setCommentInput] = useState('');
+
   const [stateRating, setStateRating] = useState(0);
-  const [isInCart, setIsInCart] = useState(false);
-  const [isInFavorite, setIsInFavorite] = useState(false);
+
   const [currentBook, setCurrentBook] = useState<CurrentBookType>();
+
+  const isInCart = useMemo(() => {
+    if (cart?.some((item) => item.bookId === +id!)) {
+      return true;
+    }
+    return false;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]);
+
+  const isInFavorite = useMemo(() => {
+    if (favorite?.some((item) => item.bookId === +id!)) {
+      return true;
+    }
+    return false;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [favorite]);
 
   useEffect(() => {
     (async () => {
-      dispatch(getUserCart(user.id));
+      if (user.id) {
+        dispatch(getUserCart(user.id));
+      }
 
       const commentResponse = await getComments({ bookId: +id! });
 
@@ -63,44 +83,26 @@ const BookPage: FC = () => {
     })();
   }, []);
 
-  useEffect(() => {
-    if (favorite) {
-      if (favorite.some((item) => item.bookId === +id!)) {
-        setIsInFavorite(true);
-      }
-    }
-  }, [favorite]);
-
-  useEffect(() => {
-    if (cart) {
-      if (cart.some((item) => item.bookId === +id!)) {
-        setIsInCart(true);
-      }
-    }
-  }, [cart]);
-
   const onAddToCart = () => {
     if (!user.email) {
       navigate('/login');
     }
     if (currentBook) {
       dispatch(addToCart(currentBook.book?.id || -1));
-      setIsInCart(true);
     }
   };
 
-  const onAddFavorite = async () => {
+  const onAddFavorite = () => {
     if (!user.email) {
       navigate('/login');
     }
 
     if (isInFavorite) {
-      await dispatch(deleteFromFavorite({ userId: user.id, bookId: +id! }));
-      setIsInFavorite(false);
+      dispatch(deleteFromFavorite({ userId: user.id, bookId: +id! }));
       return;
     }
 
-    await dispatch(addToFavorite(+id!));
+    dispatch(addToFavorite(+id!));
   };
 
   const handleRating = async (rate: number) => {
@@ -122,8 +124,6 @@ const BookPage: FC = () => {
               }
               return state;
             });
-            // eslint-disable-next-line no-console
-            console.log(currentBook?.book?.rating, ' ', newRating);
           }
         }
       }
@@ -174,8 +174,10 @@ const BookPage: FC = () => {
           <span className="book-name">{currentBook?.book?.name}</span>
           <span className="book-author">{currentBook?.book?.author}</span>
           <div className="rating-container">
-            <img src={star} alt="cannot load picture" className="rate-star" />
-            <span className="book-rating">{(currentBook?.book?.rating || 0).toFixed(1)}</span>
+            <div className="current-rating">
+              <img src={star} alt="cannot load picture" className="rate-star" />
+              <span className="book-rating">{(currentBook?.book?.rating || 0).toFixed(1)}</span>
+            </div>
             <Rating
               ratingValue={stateRating}
               onClick={handleRating}

@@ -13,12 +13,15 @@ type PropType = {
 
 const GenereFilters: FC<PropType> = ({ onBlur, dropDownRef }) => {
   const [generes, setGeneres] = useState<GenereType[]>();
+
   const [currentGeneres, setCurrentGeneres] = useState<number[]>([]);
+
   const [searchQuery, setSearchQuery] = useSearchParams();
   const ref = useRef<HTMLDivElement>(null);
 
   const onClick = async (id: number) => {
     let index = -1;
+
     if (generes) {
       index = generes.findIndex((item) => item.id === id);
     }
@@ -26,19 +29,25 @@ const GenereFilters: FC<PropType> = ({ onBlur, dropDownRef }) => {
     if (generes && index >= -1) {
       if (!currentGeneres?.includes(generes[index].id)) {
         setCurrentGeneres((state) => {
-          return [...state, generes[index].id];
+          state.push(generes[index].id);
+          return state;
         });
 
         searchQuery.set('genere', [...currentGeneres, generes[index].id].toString() || '');
-        setSearchQuery({ genere: [...currentGeneres, generes[index].id].toString() || '' });
+
+        setSearchQuery(searchQuery);
+
         return;
       }
       let currentIndex = -1;
+
       if (currentGeneres) {
-        currentIndex = currentGeneres?.findIndex(
-          (item) => item === generes[index].id,
-        );
+        currentIndex = currentGeneres?.findIndex((item) => item === generes[index].id);
       }
+
+      const queryGeneres = currentGeneres.map((item) => item);
+      queryGeneres.splice(currentIndex, 1);
+
       setCurrentGeneres((state) => {
         if (currentIndex !== -1) {
           state?.splice(currentIndex, 1);
@@ -46,10 +55,10 @@ const GenereFilters: FC<PropType> = ({ onBlur, dropDownRef }) => {
         return state;
       });
 
-      searchQuery.set('genere', currentGeneres.splice(currentIndex, 1).toString() || '');
+      searchQuery.set('genere', queryGeneres.toString() || '');
     }
 
-    setSearchQuery({ genere: currentGeneres.toString() });
+    setSearchQuery(searchQuery);
   };
 
   useEffect(() => {
@@ -59,6 +68,7 @@ const GenereFilters: FC<PropType> = ({ onBlur, dropDownRef }) => {
         return generesArray;
       });
     })();
+
     const queryGenere = searchQuery.getAll('genere').join(',').split(',');
 
     setCurrentGeneres((state) => {
@@ -78,6 +88,7 @@ const GenereFilters: FC<PropType> = ({ onBlur, dropDownRef }) => {
       if (!dropDownRef.current) {
         return;
       }
+
       if (!dropDownRef.current.contains(e.target as Node)) {
         onBlur();
       }

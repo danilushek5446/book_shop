@@ -12,10 +12,18 @@ const Ad: FC = () => {
         <h2 className="ad__title">Build your library with us</h2>
         <div className="book-background">
           <span className="sub-title">Buy two books and get one for free</span>
-          <StyleButton text="Choose a book" type="button" onClick={() => {}} className="to-catalog" />
+          <StyleButton
+            text="Choose a book"
+            type="button"
+            className="to-catalog"
+          />
         </div>
       </div>
-      <img className="ad-image" src={adPicture} alt="cannot upload picture" />
+      <img
+        className="ad-image"
+        src={adPicture}
+        alt="cannot upload picture"
+      />
     </StyledDiv>
   );
 };

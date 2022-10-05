@@ -105,10 +105,18 @@ export const StyledHeaderContainer = styled.div`
   }
 
   @media (max-width: 1280px) {
+    max-width: 804px;
+
+    .header__title{
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+
     .auth-container{
       justify-content: unset;
-      max-width: 270px;
+      max-width: 240px;
       margin-left: 11%;
+      z-index: 999;
       div{
         margin-left: 24px;
       }

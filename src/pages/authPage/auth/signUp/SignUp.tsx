@@ -26,6 +26,7 @@ const SignUp: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
   const {
     register,
     handleSubmit,
@@ -54,6 +55,7 @@ const SignUp: FC = () => {
       const email = data.email;
       const password = data.password;
       const confirmPass = data.confirmPass;
+
       if (password !== confirmPass) {
         setError('confirmPass', {
           type: 'value',
@@ -61,6 +63,7 @@ const SignUp: FC = () => {
         });
         return;
       }
+
       await dispatch(signUp({ email, password })).unwrap();
 
       if (location.state) {
@@ -84,6 +87,7 @@ const SignUp: FC = () => {
           message: err.message,
         });
       }
+
       toast(err.message);
     }
   };
@@ -135,10 +139,18 @@ const SignUp: FC = () => {
           <span>{`${errors.confirmPass ? errors.confirmPass?.message : 'Repeat your password without errors'}`}</span>
         </div>
         <div className="button-container">
-          <StyledButton className="auth" type="submit" text="Sign up" />
+          <StyledButton
+            className="auth"
+            type="submit"
+            text="Sign up"
+          />
         </div>
       </form>
-      <img src={authPicture} alt="cannot load picture" />
+      <img
+        className="auth-iamge signup"
+        src={authPicture}
+        alt="cannot load picture"
+      />
     </StyledAuthContainer>
   );
 };

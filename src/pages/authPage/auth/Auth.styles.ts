@@ -46,4 +46,24 @@ export const StyledAuthContainer = styled.div`
   img{
     align-self: start;
   }
+
+  @media(max-width: 1280px){
+    box-sizing: border-box;
+    max-width: 834px;
+    padding-left: 15px;
+    padding-right: 15px;
+    .auth-iamge{
+      max-width: 390px;
+      width: 100%;
+      max-height: 333px;
+      height: 100%;
+      padding-top: 55px;
+    }
+    .auth-iamge.signup{
+      padding-top: 130px;
+    }
+    .form-control{
+      max-width: 390px;
+    }
+  }
 `;

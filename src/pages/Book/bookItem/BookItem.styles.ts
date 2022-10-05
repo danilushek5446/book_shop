@@ -60,6 +60,7 @@ export const StyledBookContainer = styled.div`
  }
 
  .in-cart{
+   height: 44px;
    background: white;
    color: #0D1821;
    border: 1px solid #0D1821;

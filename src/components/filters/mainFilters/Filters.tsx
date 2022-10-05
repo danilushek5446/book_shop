@@ -10,6 +10,7 @@ import { StyledContainer } from './Filters.styles';
 
 const Filters: FC = () => {
   const [isOpen, setIsOpen] = useState('');
+
   const genereRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);

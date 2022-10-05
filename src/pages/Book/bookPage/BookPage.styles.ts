@@ -120,6 +120,7 @@ export const StyledBookContainer = styled.div`
   }
 
   .in-cart{
+    height: 44px;
    background: white;
    color: #0D1821;
    border: 1px solid #0D1821;
@@ -190,6 +191,71 @@ export const StyledBookContainer = styled.div`
 
     .add-button-container{
       padding-top: 40px;
+    }
+  }
+
+  @media(max-width: 1280px){
+    .book-container{
+      box-sizing: border-box;
+      padding: 15px;
+      justify-content: space-around;
+
+      .book-picture{
+        max-width: 391px;
+        max-height: 584px;
+        height: 100%;
+      }
+
+      .contenet-container{
+        padding-left: 15px;
+        max-width: 390px;
+      }
+
+      .book-name{
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 48px;
+      }
+
+      .book-author{
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+      }
+
+      .rating-container{
+        flex-direction: column;
+      }
+
+      .book-description-title{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+      }
+      
+      .book-description{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        max-width: 392px;
+      }
+
+      .current-rating{
+        display: flex;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      
+      .book-rating{
+        padding-bottom: 0;
+      }
+
+      .hardcover-title{
+        padding-top: 30px;
+      }
     }
   }
 `;
