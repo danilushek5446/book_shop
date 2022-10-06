@@ -7,6 +7,14 @@ export const StyledBookContainer = styled.div`
   width: 100%;
   padding-top: 20px;
 
+  .description-container{
+    padding-top: 30px;
+    max-width: 630px;
+    .book-description-title{
+      display: block;
+    }
+  }
+
   .book-container{
     display: flex;
     max-width: 1280px;
@@ -257,5 +265,48 @@ export const StyledBookContainer = styled.div`
         padding-top: 30px;
       }
     }
+  }
+
+  @media (max-width: 450px) {
+    .rate-star{
+      max-width: 13.5px;
+      max-height: 13.5px;
+    }
+    .react-simple-star-rating{
+      svg{
+        width: 14px !important;
+        height: 14px !important;
+        padding-right: 16px;
+      }
+    }
+
+    .filled-icons{
+
+    }
+
+    .book-container{
+      .contenet-container{
+      }
+
+      .book-picture{
+        max-width: 135px;
+        max-height: 202px;
+      }
+
+      .book-name{
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      .book-author{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+    .comments-container{
+      padding-top: 550px;
+    } 
   }
 `;

@@ -59,7 +59,6 @@ export const StyledProfile = styled.div`
 
   .upload-container{
     position: absolute;
-    width: 100%;
     left: 230px;
     top: 230px;
     input{
@@ -88,6 +87,21 @@ export const StyledProfile = styled.div`
         bottom: 10px;
         right: 35px;
       }
+    }
+  }
+
+  @media(max-width: 820px){
+    .container{
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .upload-container{
+      top: 200px;
+    }
+
+    .change-info-container{
+      flex-direction: column;
     }
   }
 `;

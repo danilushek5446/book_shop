@@ -46,4 +46,30 @@ export const StyledContainer = styled.div`
       }
     }
   }
+
+  @media(max-width: 825px){
+    align-items: center;
+    h2{
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 48px;
+    }
+
+    .container{
+      flex-direction: column;
+      align-items: center;
+      height: 190px;
+    }
+
+    .dropdown{
+      max-width: 290px;
+      .dropdown-container{
+        max-width: 290px;
+      }
+    }
+
+    .drop-down-list{
+      max-width: 290px;
+    }
+  }
 `;

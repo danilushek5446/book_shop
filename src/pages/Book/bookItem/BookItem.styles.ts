@@ -90,4 +90,19 @@ export const StyledBookContainer = styled.div`
          height: 18px !important;
       }
    }
+
+   @media (max-width: 550px) {
+      svg{
+         padding-right: 8px;
+         width: 14px !important;
+         height: 14px !important;
+      }
+      .book-rating{
+         padding-left: 10px;
+         font-weight: 500;
+         font-size: 13px;
+         line-height: 20px;
+         align-self: center;
+      }
+   }
 `;

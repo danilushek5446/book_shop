@@ -55,4 +55,29 @@ export const StyledFooter = styled.div`
       line-height: 24px;
     }
   }
+
+  @media (max-width: 820px) {
+    .container{
+      flex-direction: column;
+      max-width: 520px;
+    }
+
+    .contact-info{
+      padding-right: 84px;
+    }
+    
+    .links{
+      padding-right: 170px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .map-container{
+      img{
+        width: 291px;
+        height: 160px;
+        object-fit: cover;
+      }
+    }
+  }
 `;

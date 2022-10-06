@@ -5,7 +5,7 @@ export const StyledDiv = styled.div`
   max-width: 1280px;
   width: 100%;
   .empty-cart{
-    padding-top: 80px;
+    padding-top: 84px;
     padding-bottom: 140px;
     display: flex;
     max-width: 1000px;
@@ -95,5 +95,122 @@ export const StyledDiv = styled.div`
     .not-empty-cart{
       padding: 15px;
     } 
+  }
+
+  @media(max-width: 600px){
+    .book-content{
+      display: flex;
+      justify-content: center;
+
+      .book-picture{
+        width: 135px;
+        height: 202px;
+      }
+    }
+    .container{
+      .book-name{
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      .book-author{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      .book-price{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+      }
+
+      .book-total-price{
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 36px;
+      }
+
+      .count-container img {
+        padding-left: 15px;
+      }
+    }
+    
+    .not-empty-cart{
+      padding: 10px;
+
+      .total-price{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .continue-shopping-container{
+        padding-bottom: 20px;
+        max-width: 289px;
+        padding-bottom: 20px;
+        .continue-shopping{
+          max-width: 289px;
+        }
+      }
+      .buttons-container{
+        flex-direction: column;
+        align-items: center;
+        max-width: 550px;
+        margin: 0;
+
+        .continue-shopping-containe{
+          padding-bottom: 20px;
+          max-width: 289px;
+          padding-bottom: 20px;
+
+          button{
+            max-width: 289px;
+          }
+        }
+
+        .chekout-container{
+          max-width: 289px;
+          margin: 0;
+
+          button{
+            max-width: 289px;
+          }
+        }
+      }
+    }
+    .container{
+      button{
+        max-width: 290px;
+      }
+      
+      .empty-cart-subtitle{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 233px;
+      }
+
+      .empty-cart-title{
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+    
+  }
+
+  @media(max-width: 820px){
+    .empty-cart{
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+
+    .empty-cart img{
+      max-height: 176px;
+      max-width: 290px;
+      padding-top: 40px;
+    }
   }
 `;

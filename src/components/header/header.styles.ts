@@ -33,7 +33,7 @@ export const StyledHeaderContainer = styled.div`
   }
   .auth-container{
     display: flex;
-    max-width: 200px;
+    max-width: 220px;
     width: 100%;
     justify-content: space-between;
   }
@@ -119,6 +119,42 @@ export const StyledHeaderContainer = styled.div`
       z-index: 999;
       div{
         margin-left: 24px;
+      }
+    }
+  }
+
+  @media (max-width: 825px) {
+    position: relative;
+    height: 120px;
+    max-width: 520px;
+    .input-label-container {
+      position: absolute;
+      max-width: 520px;
+      top: 88px;
+      left: 0;
+    }
+    .input-container{
+      max-width: 60px;
+    }
+
+    .auth-container{
+      max-width: 189px;
+      margin-left: 0;
+      div{
+        margin-left: 13px;
+      }
+    }
+    .header__title{
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .auth-container{
+      max-width: 150px;
+      div{
+        width: 35px;
+        height: 35px;
       }
     }
   }

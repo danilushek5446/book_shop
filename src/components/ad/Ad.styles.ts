@@ -89,4 +89,50 @@ export const StyledDiv = styled.div`
       bottom: 29px;
     }
   }
+
+  @media (max-width: 820px) {
+    height: 520px;
+    max-width: 520px;
+    box-sizing: border-box;
+
+   .ad-image {
+      left: 20%;
+      top: 240px;
+      bottom: 29px;
+      width: 253px;
+      height: 280px;
+    }
+
+    .container{
+      max-width: 520px;
+    }
+
+    .book-background{
+      margin: auto; 
+      max-width: 232px;
+      max-height: 140px;
+      background-size: 232px 140px;
+      .sub-title{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+      }
+    }
+
+    .ad__title{
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 27px;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      padding-top: 20px;
+    }
+  }
+
+  @media(max-width: 450px){
+    .ad-image{
+      left: 10%;
+    }
+  }
 `;

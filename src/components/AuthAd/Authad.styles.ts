@@ -88,4 +88,50 @@ export const StyledDiv = styled.div`
       max-width: 392px;
     }
   }
+
+  @media(max-width: 820px){
+    margin: 15px;
+    height: 501px;
+    display: flex;
+    justify-content: center;
+    max-width: 520px;
+    .ad-image{
+      left: 25%;
+      width: 282px;
+      height: 250px;
+    }
+
+    .ad-image-fairy{
+      width: 246px;
+      height: 391px;
+      bottom: 170px;
+      right: 0;
+    }
+
+    .ad__title{
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 48px;
+      margin: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    
+    .container{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .sub-title-background{
+      max-width: 249px;
+      padding-left: 15px;
+      .sub-title{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0;
+      }
+    }
+  }
 `;

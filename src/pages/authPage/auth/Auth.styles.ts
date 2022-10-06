@@ -66,4 +66,18 @@ export const StyledAuthContainer = styled.div`
       max-width: 390px;
     }
   }
+
+  @media(max-width: 820px){
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 30px;
+
+    .auth-iamge{
+      align-self: center;
+    }
+    .auth-iamge.signup{
+      padding-top: 40px;
+    }
+  }
+
 `;

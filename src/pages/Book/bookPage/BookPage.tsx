@@ -186,17 +186,19 @@ const BookPage: FC = () => {
               size={28}
             />
           </div>
-          <span className="book-description-title">Descrition</span>
-          <span className="book-description">{currentBook?.book?.description}</span>
-          <div className="button-container">
-            <div className="hardcover-title">Hardcover</div>
-            <StyleButton
-              text={`${isInCart ? 'Added to cart' : `$${currentBook?.book?.price} USD`}`}
-              type="button"
-              onClick={onAddToCart}
-              className={`price ${isInCart ? 'in-cart' : ''}`}
-              disabled={isInCart}
-            />
+          <div className="description-container">
+            <span className="book-description-title">Descrition</span>
+            <span className="book-description">{currentBook?.book?.description}</span>
+            <div className="button-container">
+              <div className="hardcover-title">Hardcover</div>
+              <StyleButton
+                text={`${isInCart ? 'Added to cart' : `$${currentBook?.book?.price} USD`}`}
+                type="button"
+                onClick={onAddToCart}
+                className={`price ${isInCart ? 'in-cart' : ''}`}
+                disabled={isInCart}
+              />
+            </div>
           </div>
         </div>
       </div>

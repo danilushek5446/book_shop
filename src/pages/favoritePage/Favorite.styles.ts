@@ -96,4 +96,34 @@ export const StyledDiv = styled.div`
       padding: 15px;
     } 
   }
+
+  @media(max-width: 500px){
+    .book-content{
+      display: flex;
+
+      .book-picture{
+        width: 135px;
+        height: 202px;
+      }
+    }
+    .container{
+      .book-name{
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      .book-author{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      .book-price{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+  }
 `;
