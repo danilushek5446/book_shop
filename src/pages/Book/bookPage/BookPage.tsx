@@ -16,7 +16,7 @@ import filledHeart from '../../../assets/icons/filledHeart.png';
 import { setRating } from '../../../http/ratingApi';
 import { addToCart, getUserCart } from '../../../store/cart/cartThunk';
 import PageIcons from '../../../components/pageIcons/PageIcons';
-import { addToFavorite, deleteFromFavorite } from '../../../store/favorite/favoriteThunk';
+import { addToFavorite, deleteFromFavorite, getUserFavorite } from '../../../store/favorite/favoriteThunk';
 import Comment from '../../../components/comment/Comment';
 import type { CurrentBookType } from '../../../types/bookType';
 import { getOneBook } from '../../../http/bookApi';
@@ -59,6 +59,7 @@ const BookPage: FC = () => {
     (async () => {
       if (user.id) {
         dispatch(getUserCart(user.id));
+        dispatch(getUserFavorite(user.id));
       }
 
       const commentResponse = await getComments({ bookId: +id! });
@@ -107,6 +108,10 @@ const BookPage: FC = () => {
 
   const handleRating = async (rate: number) => {
     try {
+      if (!user.email) {
+        navigate('/login');
+      }
+
       if (currentBook) {
         setStateRating(rate);
 

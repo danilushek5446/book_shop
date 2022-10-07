@@ -140,6 +140,9 @@ export const StyledHeaderContainer = styled.div`
     .auth-container{
       max-width: 189px;
       margin-left: 0;
+      button{
+        font-size: 12px;
+      }
       div{
         margin-left: 13px;
       }

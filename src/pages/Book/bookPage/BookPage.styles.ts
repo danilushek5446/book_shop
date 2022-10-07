@@ -203,10 +203,11 @@ export const StyledBookContainer = styled.div`
   }
 
   @media(max-width: 1280px){
+    max-width: 850px;
     .book-container{
       box-sizing: border-box;
       padding: 15px;
-      justify-content: space-around;
+      justify-content: space-between;
 
       .book-picture{
         max-width: 391px;
@@ -265,6 +266,25 @@ export const StyledBookContainer = styled.div`
         padding-top: 30px;
       }
     }
+    .ad{
+      margin: 0;
+    }
+  }
+
+  @media(max-width: 820px){
+    max-width: 500px;
+    .book-container{
+      flex-direction: column;
+
+      .book-image-container{
+        align-self: center;
+      }
+
+      .book-picture{
+        max-width: 250px;
+        max-height: 450px;
+      }
+    }
   }
 
   @media (max-width: 450px) {
@@ -280,12 +300,21 @@ export const StyledBookContainer = styled.div`
       }
     }
 
+    .ad{
+      .ad-image{
+        left: 15%;
+      }
+    }
+
     .filled-icons{
 
     }
 
     .book-container{
-      .contenet-container{
+      flex-direction: row;
+      position: relative;
+      .book-image-container{
+        align-self: unset;
       }
 
       .book-picture{
@@ -306,7 +335,40 @@ export const StyledBookContainer = styled.div`
       }
     }
     .comments-container{
-      padding-top: 550px;
-    } 
+      padding-top: 600px;
+    }
+    
+    .book-container {
+      .contenet-container {
+        max-width: 140px;
+      }
+    }
+
+    .book-image-container{
+      .book-favorite{
+        width: 30px;
+        height: 30px;
+        img{
+          width: 17px;
+          height: 17px;
+        }
+      }
+    }
+    .description-container{
+      position: absolute;
+      top: 170px;
+      left: 5%;
+    }
+  }
+
+  @media(max-width: 350px){
+    .ad{
+      margin: 0;
+      margin-left: 10px;
+      max-width: 290px;
+      .ad-image{
+        left: 1%;
+      }
+    }
   }
 `;

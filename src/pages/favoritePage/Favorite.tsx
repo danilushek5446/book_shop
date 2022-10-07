@@ -9,10 +9,12 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import BookCard from '../Book/bookCard/BookCard';
 import { getAllBooksByIds } from '../../store/book/bookThunk';
 import { getUserFavorite } from '../../store/favorite/favoriteThunk';
+import { getUserCart } from '../../store/cart/cartThunk';
 
 const Favorite: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const user = useAppSelector((state) => state.user.user);
   const favorite = useAppSelector((state) => state.favorite.favorite);
   const books = useAppSelector((state) => state.book.booksArray);
@@ -23,6 +25,7 @@ const Favorite: FC = () => {
 
   useEffect(() => {
     dispatch(getUserFavorite(user.id));
+    dispatch(getUserCart(user.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,8 +47,8 @@ const Favorite: FC = () => {
         <div className="empty-cart">
           <img className="empty-cart-image" src={booksImage} alt="cannot upload picture" />
           <div className="container">
-            <span className="empty-cart-title">Your cart is empty</span>
-            <span className="empty-cart-subtitle">Add items to cart to make a purchase. Go to the catalogue no.</span>
+            <span className="empty-cart-title">Your favorite is empty</span>
+            <span className="empty-cart-subtitle">Add items to favorite. Go to the catalogue now.</span>
             <StyleButton
               text="Go to catalog"
               type="button"

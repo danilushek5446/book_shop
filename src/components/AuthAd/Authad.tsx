@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { StyledDiv } from './Authad.styles';
 import authAdPicture from '../../assets/images/2011.i305.006. 1.png';
 import background from '../../assets/images/atz1.png';
+import StyleButton from '../Button/StyledButton';
 
 const Ad: FC = () => {
   return (
@@ -21,7 +22,11 @@ const Ad: FC = () => {
         <h2 className="ad__title">Authorize now</h2>
         <div className="sub-title-background">
           <span className="sub-title">Authorize now and discover the fabulous world of books</span>
-          {/* <StyleButton text="Choose a book" /> */}
+          <StyleButton
+            text="Choose a book"
+            type="button"
+            className="to-catalog"
+          />
         </div>
       </div>
     </StyledDiv>

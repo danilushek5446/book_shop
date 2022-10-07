@@ -134,4 +134,19 @@ export const StyledDiv = styled.div`
       }
     }
   }
+
+  @media(max-width: 820px){
+    margin: 0;
+    .ad-image{
+      left: 20%;
+      width: 282px;
+      height: 250px;    
+    }
+  }
+
+  @media(max-width: 390px){
+    .ad-image{
+      left: 7%;
+    }
+  }
 `;

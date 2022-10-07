@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import profile from '../../../assets/icons/UserprofileInProfile.png';
 import mail from '../../../assets/icons/Mail.png';
@@ -15,6 +15,8 @@ import ChangePassword from '../changePassword/ChangePassword';
 import PageIcons from '../../../components/pageIcons/PageIcons';
 import { uploadUserPhoto } from '../../../store/user/userThunk';
 import { config } from '../../../config';
+import { getUserCart } from '../../../store/cart/cartThunk';
+import { getUserFavorite } from '../../../store/favorite/favoriteThunk';
 
 const UserProfile: FC = () => {
   const [isChangeInfo, setIsChangeInfo] = useState(false);
@@ -23,6 +25,11 @@ const UserProfile: FC = () => {
   const user = useAppSelector((state) => state.user.user);
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getUserCart(user.id));
+    dispatch(getUserFavorite(user.id));
+  });
 
   const changeInfo = () => {
     setIsChangeInfo(!isChangeInfo);

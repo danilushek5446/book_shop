@@ -42,7 +42,9 @@ export const StyledBookContainer = styled.div`
   }
 
   @media(max-width: 550px){
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .book-image-container{
       .book-favorite{
         width: 25px;

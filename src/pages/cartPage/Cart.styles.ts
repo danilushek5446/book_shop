@@ -92,8 +92,17 @@ export const StyledDiv = styled.div`
   }
 
   @media(max-width: 1280px){
+    justify-content: center;
     .not-empty-cart{
       padding: 15px;
+      max-width: 800px;
+    } 
+  }
+
+  @media(max-width: 825px){
+    .not-empty-cart{
+      padding: 15px;
+      max-width: 520px;
     } 
   }
 
@@ -112,6 +121,7 @@ export const StyledDiv = styled.div`
         font-weight: 700;
         font-size: 18px;
         line-height: 20px;
+        max-width: 140px;
       }
 
       .book-author{
@@ -138,7 +148,7 @@ export const StyledDiv = styled.div`
     }
     
     .not-empty-cart{
-      padding: 10px;
+      padding: 0;
 
       .total-price{
         display: flex;

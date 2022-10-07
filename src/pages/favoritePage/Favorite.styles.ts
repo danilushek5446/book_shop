@@ -92,8 +92,17 @@ export const StyledDiv = styled.div`
   }
 
   @media(max-width: 1280px){
+    justify-content: center;
     .not-empty-cart{
       padding: 15px;
+      max-width: 820px;
+    } 
+  }
+
+  @media(max-width: 825px){
+    .not-empty-cart{
+      padding: 15px;
+      max-width: 520px;
     } 
   }
 
@@ -105,6 +114,9 @@ export const StyledDiv = styled.div`
         width: 135px;
         height: 202px;
       }
+    }
+    .not-empty-cart{
+      padding: 0;
     }
     .container{
       .book-name{

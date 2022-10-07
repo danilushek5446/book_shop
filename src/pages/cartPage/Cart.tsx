@@ -9,13 +9,16 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { checkOut, getUserCart } from '../../store/cart/cartThunk';
 import BookCard from '../Book/bookCard/BookCard';
 import { getAllBooksByIds } from '../../store/book/bookThunk';
+import { getUserFavorite } from '../../store/favorite/favoriteThunk';
 
 const Cart: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const user = useAppSelector((state) => state.user.user);
   const cart = useAppSelector((state) => state.cart.cart);
   const books = useAppSelector((state) => state.book.booksArray);
+
   const [totalPrice, setTotalPrice] = useState(0);
 
   const onCatalogClick = () => {
@@ -35,6 +38,7 @@ const Cart: FC = () => {
 
   useEffect(() => {
     dispatch(getUserCart(user.id));
+    dispatch(getUserFavorite(user.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,7 +61,7 @@ const Cart: FC = () => {
           <img className="empty-cart-image" src={booksImage} alt="cannot upload picture" />
           <div className="container">
             <span className="empty-cart-title">Your cart is empty</span>
-            <span className="empty-cart-subtitle">Add items to cart to make a purchase. Go to the catalogue no.</span>
+            <span className="empty-cart-subtitle">Add items to cart to make a purchase. Go to the catalogue now.</span>
             <StyleButton
               text="Go to catalog"
               type="button"
