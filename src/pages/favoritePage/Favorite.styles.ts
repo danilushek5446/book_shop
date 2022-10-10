@@ -116,7 +116,7 @@ export const StyledDiv = styled.div`
       }
     }
     .not-empty-cart{
-      padding: 0;
+      padding: 10px;
     }
     .container{
       .book-name{

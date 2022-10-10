@@ -100,6 +100,7 @@ const App: FC = () => {
           element={
             (
               <PrivateProfileRoute>
+
                 <Favorite />
               </PrivateProfileRoute>
             )

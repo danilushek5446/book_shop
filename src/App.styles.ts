@@ -8,4 +8,5 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   width: 100%;
   justify-content: space-between;
+  height: 100%;
 `;

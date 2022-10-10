@@ -10,6 +10,7 @@ export const StyledDiv = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+  position: relative;
 
   .ad__title{
     margin: 0;
@@ -54,7 +55,7 @@ export const StyledDiv = styled.div`
     margin-left: 10%;
   }
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1050px) {
     overflow: unset;
     height: 289px;
     .book-background{
@@ -90,9 +91,9 @@ export const StyledDiv = styled.div`
     }
   }
 
-  @media (max-width: 820px) {
+  @media (max-width: 825px) {
     height: 520px;
-    max-width: 520px;
+    width: 100%;
     box-sizing: border-box;
 
    .ad-image {
@@ -104,7 +105,6 @@ export const StyledDiv = styled.div`
     }
 
     .container{
-      max-width: 520px;
     }
 
     .book-background{
@@ -133,6 +133,12 @@ export const StyledDiv = styled.div`
   @media(max-width: 450px){
     .ad-image{
       left: 10%;
+    }
+  }
+
+  @media(max-width: 400px){
+    .ad-image{
+      left: 6%;
     }
   }
 `;

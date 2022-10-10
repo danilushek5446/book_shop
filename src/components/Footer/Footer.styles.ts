@@ -63,7 +63,7 @@ export const StyledFooter = styled.div`
     }
 
     .contact-info{
-      padding-right: 84px;
+      padding-right: 70px;
     }
     
     .links{

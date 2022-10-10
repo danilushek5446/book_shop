@@ -62,14 +62,15 @@ export const StyledContainer = styled.div`
     }
 
     .dropdown{
-      max-width: 290px;
+      max-width: 500px;
       .dropdown-container{
-        max-width: 290px;
+        max-width: 500px;
       }
     }
 
     .drop-down-list{
-      max-width: 290px;
+      max-width: 500px;
+      width: 100%;
     }
   }
 `;

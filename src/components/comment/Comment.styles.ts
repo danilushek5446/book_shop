@@ -51,6 +51,9 @@ export const StyledCommentContainer = styled.div`
     padding-top: 9px;
     max-width: 598px;
     width: 100%;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
   }
 
 `;

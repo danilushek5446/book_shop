@@ -41,8 +41,8 @@ export const StyledHeaderContainer = styled.div`
 
   .input-label-container{
     position: relative;
-    max-width: 630px;
     width: 100%;
+    max-width: 600px;
 
     .search-input{
       box-sizing: border-box;
@@ -104,9 +104,10 @@ export const StyledHeaderContainer = styled.div`
     }
   }
 
-  @media (max-width: 1280px) {
-    max-width: 804px;
-
+  @media (max-width: 1300px) {
+    .padding-container{
+      padding: 10px;
+    }
     .header__title{
       padding-left: 50px;
       padding-right: 50px;
@@ -115,7 +116,7 @@ export const StyledHeaderContainer = styled.div`
     .auth-container{
       justify-content: unset;
       max-width: 240px;
-      margin-left: 11%;
+      margin-left: 18%;
       z-index: 999;
       div{
         margin-left: 24px;
@@ -123,15 +124,33 @@ export const StyledHeaderContainer = styled.div`
     }
   }
 
+  @media (max-width: 900px) {
+    .auth-container{
+      margin-left: 14%;
+    }
+  }
+
   @media (max-width: 825px) {
+    
     position: relative;
     height: 120px;
-    max-width: 520px;
     .input-label-container {
       position: absolute;
-      max-width: 520px;
-      top: 88px;
+      max-width: unset;    
+      box-sizing: border-box;
+      padding-left: 10px;
+      padding-right: 10px;
+      top: 100px;
       left: 0;
+      img{
+        top: 13px;
+      }
+      label{
+        top: 13px;
+      }
+      .search-input {
+        height: 48px;
+      }
     }
     .input-container{
       max-width: 60px;
@@ -142,6 +161,8 @@ export const StyledHeaderContainer = styled.div`
       margin-left: 0;
       button{
         font-size: 12px;
+        padding: 10px 23px;
+        height: 38px;
       }
       div{
         margin-left: 13px;
@@ -153,8 +174,18 @@ export const StyledHeaderContainer = styled.div`
   }
 
   @media (max-width: 450px) {
+    .container{
+      .header-logo{
+        width: 62px;
+        height: 31px;
+      }
+    }
+
     .auth-container{
       max-width: 150px;
+      div{
+        margin-left: 18px;
+      }
       div{
         width: 35px;
         height: 35px;

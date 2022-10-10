@@ -59,8 +59,6 @@ export const StyledBookContainer = styled.div`
     }
 
     .book-picture{
-      max-width: 522px;
-      max-height: 779px;
       height: 100%;
       width: 100%;
     }
@@ -136,7 +134,11 @@ export const StyledBookContainer = styled.div`
  }
 
  .book-image-container{
-   position: relative;
+    position: relative;
+    max-width: 522px;
+    max-height: 779px;
+    width: 100%;
+    height: 100%;
    .book-favorite{
       position: absolute;
       opacity: 0.6;
@@ -153,6 +155,8 @@ export const StyledBookContainer = styled.div`
 
   .comments-container{
     padding-top: 110px;
+    padding-left: 10px;
+    padding-right: 10px;
 
     .comments-title{
       font-weight: 700;
@@ -268,6 +272,8 @@ export const StyledBookContainer = styled.div`
     }
     .ad{
       margin: 0;
+      margin-bottom: 70px;
+      margin-top: 70px;
     }
   }
 
@@ -364,6 +370,7 @@ export const StyledBookContainer = styled.div`
   @media(max-width: 350px){
     .ad{
       margin: 0;
+      margin-bottom: 70px;
       margin-left: 10px;
       max-width: 290px;
       .ad-image{

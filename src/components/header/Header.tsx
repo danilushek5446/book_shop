@@ -16,12 +16,12 @@ const Header: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [searchQuery, setSearchQuery] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(searchQuery.get('search') || '');
+
   const user = useAppSelector((state) => state.user.user);
   const userCart = useAppSelector((state) => state.cart.cart);
   const userFavorite = useAppSelector((state) => state.favorite.favorite);
-
-  const [searchValue, setSearchValue] = useState('');
-  const [searchQuery, setSearchQuery] = useSearchParams();
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -75,61 +75,62 @@ const Header: FC = () => {
 
   return (
     <StyledHeaderContainer className="header">
-      <div className="container">
-        <img
-          onClick={homePage}
-          className="header-logo"
-          src={logo}
-          alt="sdtfsdt"
-        />
-        <div className="input-container">
-          <span className="header__title">Catalog</span>
-          <div className="input-label-container">
-            <input
-              id="search-input"
-              value={searchValue}
-              className="search-input"
-              onChange={onChange}
-              required
-            />
-            <img src={searchPciture} alt="cannot load icon" />
-            <label htmlFor="search-input">search</label>
-            <button className="clear" onMouseUp={onDelete}>x</button>
+      <div className="padding-container">
+        <div className="container">
+          <img
+            onClick={homePage}
+            className="header-logo"
+            src={logo}
+            alt="sdtfsdt"
+          />
+          <div className="input-container">
+            <span className="header__title">Catalog</span>
+            <div className="input-label-container">
+              <input
+                id="search-input"
+                value={searchValue}
+                className="search-input"
+                onChange={onChange}
+                required
+              />
+              <img src={searchPciture} alt="cannot load icon" />
+              <label htmlFor="search-input">search</label>
+              <button className="clear" onMouseUp={onDelete}>x</button>
+            </div>
           </div>
+          {user.email
+            ? (
+              <div className="auth-container">
+                <PageIcons
+                  className="cart-icon"
+                  picture={cart}
+                  onClick={cartPage}
+                  count={userCart?.length}
+                />
+                <PageIcons
+                  className="favorite-icon"
+                  picture={heart}
+                  onClick={favoritePage}
+                  count={userFavorite?.length}
+                />
+                <PageIcons
+                  className="profile-icon"
+                  picture={profile}
+                  onClick={profilePage}
+                />
+              </div>
+            )
+            : (
+              <div className="auth-container">
+                <StyleButton
+                  className="header-auth"
+                  type="button"
+                  onClick={onClick}
+                  text="Log In/ Sing Up"
+                />
+              </div>
+            )}
         </div>
-        {user.email
-          ? (
-            <div className="auth-container">
-              <PageIcons
-                className="cart-icon"
-                picture={cart}
-                onClick={cartPage}
-                count={userCart?.length}
-              />
-              <PageIcons
-                className="favorite-icon"
-                picture={heart}
-                onClick={favoritePage}
-                count={userFavorite?.length}
-              />
-              <PageIcons
-                className="profile-icon"
-                picture={profile}
-                onClick={profilePage}
-              />
-            </div>
-          )
-          : (
-            <div className="auth-container">
-              <StyleButton
-                className="header-auth"
-                type="button"
-                onClick={onClick}
-                text="Log In/ Sing Up"
-              />
-            </div>
-          )}
-
       </div>
     </StyledHeaderContainer>
   );

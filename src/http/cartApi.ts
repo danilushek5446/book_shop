@@ -8,7 +8,7 @@ const getCart = async (userId: number): Promise<CartInitialType> => {
 };
 
 const addToCart = async (bookId: number): Promise<ChangeCartResponseType> => {
-  const { data } = await host.post(`api/cart/addCart/${bookId}`);
+  const { data } = await host.post(`api/cart/add-cart/${bookId}`);
 
   return data;
 };
@@ -26,7 +26,7 @@ const deleteMany = async (userId: number) => {
 };
 
 const updateCount = async (query: QueryCartCountUpdateType): Promise<ChangeCartResponseType> => {
-  const { data } = await host.post('api/cart/updateCount/', { params: query });
+  const { data } = await host.post('api/cart/update-count/', { params: query });
 
   return data;
 };

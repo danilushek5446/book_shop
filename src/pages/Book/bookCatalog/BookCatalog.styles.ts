@@ -9,27 +9,30 @@ export const StyledBookContainer = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 60px 20px;
     .book-picture{
-      width: 305px;
-      height: 448px;
+      max-width: 305px;
+      max-height: 448px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
   }
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1300px) {
+    .book-image-container{
+      width: 100%;
+    }
     .container{
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 20px 20px;
 
       .book-picture{
-        width: 254px;
-        height: 372px;
         object-fit: contain;
       }
     }
 
     .book-content{
-      max-width: 254px;
+      overflow: hidden;
     }
   }
 
@@ -45,27 +48,24 @@ export const StyledBookContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    .price{
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 28px;
+      max-height: 34px;
+    }
     .book-image-container{
       .book-favorite{
         width: 25px;
         height: 25px;
         img{
-          width: 18px;
-          height: 18px;
+          width: 17px;
+          height: 17px;
         }
       }
     }
 
     .container{
-
-      .book-content{
-        max-width: 135px;
-      }
-
-      .book-picture{
-        width: 135px;
-        height: 192px;
-      }
 
       .book-name{
         font-weight: 500;

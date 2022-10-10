@@ -12,6 +12,7 @@ export const StyledDiv = styled.div`
   margin-top: 100px;
   justify-content: end;
   position: relative;
+  margin-bottom: 70px;
   .ad__title{
     margin: 0;
     margin-left: 19%;
@@ -43,6 +44,7 @@ export const StyledDiv = styled.div`
       margin-left: 107px;
     }
     button{
+      z-index: 999;
       margin-right: 12%;
       margin-top: 50px;
     }
@@ -89,7 +91,7 @@ export const StyledDiv = styled.div`
     }
   }
 
-  @media(max-width: 820px){
+  @media(max-width: 825px){
     margin: 15px;
     height: 501px;
     display: flex;
@@ -137,6 +139,7 @@ export const StyledDiv = styled.div`
 
   @media(max-width: 820px){
     margin: 0;
+    margin-bottom: 70px;
     .ad-image{
       left: 20%;
       width: 282px;

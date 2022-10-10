@@ -169,6 +169,7 @@ export const StyledDiv = styled.div`
         align-items: center;
         max-width: 550px;
         margin: 0;
+        padding-bottom: 100px;
 
         .continue-shopping-containe{
           padding-bottom: 20px;

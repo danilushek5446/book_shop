@@ -72,7 +72,7 @@ export const StyledProfile = styled.div`
   @media(max-width: 1280px){
     .container{
       max-width: 834px;
-      padding: 5px;
+      padding: 15px;
     }
     .image-container{
       .avatar{
@@ -91,6 +91,7 @@ export const StyledProfile = styled.div`
   }
 
   @media(max-width: 820px){
+    padding: 0;
     .container{
       flex-direction: column;
       align-items: center;
@@ -98,6 +99,12 @@ export const StyledProfile = styled.div`
 
     .upload-container{
       top: 200px;
+    }
+
+    .image-container{
+      .avatar{
+        padding-bottom: 20px;
+      }
     }
 
     .change-info-container{
